@@ -5,6 +5,7 @@ import Features from "@/components/Features";
 import Map from "@/components/Map";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { TimelineDemo } from "@/components/TimelineDemo";
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <Navbar />
       <Hero />
       <Features />
+      <TimelineDemo />
       <Map />
       <Contact />
       <Footer />
