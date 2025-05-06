@@ -13,16 +13,16 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       <Hero />
-      <AnimatedSection>
+      <AnimatedSection className="relative">
         <Features />
       </AnimatedSection>
-      <AnimatedSection delay={0.3}>
+      <AnimatedSection delay={0.3} className="relative">
         <TimelineDemo />
       </AnimatedSection>
-      <AnimatedSection delay={0.4}>
+      <AnimatedSection delay={0.4} className="relative">
         <Map />
       </AnimatedSection>
-      <AnimatedSection delay={0.5}>
+      <AnimatedSection delay={0.5} className="relative">
         <Contact />
       </AnimatedSection>
       <Footer />
