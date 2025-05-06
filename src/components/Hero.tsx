@@ -7,7 +7,7 @@ const Hero = () => {
       id="início" 
       className="relative h-screen bg-cover bg-center flex items-center"
       style={{ 
-        backgroundImage: "url('/lovable-uploads/93354d8c-7ef0-4550-8edb-2cac4af265a6.png')"
+        backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')"
       }}
     >
       <div className="absolute inset-0 bg-black/40" />
