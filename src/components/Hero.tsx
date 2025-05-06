@@ -12,12 +12,12 @@ const Hero = () => {
         </div>
         
         <div className="md:w-1/2 md:pl-16 text-white">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-medium mb-4">
+          <h2 className="text-3xl md:text-5xl font-serif font-medium mb-4 text-zinc-900 lg:text-5xl">
             Áreas de até <br />
-            <span className="text-4xl md:text-6xl lg:text-7xl">800 m²</span>
+            <span className="text-4xl md:text-6xl lg:text-8xl">800 m²</span>
           </h2>
           
-          <p className="mb-8 text-lg max-w-lg">
+          <p className="mb-8 max-w-lg text-lg">
             No condomínio Reserva Rio Uru Heitokai, reside uma declaração de valores fundamentada na harmonia entre inovação e tradição, plenitude e sustentabilidade.
           </p>
           
