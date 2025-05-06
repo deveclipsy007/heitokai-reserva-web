@@ -3,7 +3,7 @@ const Hero = () => {
   return <section id="início" className="relative h-screen bg-cover bg-center flex items-center" style={{
     backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')"
   }}>
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/0 rounded-none" />
       
       <div className="container-custom relative z-10 flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 mb-10 md:mb-0">
