@@ -1,7 +1,10 @@
+
 import { cn } from "@/lib/utils";
+
 const Hero = () => {
   return <section id="início" className="relative h-screen bg-cover bg-center flex items-center" style={{
-    backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')"
+    backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
+    backgroundPosition: "center top" // Changed from 'center' to 'center top'
   }}>
       <div className="absolute inset-0 bg-black/0 rounded-none" />
       
@@ -30,4 +33,5 @@ const Hero = () => {
       </div>
     </section>;
 };
+
 export default Hero;
