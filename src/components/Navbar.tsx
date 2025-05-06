@@ -31,16 +31,16 @@ const Navbar = () => {
       )}
     >
       <div className="container-custom flex justify-between items-center">
+        {/* Logo on the left */}
         <a href="#" className="flex items-center">
-          <h1 className={cn(
-            "font-serif font-bold text-xl transition-all duration-300",
-            isScrolled ? "text-heitokai-green" : "text-white"
-          )}>
-            Reserva Rio Uru Heitokai
-          </h1>
+          <img 
+            src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//Logo%20Principal%204B%203%20cores@2x.png" 
+            alt="Reserva Rio Uru Heitokai" 
+            className="h-16 w-auto"
+          />
         </a>
 
-        {/* Desktop Menu */}
+        {/* Desktop Menu moved to the right */}
         <nav className="hidden md:flex gap-8">
           {["INÍCIO", "SOBRE", "MAPA", "FALE CONOSCO"].map((item) => (
             <a
