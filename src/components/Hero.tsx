@@ -1,15 +1,8 @@
-
 import { cn } from "@/lib/utils";
-
 const Hero = () => {
-  return (
-    <section 
-      id="início" 
-      className="relative h-screen bg-cover bg-center flex items-center"
-      style={{ 
-        backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')"
-      }}
-    >
+  return <section id="início" className="relative h-screen bg-cover bg-center flex items-center" style={{
+    backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')"
+  }}>
       <div className="absolute inset-0 bg-black/40" />
       
       <div className="container-custom relative z-10 flex flex-col md:flex-row items-center">
@@ -28,18 +21,13 @@ const Hero = () => {
             No condomínio Reserva Rio Uru Heitokai, reside uma declaração de valores fundamentada na harmonia entre inovação e tradição, plenitude e sustentabilidade.
           </p>
           
-          <p className="mb-6">
-            <span className="font-serif text-xl mr-4">694 m²</span>
-            <span className="font-serif text-xl">1 Mi</span>
-          </p>
+          
           
           <a href="#contato" className="btn-primary">
             QUERO CONHECER
           </a>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
