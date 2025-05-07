@@ -9,11 +9,11 @@ import { Button } from "./ui/button";
 const Hero = () => {
   const isMobile = useIsMobile();
 
-  return <section id="início" className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" style={{
+  return <section id="início" className="relative min-h-screen bg-cover bg-center flex flex-col items-center overflow-hidden" style={{
     backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
     backgroundPosition: "center top"
   }}>
-      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
+      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10 mb-8">
         <motion.div initial={{
         opacity: 0,
         x: -50
@@ -178,6 +178,30 @@ const Hero = () => {
           ease: "easeInOut",
           delay: 0.5
         }} />
+        </motion.div>
+      </div>
+      
+      {/* Video section placed below the card */}
+      <div className="container mx-auto px-4 mt-4 mb-16">
+        <motion.div 
+          className="w-full max-w-4xl mx-auto"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="relative bg-white/5 backdrop-blur-md border border-white/10 h-60 md:h-[400px] w-full rounded-lg overflow-hidden shadow-2xl">
+            <video 
+              autoPlay
+              muted 
+              loop 
+              playsInline 
+              preload="auto" 
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//IMG_8915.MP4" type="video/mp4" />
+              Seu navegador não suporta a tag de vídeo.
+            </video>
+          </div>
         </motion.div>
       </div>
     </section>;
