@@ -1,4 +1,3 @@
-
 import { MapPin, Navigation, Compass, Route, Sparkles, Mountain, TreePine, Bird } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
@@ -236,11 +235,17 @@ const Map = () => {
                   initial={{ scale: 1.2 }}
                   animate={isVisible ? { scale: 1 } : {}}
                   transition={{ duration: 1.5 }}
-                  src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//Background%20(1).png" 
-                  alt="Rio Uru vista aérea"
+                  src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//WhatsApp%20Image%202025-05-07%20at%2010.29.02.jpeg" 
+                  alt="Vista do condomínio"
                   className="absolute inset-0 w-full h-full object-cover opacity-20 z-0"
                 />
-                <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                <div className="relative z-10 p-8 h-full flex flex-col justify-between" 
+                     style={{
+                       backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//WhatsApp%20Image%202025-05-07%20at%2010.29.02.jpeg')",
+                       backgroundSize: "cover",
+                       backgroundPosition: "center",
+                       backgroundBlendMode: "overlay"
+                     }}>
                   <div className="flex items-center space-x-2 mt-4">
                     <motion.div 
                       initial={{ width: 0 }}
