@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -11,6 +10,7 @@ import { TimelineDemo } from "@/components/TimelineDemo";
 import AnimatedSection from "@/components/AnimatedSection";
 import InvestorSection from "@/components/InvestorSection";
 import { motion, useScroll, useSpring } from "framer-motion";
+import VideoSection from "@/components/VideoSection";
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
@@ -54,6 +54,12 @@ const Index = () => {
       
       <div className="w-full">
         <Hero />
+      </div>
+      
+      <div id="video" className="w-full bg-white">
+        <AnimatedSection className="relative z-10 bg-white w-full">
+          <VideoSection />
+        </AnimatedSection>
       </div>
       
       <div id="sobre" className="w-full bg-white">
