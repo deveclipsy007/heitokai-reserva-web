@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -33,7 +32,7 @@ const Hero = () => {
       duration: 1.5
     }} className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
       
-      <div className="container-custom relative z-10 flex flex-col md:flex-row items-center pt-24 md:pt-0">
+      <div className="container-custom relative z-10 flex flex-col md:flex-row items-center justify-center md:justify-between pt-24 md:pt-0 gap-8">
         <motion.div initial={{
         opacity: 0,
         x: -50
@@ -88,7 +87,7 @@ const Hero = () => {
             duration: 1,
             delay: 0.8
           }} 
-          className="md:w-1/2 md:pl-16 text-white rounded-xl py-[30px] px-4 md:px-8 relative bg-gradient-to-br from-white/40 to-white/30 backdrop-blur-md border border-white/10 shadow-lg overflow-hidden"
+          className="md:w-1/2 md:pl-8 lg:pl-16 text-white rounded-xl py-[30px] px-4 md:px-8 relative bg-gradient-to-br from-white/40 to-white/30 backdrop-blur-md border border-white/10 shadow-lg overflow-hidden"
         >
           {/* Premium shine animation element */}
           <motion.div 
