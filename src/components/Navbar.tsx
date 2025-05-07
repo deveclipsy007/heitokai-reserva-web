@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -34,7 +33,7 @@ const Navbar = () => {
                   ? "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//Logo%20Principal%204B%203%20cores@2x.png" 
                   : "/lovable-uploads/119c5dc0-5a7e-4226-b6e4-3ab042b944b2.png"} 
                 alt="Reserva Rio Uru" 
-                className="h-12 transition-all duration-300" 
+                className={`transition-all duration-300 ${scrolled ? 'h-10' : 'h-16'}`} 
               />
             </a>
           </div>
@@ -73,7 +72,7 @@ const Navbar = () => {
                     ? "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//Logo%20Principal%204B%203%20cores@2x.png" 
                     : "/lovable-uploads/119c5dc0-5a7e-4226-b6e4-3ab042b944b2.png"} 
                   alt="Reserva Rio Uru" 
-                  className="h-10" 
+                  className={`transition-all duration-300 ${scrolled ? 'h-8' : 'h-12'}`}
                 />
               </a>
               <button
