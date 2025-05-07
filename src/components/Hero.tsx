@@ -144,23 +144,22 @@ const Hero = () => {
         backgroundPosition: "center top"
       }}
     >
-      <div className="absolute inset-0 bg-black/0 rounded-none" />
-      
-      <motion.div 
-        initial={{
-          opacity: 0,
-          x: -50
-        }} 
-        animate={{
-          opacity: 1,
-          x: 0
-        }} 
-        transition={{
-          duration: 1,
-          delay: 0.5
-        }} 
-        className={cn("md:w-1/2 mb-10 md:mb-0 relative", isMobile ? "hidden" : "block")}
-      >
+      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
+        <motion.div 
+          initial={{
+            opacity: 0,
+            x: -50
+          }} 
+          animate={{
+            opacity: 1,
+            x: 0
+          }} 
+          transition={{
+            duration: 1,
+            delay: 0.5
+          }} 
+          className={cn("md:w-1/2 mb-10 md:mb-0 relative", isMobile ? "hidden" : "block")}
+        >
           {/* Promotional image positioned to extend out from the video container */}
           <motion.img 
             src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
