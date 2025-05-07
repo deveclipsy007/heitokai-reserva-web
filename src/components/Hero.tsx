@@ -4,44 +4,79 @@ import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Award, Star, Sparkles } from "lucide-react";
 import { Badge } from "./ui/badge";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const Hero = () => {
   const isMobile = useIsMobile();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState<string | null>(null);
   
-  // Melhorar a inicialização do vídeo quando o componente montar
   useEffect(() => {
     const playVideo = async () => {
       if (videoRef.current) {
         try {
-          // Garantir que o vídeo está pronto antes de tentar reproduzir
+          // Reset video element
+          videoRef.current.pause();
+          videoRef.current.currentTime = 0;
           videoRef.current.load();
-          await videoRef.current.play();
-          console.log("Vídeo iniciado com sucesso");
+          
+          // Wait a moment before trying to play
+          setTimeout(async () => {
+            try {
+              // Try to play with user interaction simulation
+              const playPromise = videoRef.current?.play();
+              if (playPromise !== undefined) {
+                await playPromise;
+                console.log("Vídeo iniciado com sucesso");
+                setVideoLoaded(true);
+              }
+            } catch (playError) {
+              console.error("Erro ao reproduzir vídeo:", playError);
+              setVideoError("Erro ao reproduzir o vídeo");
+            }
+          }, 300);
         } catch (error) {
           console.error("Erro ao iniciar vídeo:", error);
+          setVideoError("Erro ao carregar o vídeo");
         }
       }
     };
     
     playVideo();
     
-    // Adicionar listeners para eventos do vídeo para ajudar no diagnóstico
     const video = videoRef.current;
     if (video) {
-      video.addEventListener('error', (e) => console.error('Erro de vídeo:', e));
-      video.addEventListener('canplay', () => console.log('Vídeo pode ser reproduzido'));
-      video.addEventListener('playing', () => console.log('Vídeo está reproduzindo'));
+      const handleError = (e: Event) => {
+        console.error('Erro de vídeo:', e);
+        setVideoError("Erro no vídeo");
+      };
+      
+      const handleCanPlay = () => {
+        console.log('Vídeo pode ser reproduzido');
+      };
+      
+      const handlePlaying = () => {
+        console.log('Vídeo está reproduzindo');
+        setVideoLoaded(true);
+      };
+      
+      const handleWaiting = () => {
+        console.log('Vídeo está carregando...');
+      };
+
+      video.addEventListener('error', handleError);
+      video.addEventListener('canplay', handleCanPlay);
+      video.addEventListener('playing', handlePlaying);
+      video.addEventListener('waiting', handleWaiting);
+      
+      return () => {
+        video.removeEventListener('error', handleError);
+        video.removeEventListener('canplay', handleCanPlay);
+        video.removeEventListener('playing', handlePlaying);
+        video.removeEventListener('waiting', handleWaiting);
+      };
     }
-    
-    return () => {
-      if (video) {
-        video.removeEventListener('error', (e) => console.error('Erro de vídeo:', e));
-        video.removeEventListener('canplay', () => console.log('Vídeo pode ser reproduzido'));
-        video.removeEventListener('playing', () => console.log('Vídeo está reproduzindo'));
-      }
-    };
   }, []);
   
   return <section id="início" className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" style={{
@@ -98,18 +133,49 @@ const Hero = () => {
               }} 
               className="absolute inset-0 flex items-center justify-center"
             >
+              {videoError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-20">
+                  <p className="text-white text-center px-4">
+                    {videoError}<br/>
+                    <button 
+                      className="mt-2 px-3 py-1 bg-heitokai-green/80 rounded-md hover:bg-heitokai-green"
+                      onClick={() => {
+                        setVideoError(null);
+                        if (videoRef.current) {
+                          videoRef.current.load();
+                          videoRef.current.play().catch(err => console.error('Erro ao tentar reproduzir:', err));
+                        }
+                      }}
+                    >
+                      Tentar novamente
+                    </button>
+                  </p>
+                </div>
+              )}
+              
               <video 
                 ref={videoRef}
                 className="absolute inset-0 w-full h-full object-cover"
                 muted
                 loop
                 playsInline
+                autoPlay
                 preload="auto"
                 controls={false}
+                onError={(e) => {
+                  console.error("Erro de vídeo no evento:", e);
+                  setVideoError("Erro ao carregar vídeo");
+                }}
               >
                 <source src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//IMG_8915.MP4" type="video/mp4" />
                 Seu navegador não suporta a tag de vídeo.
               </video>
+              
+              {!videoLoaded && !videoError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                  <div className="w-12 h-12 border-4 border-heitokai-green/80 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
             </motion.div>
           </div>
         </motion.div>
