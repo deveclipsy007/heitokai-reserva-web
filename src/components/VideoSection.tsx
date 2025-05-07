@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Loader, Play } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";

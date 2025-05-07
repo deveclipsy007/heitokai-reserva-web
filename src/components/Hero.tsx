@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Star, Sparkles } from "lucide-react";
 import { Badge } from "./ui/badge";
@@ -12,17 +12,16 @@ import React from 'react';
 const MemoizedVideoSection = React.memo(VideoSection);
 
 // Optimização de animações para melhorar performance
-const particleVariants = {
-  animate: (i: number) => ({
+const particleVariants: Variants = {
+  animate: {
     opacity: [0.1, 0.3, 0.1],
     scale: [1, 1.2, 1],
     transition: {
-      duration: 3 + Math.random() * 2,
+      duration: 3,
       repeat: Infinity,
       repeatType: "mirror",
-      delay: i * 0.7
     }
-  })
+  }
 };
 
 const Hero = () => {
@@ -33,7 +32,8 @@ const Hero = () => {
     Array.from({ length: 6 }).map((_, i) => ({
       key: i,
       left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`
+      top: `${Math.random() * 100}%`,
+      delay: i * 0.7
     })), []);
 
   return (
@@ -82,7 +82,7 @@ const Hero = () => {
             
             {/* Subtle glowing particles - Otimizadas */}
             <div className="absolute inset-0 overflow-hidden">
-              {particles.map((particle, i) => (
+              {particles.map((particle) => (
                 <motion.div 
                   key={particle.key} 
                   className="absolute w-12 md:w-16 h-12 md:h-16 rounded-full bg-white/10 blur-xl" 
@@ -90,9 +90,11 @@ const Hero = () => {
                     left: particle.left,
                     top: particle.top
                   }} 
-                  custom={i}
                   variants={particleVariants}
                   animate="animate"
+                  transition={{
+                    delay: particle.delay
+                  }}
                 />
               ))}
             </div>
