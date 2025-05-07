@@ -4,11 +4,24 @@ import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Award, Star, Sparkles } from "lucide-react";
 import { Badge } from "./ui/badge";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const Hero = () => {
   const isMobile = useIsMobile();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  // Handle mouse movement for 3D effect
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    
+    // Calculate mouse position relative to the element
+    const x = (clientX - left) / width - 0.5;
+    const y = (clientY - top) / height - 0.5;
+    
+    setMousePosition({ x, y });
+  };
   
   // Initialize video when component mounts
   useEffect(() => {
@@ -19,10 +32,15 @@ const Hero = () => {
     }
   }, []);
   
-  return <section id="início" className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" style={{
-    backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
-    backgroundPosition: "center top"
-  }}>
+  return <section 
+    id="início" 
+    className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" 
+    style={{
+      backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
+      backgroundPosition: "center top"
+    }}
+    onMouseMove={handleMouseMove}
+  >
       <div className="absolute inset-0 bg-black/0 rounded-none" />
       
       <motion.div initial={{
@@ -44,14 +62,31 @@ const Hero = () => {
         duration: 1,
         delay: 0.5
       }} className={cn("md:w-1/2 mb-10 md:mb-0 relative", isMobile ? "hidden" : "block")}>
-          {/* Promotional image positioned in front of the video container */}
+          {/* Promotional image positioned to create 3D effect */}
           <motion.img 
             src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
             alt="Promotional image"
-            className="absolute top-4 left-0 w-[200px] h-[200px] object-cover transform -translate-x-1/4 z-20"
+            className="absolute top-10 left-4 w-[200px] h-[200px] object-contain z-20"
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.3 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              rotateY: mousePosition.x * 10,
+              rotateX: -mousePosition.y * 10,
+              translateX: `-${30 + Math.abs(mousePosition.x * 5)}%`,
+              translateY: `-${10 + Math.abs(mousePosition.y * 5)}%`,
+            }}
+            transition={{ 
+              duration: 0.8, 
+              delay: 1.3,
+              type: "spring",
+              stiffness: 100
+            }}
+            style={{ 
+              transformStyle: "preserve-3d", 
+              transformOrigin: "center center",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+            }}
           />
           
           <div className="relative bg-white/5 backdrop-blur-md border border-white/10 h-72 md:h-96 w-full rounded-lg overflow-hidden shadow-2xl">
