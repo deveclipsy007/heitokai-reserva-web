@@ -11,6 +11,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface TimelineEntry {
   title: string;
+  icon?: React.ReactNode;
   content: React.ReactNode;
 }
 
@@ -65,6 +66,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
+  // Enhanced animation variants
   const lineVariants = {
     hidden: { height: 0 },
     visible: (i: number) => ({
@@ -90,6 +92,20 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     })
   };
 
+  const iconVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: (i: number) => ({
+      scale: 1,
+      opacity: 1,
+      transition: {
+        delay: 0.4 * i,
+        duration: 0.6,
+        type: "spring",
+        stiffness: 200
+      }
+    })
+  };
+
   return (
     <div
       className="w-full bg-gradient-to-b from-white to-heitokai-beige/30 dark:from-neutral-950 dark:to-neutral-900 font-sans px-4 md:px-10 py-16"
@@ -102,7 +118,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           transition={{ duration: 0.7 }}
           className="text-center font-serif text-3xl md:text-5xl mb-6 text-heitokai-dark dark:text-white max-w-4xl mx-auto"
         >
-          Nossa Jornada Heitokai
+          Vantagens Exclusivas Heitokai
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -110,8 +126,9 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-center text-heitokai-dark/80 dark:text-neutral-300 text-sm md:text-base max-w-2xl mx-auto mb-16"
         >
-          Acompanhe a evolução do Reserva Rio Uru Heitokai, um projeto que combina natureza, exclusividade e 
-          planejamento minucioso para criar o habitat perfeito para sua família.
+          Descubra o que torna o Reserva Rio Uru Heitokai uma oportunidade única, combinando 
+          natureza preservada, infraestrutura de alto padrão e valorização excepcional para 
+          criar o refúgio perfeito para sua família e seu patrimônio.
         </motion.p>
       </div>
 
@@ -128,28 +145,33 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
               <motion.div 
-                className="h-14 absolute left-3 md:left-3 w-14 rounded-full bg-white dark:bg-black flex items-center justify-center shadow-lg"
+                className="h-16 absolute left-2 md:left-2 w-16 rounded-full bg-white dark:bg-black flex items-center justify-center shadow-lg"
                 initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 * index }}
               >
                 <motion.div 
-                  className={`h-8 w-8 rounded-full ${activeIndex === index ? 'bg-heitokai-green' : 'bg-heitokai-light-green/70'} dark:bg-neutral-800 border border-heitokai-green/30 dark:border-neutral-700 p-2`}
+                  className={`h-10 w-10 rounded-full ${activeIndex === index ? 'bg-heitokai-green' : 'bg-heitokai-light-green/70'} dark:bg-neutral-800 border border-heitokai-green/30 dark:border-neutral-700 flex items-center justify-center`}
                   animate={{ 
                     scale: activeIndex === index ? [1, 1.2, 1] : 1,
-                  }}
-                  style={{
                     backgroundColor: activeIndex === index ? '#2A7A4B' : 'rgba(197, 226, 165, 0.7)'
                   }}
                   transition={{ duration: 0.7, repeat: activeIndex === index ? Infinity : 0, repeatDelay: 2 }}
-                />
+                >
+                  <motion.div
+                    variants={iconVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    custom={index}
+                  >
+                    {item.icon}
+                  </motion.div>
+                </motion.div>
               </motion.div>
               <motion.h3 
-                className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-heitokai-dark dark:text-neutral-500"
+                className="hidden md:block text-xl md:pl-20 md:text-4xl font-bold text-heitokai-dark dark:text-neutral-500"
                 animate={{ 
-                  x: activeIndex === index ? [0, 5, 0] : 0
-                }}
-                style={{
+                  x: activeIndex === index ? [0, 5, 0] : 0,
                   color: activeIndex === index ? '#1E3A29' : '#4A4A4A'
                 }}
                 transition={{ duration: 0.5 }}
@@ -162,9 +184,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               <motion.h3 
                 className="md:hidden block text-2xl mb-4 text-left font-bold text-heitokai-dark dark:text-neutral-500"
                 animate={{ 
-                  x: activeIndex === index ? [0, 5, 0] : 0
-                }}
-                style={{
+                  x: activeIndex === index ? [0, 5, 0] : 0,
                   color: activeIndex === index ? '#1E3A29' : '#4A4A4A'
                 }}
                 transition={{ duration: 0.5 }}
@@ -199,12 +219,12 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         
         {/* Partículas decorativas animadas */}
         <div className="absolute left-6 top-0 h-full pointer-events-none">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(10)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute w-3 h-3 rounded-full bg-heitokai-green/40 blur-sm"
               style={{
-                top: `${(i * 20) + Math.random() * 10}%`,
+                top: `${(i * 10) + Math.random() * 10}%`,
                 left: `${Math.random() * 20}px`
               }}
               animate={{
@@ -214,16 +234,40 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               }}
               transition={{
                 duration: 5,
-                delay: i * 1.5,
+                delay: i * 0.8,
                 repeat: Infinity,
                 repeatType: "loop"
               }}
             />
           ))}
         </div>
+        
+        {/* Elementos decorativos adicionais */}
+        <div className="absolute right-6 top-0 h-full pointer-events-none">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 rounded-full bg-heitokai-light-green/30"
+              style={{
+                top: `${(i * 20) + Math.random() * 10}%`,
+                right: `${Math.random() * 40}px`
+              }}
+              animate={{
+                opacity: [0.2, 0.8, 0.2],
+                x: [0, 15, 0],
+              }}
+              transition={{
+                duration: 8,
+                delay: i * 1.2,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            />
+          ))}
+        </div>
       </div>
       
-      {/* Elemento UAU - Reflexo inferior */}
+      {/* Elemento de reflexo inferior */}
       <div className="relative w-full max-w-7xl mx-auto h-40 overflow-hidden">
         <motion.div 
           initial={{ opacity: 0 }}
@@ -239,7 +283,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       
       <style>{`
         .glow {
-          box-shadow: 0 0 10px rgba(197, 226, 165, 0.6), 0 0 20px rgba(197, 226, 165, 0.3);
+          box-shadow: 0 0 10px rgba(42, 122, 75, 0.6), 0 0 20px rgba(42, 122, 75, 0.3);
         }
       `}</style>
     </div>

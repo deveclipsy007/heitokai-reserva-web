@@ -62,7 +62,7 @@ const Index = () => {
         </AnimatedSection>
       </div>
       
-      <div className="w-full bg-white">
+      <div id="vantagens" className="w-full bg-white">
         <AnimatedSection delay={0.3} className="relative z-10 bg-white w-full">
           <TimelineDemo />
         </AnimatedSection>
