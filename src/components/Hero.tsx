@@ -282,7 +282,7 @@ const Hero = () => {
             duration: 1,
             delay: 0.8
           }} 
-          className="md:w-1/2 md:pl-8 lg:pl-16 text-white rounded-xl py-[30px] px-4 md:px-8 relative bg-gradient-to-br from-white/40 to-white/30 backdrop-blur-md border border-white/10 shadow-lg overflow-hidden"
+          className="w-full md:w-1/2 md:pl-8 lg:pl-16 text-white rounded-xl py-6 md:py-[30px] px-4 md:px-8 relative bg-gradient-to-br from-white/40 to-white/30 backdrop-blur-md border border-white/10 shadow-lg overflow-hidden"
         >
           {/* Premium shine animation element */}
           <motion.div 
@@ -304,7 +304,7 @@ const Hero = () => {
             {[...Array(6)].map((_, i) => (
               <motion.div 
                 key={i}
-                className="absolute w-16 h-16 rounded-full bg-white/10 blur-xl"
+                className="absolute w-12 md:w-16 h-12 md:h-16 rounded-full bg-white/10 blur-xl"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
@@ -367,7 +367,7 @@ const Hero = () => {
         }} transition={{
           duration: 1,
           delay: 1.2
-        }} className="text-3xl md:text-5xl font-serif font-medium mb-4 text-zinc-950 lg:text-3xl">
+        }} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-medium mb-3 md:mb-4 text-zinc-950">
             Terrenos exclusivos de até <br />
             <motion.span initial={{
             opacity: 0,
@@ -380,7 +380,7 @@ const Hero = () => {
             delay: 1.5,
             type: "spring",
             stiffness: 100
-          }} className="text-4xl md:text-6xl lg:text-8xl inline-block">
+          }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl inline-block">
               800 m²
             </motion.span>
           </motion.h2>
@@ -392,7 +392,7 @@ const Hero = () => {
         }} transition={{
           duration: 1,
           delay: 1.7
-        }} className="mb-10 max-w-lg font-medium text-lg text-zinc-950">
+        }} className="mb-6 md:mb-10 max-w-lg font-medium text-base md:text-lg text-zinc-950">
             Loteamento premium ao lado rio Uru próximo da cidade de Heitoraí. Com acesso privilegiado ao cristalino Rio Uru, cada detalhe foi meticulosamente planejado para proporcionar uma experiência de vida sem igual, onde sofisticação e sustentabilidade caminham juntas.
           </motion.p>
           
@@ -427,7 +427,7 @@ const Hero = () => {
           </motion.div>
             
           {/* Floating elements for premium feeling */}
-          <motion.div className="absolute -bottom-6 -right-6 w-24 h-24 bg-heitokai-blue/10 rounded-full blur-xl" animate={{
+          <motion.div className="absolute -bottom-6 -right-6 w-16 md:w-24 h-16 md:h-24 bg-heitokai-blue/10 rounded-full blur-xl" animate={{
           scale: [1, 1.2, 1],
           opacity: [0.5, 0.8, 0.5]
         }} transition={{
@@ -436,7 +436,7 @@ const Hero = () => {
           ease: "easeInOut"
         }} />
           
-          <motion.div className="absolute -top-6 -left-6 w-20 h-20 bg-heitokai-green/10 rounded-full blur-xl" animate={{
+          <motion.div className="absolute -top-6 -left-6 w-14 md:w-20 h-14 md:h-20 bg-heitokai-green/10 rounded-full blur-xl" animate={{
           scale: [1, 1.3, 1],
           opacity: [0.5, 0.7, 0.5]
         }} transition={{
