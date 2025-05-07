@@ -1,4 +1,3 @@
-
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Loader, Play } from "lucide-react";
@@ -24,8 +23,9 @@ const VideoSection = () => {
   const [buffering, setBuffering] = useState(true);
   const { toast } = useToast();
 
-  // Fix video URL - removing the double slash
-  const videoUrl = "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars/IMG_8915.MP4";
+  // Utiliza link direto do Google Drive obtido através da ID do arquivo
+  const videoId = "1NxVilXaI5ZfdeXJoAspscAAO681ZAQl3";
+  const videoUrl = `https://drive.google.com/uc?export=download&id=${videoId}`;
 
   // Função para adicionar entradas ao log
   const addToLog = (event: string, details?: string, error?: any) => {
@@ -80,6 +80,7 @@ const VideoSection = () => {
           setIsLoading(true);
           setBuffering(true);
           addToLog("LOAD", "Vídeo inicializado com sucesso");
+          addToLog("VIDEO_URL", `Usando URL: ${videoUrl}`);
           
           // Check for autoplay capabilities
           const videoElement = videoRef.current;
