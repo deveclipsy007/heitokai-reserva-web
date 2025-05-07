@@ -2,11 +2,12 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Award, Star, Sparkles, Play } from "lucide-react";
+import { Award, Star, Sparkles, Play, Loader } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { useRef, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 
 const Hero = () => {
   const isMobile = useIsMobile();
@@ -14,6 +15,8 @@ const Hero = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState<string | null>(null);
   const [videoPlaying, setVideoPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
   
   useEffect(() => {
     const loadVideo = () => {
@@ -39,25 +42,30 @@ const Hero = () => {
         console.error('Erro de vídeo:', e);
         setVideoError("Erro no vídeo");
         setVideoPlaying(false);
+        setIsLoading(false);
       };
       
       const handleCanPlay = () => {
         console.log('Vídeo pode ser reproduzido');
+        setIsLoading(false);
       };
       
       const handlePlaying = () => {
         console.log('Vídeo está reproduzindo');
         setVideoPlaying(true);
         setVideoLoaded(true);
+        setIsLoading(false);
       };
       
       const handleWaiting = () => {
         console.log('Vídeo está carregando...');
+        setIsLoading(true);
       };
       
       const handlePause = () => {
         console.log('Vídeo foi pausado');
         setVideoPlaying(false);
+        setIsLoading(false);
       };
 
       video.addEventListener('error', handleError);
@@ -79,18 +87,51 @@ const Hero = () => {
   const handlePlayVideo = () => {
     if (videoRef.current) {
       try {
-        videoRef.current.play()
-          .then(() => {
-            console.log("Vídeo iniciado manualmente com sucesso");
-            setVideoPlaying(true);
-          })
-          .catch(error => {
-            console.error("Erro ao reproduzir vídeo manualmente:", error);
-            setVideoError("Erro ao reproduzir o vídeo");
-          });
+        setIsLoading(true);
+        
+        // Certifique-se de que o vídeo está pronto para ser reproduzido
+        if (videoRef.current.readyState >= 2) {
+          videoRef.current.play()
+            .then(() => {
+              console.log("Vídeo iniciado manualmente com sucesso");
+              setVideoPlaying(true);
+              setIsLoading(false);
+            })
+            .catch(error => {
+              console.error("Erro ao reproduzir vídeo manualmente:", error);
+              setVideoError("Erro ao reproduzir o vídeo");
+              setIsLoading(false);
+              toast({
+                title: "Erro ao reproduzir vídeo",
+                description: "Tente novamente ou verifique suas configurações de mídia",
+                variant: "destructive",
+              });
+            });
+        } else {
+          // Se o vídeo não estiver pronto, aguarde o evento canplay
+          const onCanPlay = () => {
+            videoRef.current?.play()
+              .then(() => {
+                console.log("Vídeo iniciado após carregar");
+                setVideoPlaying(true);
+                setIsLoading(false);
+                videoRef.current?.removeEventListener('canplay', onCanPlay);
+              })
+              .catch(error => {
+                console.error("Erro ao iniciar vídeo após carregamento:", error);
+                setVideoError("Erro ao iniciar o vídeo");
+                setIsLoading(false);
+                videoRef.current?.removeEventListener('canplay', onCanPlay);
+              });
+          };
+          
+          videoRef.current.addEventListener('canplay', onCanPlay);
+          videoRef.current.load(); // Force reload
+        }
       } catch (error) {
         console.error("Erro ao tentar reproduzir:", error);
         setVideoError("Erro ao iniciar o vídeo");
+        setIsLoading(false);
       }
     }
   };
@@ -102,24 +143,15 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black/0 rounded-none" />
       
       <motion.div initial={{
-      opacity: 0
+      opacity: 0,
+      x: -50
     }} animate={{
-      opacity: 1
+      opacity: 1,
+      x: 0
     }} transition={{
-      duration: 1.5
-    }} className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-      
-      <div className="container-custom relative z-10 flex flex-col md:flex-row items-center justify-center md:justify-between pt-24 md:pt-0 gap-8">
-        <motion.div initial={{
-        opacity: 0,
-        x: -50
-      }} animate={{
-        opacity: 1,
-        x: 0
-      }} transition={{
-        duration: 1,
-        delay: 0.5
-      }} className={cn("md:w-1/2 mb-10 md:mb-0 relative", isMobile ? "hidden" : "block")}>
+      duration: 1,
+      delay: 0.5
+    }} className={cn("md:w-1/2 mb-10 md:mb-0 relative", isMobile ? "hidden" : "block")}>
           {/* Promotional image positioned to extend out from the video container */}
           <motion.img 
             src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
@@ -181,6 +213,7 @@ const Hero = () => {
                   console.error("Erro de vídeo no evento:", e);
                   setVideoError("Erro ao carregar vídeo");
                   setVideoPlaying(false);
+                  setIsLoading(false);
                 }}
               >
                 <source src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//IMG_8915.MP4" type="video/mp4" />
@@ -193,20 +226,34 @@ const Hero = () => {
                 </div>
               )}
               
-              {/* Novo botão de play no centro do vídeo */}
-              {videoLoaded && !videoPlaying && !videoError && (
+              {/* Botão de play no centro do vídeo */}
+              {(videoLoaded && !videoPlaying && !videoError) && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                  <motion.button
-                    onClick={handlePlayVideo}
-                    className="w-16 h-16 md:w-20 md:h-20 bg-heitokai-green/90 rounded-full flex items-center justify-center hover:bg-heitokai-green transition-all duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                  >
-                    <Play className="h-8 w-8 md:h-10 md:w-10 text-white" fill="white" strokeWidth={1} />
-                  </motion.button>
+                  {isLoading ? (
+                    <motion.div 
+                      className="w-16 h-16 md:w-20 md:h-20 bg-heitokai-green/90 rounded-full flex items-center justify-center"
+                      animate={{ rotate: 360 }}
+                      transition={{ 
+                        duration: 1.5, 
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    >
+                      <Loader className="h-8 w-8 md:h-10 md:w-10 text-white" strokeWidth={2} />
+                    </motion.div>
+                  ) : (
+                    <motion.button
+                      onClick={handlePlayVideo}
+                      className="w-16 h-16 md:w-20 md:h-20 bg-heitokai-green/90 rounded-full flex items-center justify-center hover:bg-heitokai-green transition-all duration-300"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 10 }}
+                    >
+                      <Play className="h-8 w-8 md:h-10 md:w-10 text-white" fill="white" strokeWidth={1} />
+                    </motion.button>
+                  )}
                 </div>
               )}
             </motion.div>
