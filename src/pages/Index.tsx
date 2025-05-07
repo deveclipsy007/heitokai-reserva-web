@@ -49,23 +49,34 @@ const Index = () => {
       />
       
       <Navbar />
-      <Hero />
       
-      <AnimatedSection className="relative z-10 bg-white">
-        <Features />
-      </AnimatedSection>
+      <div className="w-full">
+        <Hero />
+      </div>
       
-      <AnimatedSection delay={0.3} className="relative z-10 bg-white">
-        <TimelineDemo />
-      </AnimatedSection>
+      <div id="sobre" className="w-full bg-white">
+        <AnimatedSection className="relative z-10 bg-white w-full">
+          <Features />
+        </AnimatedSection>
+      </div>
       
-      <AnimatedSection delay={0.4} className="relative z-10 bg-white">
-        <Map />
-      </AnimatedSection>
+      <div className="w-full bg-white">
+        <AnimatedSection delay={0.3} className="relative z-10 bg-white w-full">
+          <TimelineDemo />
+        </AnimatedSection>
+      </div>
       
-      <AnimatedSection delay={0.5} className="relative z-10 bg-white">
-        <Contact />
-      </AnimatedSection>
+      <div id="mapa" className="w-full bg-white">
+        <AnimatedSection delay={0.4} className="relative z-10 bg-white w-full">
+          <Map />
+        </AnimatedSection>
+      </div>
+      
+      <div id="fale conosco" className="w-full bg-white">
+        <AnimatedSection delay={0.5} className="relative z-10 bg-white w-full">
+          <Contact />
+        </AnimatedSection>
+      </div>
       
       <Footer />
     </div>

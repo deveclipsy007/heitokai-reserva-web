@@ -9,11 +9,11 @@ export function TimelineDemo() {
     {
       title: "2024",
       content: (
-        <div>
+        <div className="w-full">
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
             O Reserva Rio Uru Heitokai inicia seu desenvolvimento com foco em sustentabilidade e design biofílico
           </p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 w-full">
             <Card className="rounded-lg overflow-hidden h-20 md:h-44 lg:h-60 w-full shadow-lg">
               <img 
                 src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png" 
@@ -35,14 +35,14 @@ export function TimelineDemo() {
     {
       title: "2023",
       content: (
-        <div>
+        <div className="w-full">
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
             Fase de planejamento e estudos técnicos para implementação do condomínio com princípios de harmonia e valorização da natureza.
           </p>
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
             Desenvolvimento do conceito Heitokai - onde natureza e modernidade se encontram em perfeito equilíbrio.
           </p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 w-full">
             <Card className="rounded-lg overflow-hidden h-20 md:h-44 lg:h-60 w-full shadow-lg">
               <div className="bg-heitokai-green/20 h-full w-full flex items-center justify-center">
                 <p className="text-heitokai-dark font-medium text-center p-4">Estudos de impacto ambiental</p>
@@ -60,7 +60,7 @@ export function TimelineDemo() {
     {
       title: "Próximas etapas",
       content: (
-        <div>
+        <div className="w-full">
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-4">
             O projeto continua em desenvolvimento com as seguintes etapas:
           </p>
@@ -81,7 +81,7 @@ export function TimelineDemo() {
               ✅ Acesso exclusivo para moradores
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 w-full">
             <Card className="rounded-lg overflow-hidden h-20 md:h-44 lg:h-60 w-full shadow-lg bg-heitokai-beige/30 flex items-center justify-center">
               <p className="text-heitokai-dark font-medium text-center p-4">Lançamento</p>
             </Card>
@@ -95,7 +95,7 @@ export function TimelineDemo() {
   ];
   
   return (
-    <div className="min-h-screen w-full">
+    <div className="w-full bg-white">
       <div className="w-full">
         <Timeline data={data} />
       </div>

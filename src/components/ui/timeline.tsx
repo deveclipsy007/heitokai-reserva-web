@@ -41,7 +41,20 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
     
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Update height on resize for responsive layouts
+    const handleResize = () => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        setHeight(rect.height);
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, [ref]);
 
   const { scrollYProgress } = useScroll({
@@ -79,7 +92,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
   return (
     <div
-      className="w-full bg-gradient-to-b from-white to-heitokai-beige/30 dark:from-neutral-950 dark:to-neutral-900 font-sans md:px-10 py-16"
+      className="w-full bg-gradient-to-b from-white to-heitokai-beige/30 dark:from-neutral-950 dark:to-neutral-900 font-sans px-4 md:px-10 py-16"
       ref={containerRef}
     >
       <div className="max-w-7xl mx-auto py-10 px-4 md:px-8 lg:px-10">
@@ -162,6 +175,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 + (0.1 * index) }}
+                className="w-full"
               >
                 {item.content}{" "}
               </motion.div>
