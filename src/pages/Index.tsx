@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { motion, useScroll, useSpring } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import Footer from "@/components/Footer";
+import ChatBubble from "@/components/ChatBot/ChatBubble";
 
 // Importação com lazy loading para melhorar o carregamento inicial
 const Hero = lazy(() => import("@/components/Hero"));
@@ -98,6 +99,9 @@ const Index = () => {
       </div>
       
       <Footer />
+      
+      {/* ChatBot */}
+      <ChatBubble />
     </div>
   );
 };

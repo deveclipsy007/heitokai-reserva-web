@@ -1,0 +1,132 @@
+
+import React, { useState, useRef, useEffect } from 'react';
+import { Send, Bot, User } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+
+type Message = {
+  role: 'user' | 'assistant';
+  content: string;
+};
+
+interface ChatWindowProps {
+  onClose: () => void;
+}
+
+const ChatWindow = ({ onClose }: ChatWindowProps) => {
+  const [messages, setMessages] = useState<Message[]>([
+    { role: 'assistant', content: 'Olá! Como posso ajudar você com informações sobre o Condomínio Reserva Rio Uru?' }
+  ]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  // Função para rolar para o final da conversa quando novas mensagens são adicionadas
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    
+    // Adicionar mensagem do usuário
+    const userMessage = { role: 'user' as const, content: input };
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
+    setIsLoading(true);
+    
+    try {
+      // Enviar para API do OpenAI
+      const response = await sendMessageToOpenAI([...messages, userMessage]);
+      
+      // Adicionar resposta do assistente
+      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+    } catch (error) {
+      console.error('Erro ao enviar mensagem para OpenAI:', error);
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: 'Desculpe, houve um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.' 
+      }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  return (
+    <div className="bg-white rounded-lg shadow-xl w-80 sm:w-96 h-[500px] flex flex-col overflow-hidden border border-gray-200">
+      <div className="p-4 bg-heitokai-green text-white font-medium flex justify-between items-center">
+        <span>Assistente Reserva Rio Uru</span>
+      </div>
+      
+      <ScrollArea className="flex-1 p-4">
+        <div className="space-y-4">
+          {messages.map((msg, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              <div 
+                className={`max-w-[80%] p-3 rounded-lg ${
+                  msg.role === 'user' 
+                    ? 'bg-heitokai-green text-white rounded-tr-none' 
+                    : 'bg-gray-100 text-gray-800 rounded-tl-none'
+                }`}
+              >
+                <div className="flex items-start gap-2">
+                  {msg.role === 'assistant' && (
+                    <Bot className="h-5 w-5 mt-1 flex-shrink-0" />
+                  )}
+                  <div className="text-sm">{msg.content}</div>
+                  {msg.role === 'user' && (
+                    <User className="h-5 w-5 mt-1 flex-shrink-0" />
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="bg-gray-100 p-3 rounded-lg rounded-tl-none max-w-[80%]">
+                <div className="flex items-center gap-2">
+                  <Bot className="h-5 w-5" />
+                  <div className="flex space-x-1">
+                    <div className="h-2 w-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
+                    <div className="h-2 w-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                    <div className="h-2 w-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+      </ScrollArea>
+      
+      <form onSubmit={handleSubmit} className="p-3 border-t border-gray-200 flex gap-2">
+        <Input
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          placeholder="Digite sua mensagem..."
+          className="flex-1"
+          disabled={isLoading}
+        />
+        <Button 
+          type="submit" 
+          size="icon"
+          disabled={isLoading || !input.trim()} 
+          className="bg-heitokai-green hover:bg-heitokai-dark"
+        >
+          <Send className="h-4 w-4" />
+        </Button>
+      </form>
+    </div>
+  );
+};
+
+export default ChatWindow;
