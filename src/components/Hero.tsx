@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -392,7 +393,7 @@ const Hero = () => {
           duration: 1,
           delay: 1.7
         }} className="mb-10 max-w-lg font-medium text-lg text-zinc-950">
-            No Condomínio Reserva Rio Uru Heitokai, exclusividade encontra natureza preservada. Com acesso privilegiado ao cristalino Rio Uru, cada detalhe foi meticulosamente planejado para proporcionar uma experiência de vida sem igual, onde sofisticação e sustentabilidade caminham juntas.
+            Loteamento premium ao lado rio Uru próximo da cidade de Heitoraí. Com acesso privilegiado ao cristalino Rio Uru, cada detalhe foi meticulosamente planejado para proporcionar uma experiência de vida sem igual, onde sofisticação e sustentabilidade caminham juntas.
           </motion.p>
           
           <motion.div initial={{
