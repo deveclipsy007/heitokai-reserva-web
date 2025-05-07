@@ -1,9 +1,4 @@
-
-import { useIsMobile } from "@/hooks/use-mobile";
-
 const Features = () => {
-  const isMobile = useIsMobile();
-  
   const featureItems = [{
     title: "NATUREZA E RIO EXCLUSIVO E PRESERVADO",
     icon: "🌿",
@@ -21,17 +16,14 @@ const Features = () => {
     icon: "☯️",
     description: "Aqui o contato com a natureza é privilegiado e cada detalhe foi planejado para criar um estilo de vida equilibrado e sustentável."
   }];
-  
-  return (
-    <section id="sobre" className="py-12 md:py-16 bg-heitokai-light-green/30">
-      <div className="container-custom px-4">
-        <h2 className="text-center font-serif text-2xl md:text-4xl text-heitokai-dark mb-8 md:mb-12">
+  return <section id="sobre" className="py-16 bg-heitokai-light-green/30">
+      <div className="container-custom">
+        <h2 className="text-center font-serif text-3xl md:text-4xl text-heitokai-dark mb-12">
           UM LUGAR FEITO COM TALENTO E EMPREENDEDORISMO
         </h2>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {featureItems.map((feature, index) => (
-            <div key={index} className="flex flex-col items-center bg-white/50 p-4 rounded-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {featureItems.map((feature, index) => <div key={index} className="flex flex-col items-center">
               <div className="text-4xl mb-4">{feature.icon}</div>
               <h3 className="font-serif text-center text-lg font-medium mb-3 text-heitokai-dark">
                 {feature.title}
@@ -39,13 +31,12 @@ const Features = () => {
               <p className="text-center text-sm">
                 {feature.description}
               </p>
-            </div>
-          ))}
+            </div>)}
         </div>
         
-        <div className="mt-12 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="order-2 md:order-1">
-            <h3 className="section-title text-2xl md:text-3xl">Não perca o momento</h3>
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h3 className="section-title">Não perca o momento</h3>
             <p className="mb-6">
               O Condomínio Reserva Rio Uru Heitokai é mais que um empreendimento imobiliário, é um estilo de vida em comunhão com a natureza. Projetado para valorizar o melhor da experiência de viver bem, com conforto e em harmonia com o ambiente.
             </p>
@@ -54,13 +45,11 @@ const Features = () => {
             </p>
           </div>
           
-          <div className="aspect-video bg-gray-200 rounded-sm overflow-hidden order-1 md:order-2">
+          <div className="aspect-video bg-gray-200 rounded-sm overflow-hidden">
             <img alt="Vista aérea do condomínio" className="w-full h-full object-cover" src="/lovable-uploads/d0cd53f7-90e4-4cb9-bbef-bc2228f62cde.jpg" />
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Features;
