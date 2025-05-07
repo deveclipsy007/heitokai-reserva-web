@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 z-40 w-full transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
       <div className="container-custom mx-auto">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center">
