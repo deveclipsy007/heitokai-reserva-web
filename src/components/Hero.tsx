@@ -1,6 +1,10 @@
+
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Award, Star, Sparkles } from "lucide-react";
+import { Badge } from "./ui/badge";
+
 const Hero = () => {
   const isMobile = useIsMobile();
   return <section id="início" className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" style={{
@@ -44,16 +48,68 @@ const Hero = () => {
           </div>
         </motion.div>
         
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 1,
-        delay: 0.8
-      }} className="md:w-1/2 md:pl-16 text-white rounded-xl py-[30px] px-4 md:px-8 bg-gradient-to-br from-white/40 to-white/30 backdrop-blur-md border border-white/10 shadow-lg">
+        <motion.div 
+          initial={{
+            opacity: 0,
+            y: 30
+          }} 
+          animate={{
+            opacity: 1,
+            y: 0
+          }} 
+          transition={{
+            duration: 1,
+            delay: 0.8
+          }} 
+          className="md:w-1/2 md:pl-16 text-white rounded-xl py-[30px] px-4 md:px-8 relative bg-gradient-to-br from-white/40 to-white/30 backdrop-blur-md border border-white/10 shadow-lg overflow-hidden"
+        >
+          {/* Premium seal element */}
+          <motion.div 
+            initial={{ rotate: -15, scale: 0, opacity: 0 }}
+            animate={{ rotate: 0, scale: 1, opacity: 1 }}
+            transition={{ 
+              delay: 2.5, 
+              duration: 0.7, 
+              type: "spring", 
+              stiffness: 120 
+            }}
+            className="absolute -right-6 -top-6 flex items-center justify-center"
+          >
+            <div className="relative">
+              <motion.div 
+                animate={{ 
+                  rotate: 360 
+                }} 
+                transition={{ 
+                  duration: 20, 
+                  ease: "linear", 
+                  repeat: Infinity 
+                }}
+                className="w-28 h-28 bg-gradient-to-br from-heitokai-green via-heitokai-blue to-heitokai-green rounded-full flex items-center justify-center"
+              />
+              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+                <div className="bg-white rounded-full w-20 h-20 flex flex-col items-center justify-center shadow-lg">
+                  <Award className="w-6 h-6 text-heitokai-green mb-1" />
+                  <span className="text-heitokai-dark text-xs font-bold">PREMIUM</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Badge element */}
+          <motion.div 
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 2, duration: 0.5 }}
+            className="mb-2"
+          >
+            <Badge 
+              className="bg-heitokai-green/90 text-white px-3 py-1 gap-1 uppercase text-xs font-semibold"
+            >
+              <Sparkles className="h-3 w-3" /> Exclusivo
+            </Badge>
+          </motion.div>
+          
           <motion.h2 initial={{
           opacity: 0
         }} animate={{
@@ -63,18 +119,23 @@ const Hero = () => {
           delay: 1.2
         }} className="text-3xl md:text-5xl font-serif font-medium mb-4 text-zinc-950 lg:text-3xl">
             Terrenos exclusivos de até <br />
-            <motion.span initial={{
-            opacity: 0,
-            scale: 0.8
-          }} animate={{
-            opacity: 1,
-            scale: 1
-          }} transition={{
-            duration: 0.8,
-            delay: 1.5,
-            type: "spring",
-            stiffness: 100
-          }} className="text-4xl md:text-6xl lg:text-8xl inline-block">
+            <motion.span 
+              initial={{
+              opacity: 0,
+              scale: 0.8
+            }} 
+              animate={{
+              opacity: 1,
+              scale: 1
+            }} 
+              transition={{
+              duration: 0.8,
+              delay: 1.5,
+              type: "spring",
+              stiffness: 100
+            }} 
+              className="text-4xl md:text-6xl lg:text-8xl inline-block"
+            >
               800 m²
             </motion.span>
           </motion.h2>
@@ -90,24 +151,74 @@ const Hero = () => {
             No Condomínio Reserva Rio Uru Heitokai, exclusividade encontra natureza preservada. Com acesso privilegiado ao cristalino Rio Uru, cada detalhe foi meticulosamente planejado para proporcionar uma experiência de vida sem igual, onde sofisticação e sustentabilidade caminham juntas.
           </motion.p>
           
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8,
-          delay: 2
-        }} whileHover={{
-          scale: 1.05
-        }} whileTap={{
-          scale: 0.95
-        }} className="w-full text-center md:text-left">
-            <a href="#contato" className="btn-primary block md:inline-block text-center w-full md:w-auto">
-              GARANTA SEU LOTE PREMIUM
-            </a>
+          <motion.div 
+            initial={{
+              opacity: 0,
+              y: 20
+            }} 
+            animate={{
+              opacity: 1,
+              y: 0
+            }} 
+            transition={{
+              duration: 0.8,
+              delay: 2
+            }} 
+            className="w-full text-center md:text-left"
+          >
+            <motion.a 
+              href="#contato" 
+              className="btn-primary block md:inline-block text-center w-full md:w-auto relative group overflow-hidden"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0px 10px 20px rgba(42, 122, 75, 0.3)"
+              }} 
+              whileTap={{
+                scale: 0.95
+              }}
+            >
+              <motion.span 
+                className="relative z-10 flex items-center justify-center gap-2"
+              >
+                GARANTA SEU LOTE PREMIUM
+                <Star className="w-4 h-4" />
+              </motion.span>
+              <motion.div 
+                className="absolute bottom-0 left-0 h-1 w-full bg-white/30"
+                initial={{ width: "0%" }}
+                whileHover={{ width: "100%" }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.a>
           </motion.div>
+            
+          {/* Floating elements for premium feeling */}
+          <motion.div 
+            className="absolute -bottom-6 -right-6 w-24 h-24 bg-heitokai-blue/10 rounded-full blur-xl"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.5, 0.8, 0.5]
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          <motion.div 
+            className="absolute -top-6 -left-6 w-20 h-20 bg-heitokai-green/10 rounded-full blur-xl"
+            animate={{ 
+              scale: [1, 1.3, 1],
+              opacity: [0.5, 0.7, 0.5]
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5
+            }}
+          />
         </motion.div>
       </div>
     </section>;
