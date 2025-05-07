@@ -44,14 +44,18 @@ const Hero = () => {
         duration: 1,
         delay: 0.5
       }} className={cn("md:w-1/2 mb-10 md:mb-0 relative", isMobile ? "hidden" : "block")}>
-          {/* Promotional image positioned in front of the video container */}
+          {/* Promotional image positioned to extend out from the video container */}
           <motion.img 
             src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
             alt="Promotional image"
-            className="absolute top-4 left-0 w-[200px] h-[200px] object-cover transform -translate-x-1/4 z-20"
+            className="absolute -left-10 top-1/2 -translate-y-1/2 w-[220px] h-[220px] object-cover z-20 shadow-xl rounded-lg"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1.3 }}
+            style={{
+              boxShadow: "0px 0px 20px rgba(0,0,0,0.3)",
+              transform: "translateY(-50%) rotate(-5deg)",
+            }}
           />
           
           <div className="relative bg-white/5 backdrop-blur-md border border-white/10 h-72 md:h-96 w-full rounded-lg overflow-hidden shadow-2xl">
