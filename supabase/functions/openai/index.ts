@@ -1,6 +1,5 @@
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Configuration, OpenAIApi } from "https://esm.sh/openai@3.2.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -12,9 +11,6 @@ const openaiApiKey = Deno.env.get("OPENAI_API_KEY");
 if (!openaiApiKey) {
   throw new Error("OPENAI_API_KEY environment variable is not set");
 }
-
-const configuration = new Configuration({ apiKey: openaiApiKey });
-const openai = new OpenAIApi(configuration);
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -50,13 +46,28 @@ serve(async (req) => {
       ...messages
     ];
 
-    const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: conversationWithContext,
-      temperature: 0.7,
+    // Make the API request to OpenAI
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${openaiApiKey}`
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: conversationWithContext,
+        temperature: 0.7,
+      })
     });
 
-    const responseData = completion.data.choices[0].message;
+    if (!response.ok) {
+      const error = await response.json();
+      console.error("OpenAI API error:", error);
+      throw new Error(`OpenAI API error: ${error.error?.message || "Unknown error"}`);
+    }
+
+    const data = await response.json();
+    const responseData = data.choices[0].message;
     
     return new Response(JSON.stringify(responseData), {
       headers: { "Content-Type": "application/json", ...corsHeaders },
