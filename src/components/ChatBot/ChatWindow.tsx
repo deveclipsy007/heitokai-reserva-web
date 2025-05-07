@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { sendMessageToOpenAI } from '@/services/openai';
 
 type Message = {
   role: 'user' | 'assistant';
