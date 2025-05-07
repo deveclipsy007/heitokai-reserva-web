@@ -1,16 +1,17 @@
+
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Loader, Play } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
 const VideoSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState<string | null>(null);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+
   useEffect(() => {
     const loadVideo = () => {
       if (videoRef.current) {
@@ -68,6 +69,7 @@ const VideoSection = () => {
       };
     }
   }, []);
+
   const handlePlayVideo = () => {
     if (videoRef.current) {
       try {
@@ -114,6 +116,23 @@ const VideoSection = () => {
       }
     }
   };
-  return;
+
+  return (
+    <div className="relative bg-white/5 backdrop-blur-md border border-white/10 h-full w-full rounded-lg overflow-hidden shadow-2xl">
+      <video 
+        ref={videoRef}
+        autoPlay
+        muted 
+        loop 
+        playsInline 
+        preload="auto" 
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//IMG_8915.MP4" type="video/mp4" />
+        Seu navegador não suporta a tag de vídeo.
+      </video>
+    </div>
+  );
 };
+
 export default VideoSection;
