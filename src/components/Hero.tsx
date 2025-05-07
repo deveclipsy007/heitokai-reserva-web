@@ -20,6 +20,7 @@ const Hero = () => {
   }, []);
   
   return <section id="início" className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" style={{
+    backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
     backgroundPosition: "center top"
   }}>
       <div className="absolute inset-0 bg-black/0 rounded-none" />
