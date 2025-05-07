@@ -32,10 +32,17 @@ const Index = () => {
         }
       });
     });
+    
+    // Set the background color of the body to white
+    document.body.style.backgroundColor = "white";
+    
+    return () => {
+      document.body.style.backgroundColor = "";
+    };
   }, []);
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden">
+    <div className="min-h-screen w-full overflow-x-hidden bg-white">
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-heitokai-green origin-left z-50"
         style={{ scaleX }}
@@ -44,19 +51,19 @@ const Index = () => {
       <Navbar />
       <Hero />
       
-      <AnimatedSection className="relative z-10">
+      <AnimatedSection className="relative z-10 bg-white">
         <Features />
       </AnimatedSection>
       
-      <AnimatedSection delay={0.3} className="relative z-10">
+      <AnimatedSection delay={0.3} className="relative z-10 bg-white">
         <TimelineDemo />
       </AnimatedSection>
       
-      <AnimatedSection delay={0.4} className="relative z-10">
+      <AnimatedSection delay={0.4} className="relative z-10 bg-white">
         <Map />
       </AnimatedSection>
       
-      <AnimatedSection delay={0.5} className="relative z-10">
+      <AnimatedSection delay={0.5} className="relative z-10 bg-white">
         <Contact />
       </AnimatedSection>
       

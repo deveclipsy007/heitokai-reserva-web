@@ -30,7 +30,7 @@ const AnimatedSection = ({ children, className, delay = 0.2 }: AnimatedSectionPr
   const opacityTransform = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="relative bg-white">
       <motion.section
         ref={ref}
         initial={{ opacity: 0, y: 30 }}

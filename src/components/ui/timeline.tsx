@@ -124,7 +124,9 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                   className={`h-8 w-8 rounded-full ${activeIndex === index ? 'bg-heitokai-green' : 'bg-heitokai-light-green/70'} dark:bg-neutral-800 border border-heitokai-green/30 dark:border-neutral-700 p-2`}
                   animate={{ 
                     scale: activeIndex === index ? [1, 1.2, 1] : 1,
-                    backgroundColor: activeIndex === index ? '#2A7A4B' : '#C5E2A580'
+                  }}
+                  style={{
+                    backgroundColor: activeIndex === index ? '#2A7A4B' : 'rgba(197, 226, 165, 0.7)'
                   }}
                   transition={{ duration: 0.7, repeat: activeIndex === index ? Infinity : 0, repeatDelay: 2 }}
                 />
@@ -132,8 +134,10 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               <motion.h3 
                 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-heitokai-dark dark:text-neutral-500"
                 animate={{ 
-                  color: activeIndex === index ? '#1E3A29' : '',
                   x: activeIndex === index ? [0, 5, 0] : 0
+                }}
+                style={{
+                  color: activeIndex === index ? '#1E3A29' : '#4A4A4A'
                 }}
                 transition={{ duration: 0.5 }}
               >
@@ -145,8 +149,10 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               <motion.h3 
                 className="md:hidden block text-2xl mb-4 text-left font-bold text-heitokai-dark dark:text-neutral-500"
                 animate={{ 
-                  color: activeIndex === index ? '#1E3A29' : '',
                   x: activeIndex === index ? [0, 5, 0] : 0
+                }}
+                style={{
+                  color: activeIndex === index ? '#1E3A29' : '#4A4A4A'
                 }}
                 transition={{ duration: 0.5 }}
               >

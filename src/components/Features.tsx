@@ -253,7 +253,6 @@ const Features = () => {
             <motion.img 
               initial={{ scale: 1.1 }}
               whileInView={{ scale: 1 }}
-              whileHover={{ scale: 1.05 }}
               transition={{ duration: 3 }}
               alt="Vista aérea do condomínio" 
               className="w-full h-full object-cover rounded-lg" 
