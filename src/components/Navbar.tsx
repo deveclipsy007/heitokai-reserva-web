@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -13,13 +14,39 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll);
 
+    // Adicionar funcionalidade de scroll suave para as âncoras
+    const handleAnchorClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+        event.preventDefault();
+        const targetId = target.getAttribute('href');
+        const targetElement = document.querySelector(targetId || '');
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.getBoundingClientRect().top + window.scrollY - 100,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    document.body.addEventListener('click', handleAnchorClick);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      document.body.removeEventListener('click', handleAnchorClick);
     };
   }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleMenuItemClick = () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
   };
 
   return (
@@ -39,10 +66,10 @@ const Navbar = () => {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="/#sobre" className="text-heitokai-dark hover:text-heitokai-green transition-colors">O Empreendimento</a>
-            <a href="/#mapa" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Localização</a>
-            <a href="/#sobre-nos" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Sobre Nós</a>
-            <a href="/#fale conosco" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Contato</a>
+            <a href="#sobre" className="text-heitokai-dark hover:text-heitokai-green transition-colors">O Empreendimento</a>
+            <a href="#mapa" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Localização</a>
+            <a href="#sobre-nos" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Sobre Nós</a>
+            <a href="#fale-conosco" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Contato</a>
           </nav>
 
           <div className="md:hidden">
@@ -85,30 +112,30 @@ const Navbar = () => {
             </div>
             <div className="flex flex-col space-y-4 p-5">
               <a 
-                href="/#sobre" 
+                href="#sobre" 
                 className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
-                onClick={toggleMenu}
+                onClick={handleMenuItemClick}
               >
                 O Empreendimento
               </a>
               <a 
-                href="/#mapa" 
+                href="#mapa" 
                 className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
-                onClick={toggleMenu}
+                onClick={handleMenuItemClick}
               >
                 Localização
               </a>
               <a 
-                href="/#sobre-nos" 
+                href="#sobre-nos" 
                 className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
-                onClick={toggleMenu}
+                onClick={handleMenuItemClick}
               >
                 Sobre Nós
               </a>
               <a 
-                href="/#fale conosco" 
+                href="#fale-conosco" 
                 className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
-                onClick={toggleMenu}
+                onClick={handleMenuItemClick}
               >
                 Contato
               </a>

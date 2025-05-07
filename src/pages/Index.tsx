@@ -26,20 +26,6 @@ const Index = () => {
   });
 
   useEffect(() => {
-    // Smooth scroll para ancoragem
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href')!);
-        if (target) {
-          window.scrollTo({
-            top: (target as HTMLElement).offsetTop,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-    
     // Set the background color of the body to white
     document.body.style.backgroundColor = "white";
     
@@ -103,7 +89,7 @@ const Index = () => {
         </AnimatedSection>
       </div>
       
-      <div id="fale conosco" className="w-full bg-white">
+      <div id="fale-conosco" className="w-full bg-white">
         <AnimatedSection delay={0.6} className="relative z-10 bg-white w-full">
           <Suspense fallback={<LoadingFallback />}>
             <Contact />

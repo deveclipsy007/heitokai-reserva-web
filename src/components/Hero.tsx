@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { motion, Variants } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -187,7 +188,7 @@ const Hero = () => {
               className="w-full text-center md:text-left"
             >
               <motion.a 
-                href="#contato" 
+                href="#fale-conosco" 
                 className="btn-primary block md:inline-block text-center w-full md:w-auto relative group overflow-hidden" 
                 whileHover={{
                   scale: 1.05,

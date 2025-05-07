@@ -35,7 +35,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="fale conosco" className="py-16 bg-white">
+    <section id="fale-conosco" className="py-16 bg-white">
       <div className="container-custom">
         <h2 className="text-center font-serif text-3xl md:text-4xl text-heitokai-dark mb-8">
           Entre em contato e receba mais informações
