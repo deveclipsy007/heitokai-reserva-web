@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -7,8 +6,35 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import VideoSection from "./VideoSection";
 
+// Memoizando componentes que não mudam frequentemente para evitar re-renderizações
+import React from 'react';
+
+const MemoizedVideoSection = React.memo(VideoSection);
+
+// Optimização de animações para melhorar performance
+const particleVariants = {
+  animate: (i: number) => ({
+    opacity: [0.1, 0.3, 0.1],
+    scale: [1, 1.2, 1],
+    transition: {
+      duration: 3 + Math.random() * 2,
+      repeat: Infinity,
+      repeatType: "mirror",
+      delay: i * 0.7
+    }
+  })
+};
+
 const Hero = () => {
   const isMobile = useIsMobile();
+  
+  // Pré-calculando partículas para evitar recalculos durante renderização
+  const particles = React.useMemo(() => 
+    Array.from({ length: 6 }).map((_, i) => ({
+      key: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`
+    })), []);
 
   return (
     <section 
@@ -37,7 +63,7 @@ const Hero = () => {
             }} 
             className="w-full md:w-1/2 text-white rounded-xl py-6 md:py-[30px] px-4 md:px-8 relative bg-gradient-to-br from-white/40 to-white/30 backdrop-blur-md border border-white/10 shadow-lg overflow-hidden"
           >
-            {/* Premium shine animation element */}
+            {/* Premium shine animation element - Otimizada */}
             <motion.div 
               className="absolute inset-0 opacity-30 bg-gradient-to-r from-transparent via-white to-transparent" 
               style={{
@@ -54,26 +80,19 @@ const Hero = () => {
               }} 
             />
             
-            {/* Subtle glowing particles */}
+            {/* Subtle glowing particles - Otimizadas */}
             <div className="absolute inset-0 overflow-hidden">
-              {[...Array(6)].map((_, i) => (
+              {particles.map((particle, i) => (
                 <motion.div 
-                  key={i} 
+                  key={particle.key} 
                   className="absolute w-12 md:w-16 h-12 md:h-16 rounded-full bg-white/10 blur-xl" 
                   style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`
+                    left: particle.left,
+                    top: particle.top
                   }} 
-                  animate={{
-                    opacity: [0.1, 0.3, 0.1],
-                    scale: [1, 1.2, 1]
-                  }} 
-                  transition={{
-                    duration: 3 + Math.random() * 2,
-                    repeat: Infinity,
-                    repeatType: "mirror",
-                    delay: i * 0.7
-                  }} 
+                  custom={i}
+                  variants={particleVariants}
+                  animate="animate"
                 />
               ))}
             </div>
@@ -195,7 +214,7 @@ const Hero = () => {
               </motion.a>
             </motion.div>
               
-            {/* Floating elements for premium feeling */}
+            {/* Floating elements for premium feeling - Otimizadas */}
             <motion.div 
               className="absolute -bottom-6 -right-6 w-16 md:w-24 h-16 md:h-24 bg-heitokai-blue/10 rounded-full blur-xl" 
               animate={{
@@ -224,7 +243,7 @@ const Hero = () => {
             />
           </motion.div>
 
-          {/* Right side - Video - Only visible on desktop */}
+          {/* Right side - Video - Only visible on desktop - Memoizado */}
           <motion.div 
             initial={{
               opacity: 0,
@@ -240,11 +259,11 @@ const Hero = () => {
             }}
             className="hidden md:block md:w-1/2 h-[450px]"
           >
-            <VideoSection />
+            <MemoizedVideoSection />
           </motion.div>
         </div>
         
-        {/* Video for mobile - Only visible on mobile */}
+        {/* Video for mobile - Only visible on mobile - Memoizado */}
         <div className="md:hidden w-full mt-8">
           <motion.div 
             className="w-full h-60"
@@ -252,7 +271,7 @@ const Hero = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <VideoSection />
+            <MemoizedVideoSection />
           </motion.div>
         </div>
       </div>
@@ -260,4 +279,5 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+// Exportando como componente memoizado para evitar re-renderizações desnecessárias
+export default React.memo(Hero);

@@ -1,5 +1,4 @@
-
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Loader, Play } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -24,11 +23,11 @@ const VideoSection = () => {
   const [buffering, setBuffering] = useState(true);
   const { toast } = useToast();
 
-  // Fix video URL - removing the double slash
+  // Fix video URL
   const videoUrl = "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars/IMG_8915.MP4";
 
-  // Função para adicionar entradas ao log
-  const addToLog = (event: string, details?: string, error?: any) => {
+  // Memoizar a função de log para evitar recriação em cada renderização
+  const addToLog = useCallback((event: string, details?: string, error?: any) => {
     const timestamp = new Date().toISOString();
     const logEntry: VideoLogEntry = {
       timestamp,
@@ -37,9 +36,12 @@ const VideoSection = () => {
       error
     };
     
-    console.log(`Video Log [${timestamp}]: ${event}${details ? ` - ${details}` : ''}`);
-    if (error) {
-      console.error("Video Error:", error);
+    // Usar console.log condicional apenas quando necessário
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`Video Log [${timestamp}]: ${event}${details ? ` - ${details}` : ''}`);
+      if (error) {
+        console.error("Video Error:", error);
+      }
     }
     
     setVideoLogs(prev => [...prev, logEntry]);
@@ -52,10 +54,10 @@ const VideoSection = () => {
         variant: "destructive",
       });
     }
-  };
+  }, [toast]);
 
-  // Função para verificar se tem buffer suficiente
-  const hasEnoughBuffer = () => {
+  // Função memoizada para verificar buffer
+  const hasEnoughBuffer = useCallback(() => {
     if (!videoRef.current) return false;
     
     const video = videoRef.current;
@@ -66,52 +68,120 @@ const VideoSection = () => {
     
     // Consideramos suficiente se tivermos pelo menos 3 segundos de buffer
     return bufferedEnd - currentTime >= 3;
-  };
+  }, []);
+
+  // Memoizar handlePlayVideo para evitar recriação
+  const handlePlayVideo = useCallback(() => {
+    if (videoRef.current) {
+      try {
+        setIsLoading(true);
+        addToLog("PLAY_ATTEMPT", "Tentativa manual de reprodução");
+
+        // Certifique-se de que o vídeo está pronto para ser reproduzido
+        if (videoRef.current.readyState >= 2) {
+          videoRef.current.play().then(() => {
+            addToLog("PLAY_SUCCESS", "Vídeo iniciado manualmente com sucesso");
+            setVideoPlaying(true);
+            setIsLoading(false);
+            setShowPlayButton(false);
+          }).catch(error => {
+            addToLog("PLAY_ERROR", "Erro ao reproduzir vídeo manualmente", error);
+            setVideoError("Erro ao reproduzir o vídeo");
+            setIsLoading(false);
+            setShowPlayButton(true);
+            toast({
+              title: "Erro ao reproduzir vídeo",
+              description: "Tente novamente ou verifique suas configurações de mídia",
+              variant: "destructive"
+            });
+          });
+        } else {
+          // Se o vídeo não estiver pronto, aguarde o evento canplay
+          addToLog("WAITING_CANPLAY", `Estado atual: ${videoRef.current.readyState}`);
+          const onCanPlay = () => {
+            videoRef.current?.play().then(() => {
+              addToLog("DELAYED_PLAY_SUCCESS", "Vídeo iniciado após carregar");
+              setVideoPlaying(true);
+              setIsLoading(false);
+              setShowPlayButton(false);
+              videoRef.current?.removeEventListener('canplay', onCanPlay);
+            }).catch(error => {
+              addToLog("DELAYED_PLAY_ERROR", "Erro ao iniciar vídeo após carregamento", error);
+              setVideoError("Erro ao iniciar o vídeo");
+              setIsLoading(false);
+              setShowPlayButton(true);
+              videoRef.current?.removeEventListener('canplay', onCanPlay);
+            });
+          };
+          videoRef.current.addEventListener('canplay', onCanPlay);
+          videoRef.current.load(); // Force reload
+          addToLog("FORCE_RELOAD", "Forçando recarregamento do vídeo");
+        }
+      } catch (error) {
+        addToLog("GENERAL_ERROR", "Erro ao tentar reproduzir", error);
+        setVideoError("Erro ao iniciar o vídeo");
+        setIsLoading(false);
+        setShowPlayButton(true);
+      }
+    } else {
+      addToLog("REF_ERROR", "Referência de vídeo não disponível");
+    }
+  }, [addToLog, toast]);
 
   useEffect(() => {
+    // Uso de uma variável para limitar operações pesadas
+    let isMounted = true;
+    
     const loadVideo = () => {
-      if (videoRef.current) {
-        try {
-          addToLog("INIT", "Inicializando vídeo");
-          // Reset video element
-          videoRef.current.pause();
-          videoRef.current.currentTime = 0;
-          videoRef.current.load();
-          setIsLoading(true);
-          setBuffering(true);
-          addToLog("LOAD", "Vídeo inicializado com sucesso");
-          
-          // Check for autoplay capabilities
-          const videoElement = videoRef.current;
-          const autoplayPromise = videoElement.play();
-          
-          if (autoplayPromise !== undefined) {
-            autoplayPromise
-              .then(() => {
+      if (!isMounted || !videoRef.current) return;
+      
+      try {
+        addToLog("INIT", "Inicializando vídeo");
+        // Reset video element
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+        videoRef.current.load();
+        setIsLoading(true);
+        setBuffering(true);
+        addToLog("LOAD", "Vídeo inicializado com sucesso");
+        
+        // Check for autoplay capabilities
+        const videoElement = videoRef.current;
+        const autoplayPromise = videoElement.play();
+        
+        if (autoplayPromise !== undefined) {
+          autoplayPromise
+            .then(() => {
+              if (isMounted) {
                 addToLog("AUTOPLAY_SUCCESS", "Reprodução automática iniciada com sucesso");
                 setAutoplayFailed(false);
                 setShowPlayButton(false);
-              })
-              .catch(error => {
+              }
+            })
+            .catch(error => {
+              if (isMounted) {
                 addToLog("AUTOPLAY_FAILED", "Reprodução automática bloqueada pelo navegador", error);
                 setAutoplayFailed(true);
                 setShowPlayButton(true);
                 setVideoPlaying(false);
-              });
-          }
-        } catch (error) {
+              }
+            });
+        }
+      } catch (error) {
+        if (isMounted) {
           addToLog("ERROR", "Erro ao carregar vídeo", error);
           setVideoError("Erro ao carregar o vídeo");
           setShowPlayButton(true);
         }
-      } else {
-        addToLog("ERROR", "Referência do vídeo não encontrada");
       }
     };
     
     loadVideo();
     const video = videoRef.current;
+    
+    // Configurar handlers uma vez e remover ao desmontar
     if (video) {
+      // Manejar erros e estados do vídeo
       const handleError = (e: Event) => {
         const videoElement = e.target as HTMLVideoElement;
         const errorCode = videoElement.error ? videoElement.error.code : 'desconhecido';
@@ -217,6 +287,7 @@ const VideoSection = () => {
       video.addEventListener('progress', handleProgress);
       
       return () => {
+        isMounted = false;
         video.removeEventListener('error', handleError);
         video.removeEventListener('canplay', handleCanPlay);
         video.removeEventListener('playing', handlePlaying);
@@ -233,64 +304,7 @@ const VideoSection = () => {
         addToLog("CLEANUP", "Removendo listeners do vídeo");
       };
     }
-  }, []);
-
-  const handlePlayVideo = () => {
-    if (videoRef.current) {
-      try {
-        setIsLoading(true);
-        addToLog("PLAY_ATTEMPT", "Tentativa manual de reprodução");
-
-        // Certifique-se de que o vídeo está pronto para ser reproduzido
-        if (videoRef.current.readyState >= 2) {
-          videoRef.current.play().then(() => {
-            addToLog("PLAY_SUCCESS", "Vídeo iniciado manualmente com sucesso");
-            setVideoPlaying(true);
-            setIsLoading(false);
-            setShowPlayButton(false);
-          }).catch(error => {
-            addToLog("PLAY_ERROR", "Erro ao reproduzir vídeo manualmente", error);
-            setVideoError("Erro ao reproduzir o vídeo");
-            setIsLoading(false);
-            setShowPlayButton(true);
-            toast({
-              title: "Erro ao reproduzir vídeo",
-              description: "Tente novamente ou verifique suas configurações de mídia",
-              variant: "destructive"
-            });
-          });
-        } else {
-          // Se o vídeo não estiver pronto, aguarde o evento canplay
-          addToLog("WAITING_CANPLAY", `Estado atual: ${videoRef.current.readyState}`);
-          const onCanPlay = () => {
-            videoRef.current?.play().then(() => {
-              addToLog("DELAYED_PLAY_SUCCESS", "Vídeo iniciado após carregar");
-              setVideoPlaying(true);
-              setIsLoading(false);
-              setShowPlayButton(false);
-              videoRef.current?.removeEventListener('canplay', onCanPlay);
-            }).catch(error => {
-              addToLog("DELAYED_PLAY_ERROR", "Erro ao iniciar vídeo após carregamento", error);
-              setVideoError("Erro ao iniciar o vídeo");
-              setIsLoading(false);
-              setShowPlayButton(true);
-              videoRef.current?.removeEventListener('canplay', onCanPlay);
-            });
-          };
-          videoRef.current.addEventListener('canplay', onCanPlay);
-          videoRef.current.load(); // Force reload
-          addToLog("FORCE_RELOAD", "Forçando recarregamento do vídeo");
-        }
-      } catch (error) {
-        addToLog("GENERAL_ERROR", "Erro ao tentar reproduzir", error);
-        setVideoError("Erro ao iniciar o vídeo");
-        setIsLoading(false);
-        setShowPlayButton(true);
-      }
-    } else {
-      addToLog("REF_ERROR", "Referência de vídeo não disponível");
-    }
-  };
+  }, [hasEnoughBuffer]);
 
   return (
     <div className="relative bg-white/5 backdrop-blur-md border border-white/10 h-full w-full rounded-lg overflow-hidden shadow-2xl">
@@ -333,4 +347,5 @@ const VideoSection = () => {
   );
 };
 
-export default VideoSection;
+// Exportar como componente memoizado
+export default React.memo(VideoSection);

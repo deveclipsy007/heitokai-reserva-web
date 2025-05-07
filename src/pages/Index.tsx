@@ -1,16 +1,21 @@
 
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Features from "@/components/Features";
-import Map from "@/components/Map";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import AboutUs from "@/components/AboutUs";
-import { TimelineDemo } from "@/components/TimelineDemo";
-import AnimatedSection from "@/components/AnimatedSection";
-import InvestorSection from "@/components/InvestorSection";
 import { motion, useScroll, useSpring } from "framer-motion";
+import AnimatedSection from "@/components/AnimatedSection";
+import Footer from "@/components/Footer";
+
+// Importação com lazy loading para melhorar o carregamento inicial
+const Hero = lazy(() => import("@/components/Hero"));
+const Features = lazy(() => import("@/components/Features"));
+const Map = lazy(() => import("@/components/Map"));
+const Contact = lazy(() => import("@/components/Contact"));
+const AboutUs = lazy(() => import("@/components/AboutUs"));
+const TimelineDemo = lazy(() => import("@/components/TimelineDemo").then(module => ({ default: module.TimelineDemo })));
+const InvestorSection = lazy(() => import("@/components/InvestorSection"));
+
+// Componente de carregamento simples
+const LoadingFallback = () => <div className="w-full h-32 flex items-center justify-center">Carregando...</div>;
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
@@ -53,42 +58,56 @@ const Index = () => {
       <Navbar />
       
       <div className="w-full">
-        <Hero />
+        <Suspense fallback={<LoadingFallback />}>
+          <Hero />
+        </Suspense>
       </div>
       
       <div id="sobre" className="w-full bg-white">
         <AnimatedSection className="relative z-10 bg-white w-full">
-          <Features />
+          <Suspense fallback={<LoadingFallback />}>
+            <Features />
+          </Suspense>
         </AnimatedSection>
       </div>
       
       <div id="vantagens" className="w-full bg-white">
         <AnimatedSection delay={0.3} className="relative z-10 bg-white w-full">
-          <TimelineDemo />
+          <Suspense fallback={<LoadingFallback />}>
+            <TimelineDemo />
+          </Suspense>
         </AnimatedSection>
       </div>
       
       <div id="investidores" className="w-full bg-white">
         <AnimatedSection delay={0.35} className="relative z-10 bg-white w-full">
-          <InvestorSection />
+          <Suspense fallback={<LoadingFallback />}>
+            <InvestorSection />
+          </Suspense>
         </AnimatedSection>
       </div>
       
       <div id="mapa" className="w-full bg-white">
         <AnimatedSection delay={0.4} className="relative z-10 bg-white w-full">
-          <Map />
+          <Suspense fallback={<LoadingFallback />}>
+            <Map />
+          </Suspense>
         </AnimatedSection>
       </div>
       
       <div id="sobre-nos" className="w-full bg-white">
         <AnimatedSection delay={0.5} className="relative z-10 bg-white w-full">
-          <AboutUs />
+          <Suspense fallback={<LoadingFallback />}>
+            <AboutUs />
+          </Suspense>
         </AnimatedSection>
       </div>
       
       <div id="fale conosco" className="w-full bg-white">
         <AnimatedSection delay={0.6} className="relative z-10 bg-white w-full">
-          <Contact />
+          <Suspense fallback={<LoadingFallback />}>
+            <Contact />
+          </Suspense>
         </AnimatedSection>
       </div>
       
