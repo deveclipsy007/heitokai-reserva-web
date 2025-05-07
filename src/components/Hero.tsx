@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -136,22 +135,32 @@ const Hero = () => {
     }
   };
   
-  return <section id="início" className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" style={{
-    backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
-    backgroundPosition: "center top"
-  }}>
+  return (
+    <section 
+      id="início" 
+      className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" 
+      style={{
+        backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
+        backgroundPosition: "center top"
+      }}
+    >
       <div className="absolute inset-0 bg-black/0 rounded-none" />
       
-      <motion.div initial={{
-      opacity: 0,
-      x: -50
-    }} animate={{
-      opacity: 1,
-      x: 0
-    }} transition={{
-      duration: 1,
-      delay: 0.5
-    }} className={cn("md:w-1/2 mb-10 md:mb-0 relative", isMobile ? "hidden" : "block")}>
+      <motion.div 
+        initial={{
+          opacity: 0,
+          x: -50
+        }} 
+        animate={{
+          opacity: 1,
+          x: 0
+        }} 
+        transition={{
+          duration: 1,
+          delay: 0.5
+        }} 
+        className={cn("md:w-1/2 mb-10 md:mb-0 relative", isMobile ? "hidden" : "block")}
+      >
           {/* Promotional image positioned to extend out from the video container */}
           <motion.img 
             src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
@@ -438,6 +447,8 @@ const Hero = () => {
         }} />
         </motion.div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;
