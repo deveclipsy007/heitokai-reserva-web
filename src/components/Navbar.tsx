@@ -30,9 +30,11 @@ const Navbar = () => {
           <div className="flex items-center">
             <a href="/" className="flex items-center space-x-2">
               <img 
-                src="/lovable-uploads/119c5dc0-5a7e-4226-b6e4-3ab042b944b2.png" 
+                src={scrolled 
+                  ? "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//Logo%20Principal%204B%203%20cores@2x.png" 
+                  : "/lovable-uploads/119c5dc0-5a7e-4226-b6e4-3ab042b944b2.png"} 
                 alt="Reserva Rio Uru" 
-                className="h-12" 
+                className="h-12 transition-all duration-300" 
               />
             </a>
           </div>
@@ -67,7 +69,9 @@ const Navbar = () => {
             <div className="flex justify-between items-center p-5 border-b">
               <a href="/" className="flex items-center space-x-2">
                 <img 
-                  src="/lovable-uploads/119c5dc0-5a7e-4226-b6e4-3ab042b944b2.png" 
+                  src={scrolled 
+                    ? "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//Logo%20Principal%204B%203%20cores@2x.png" 
+                    : "/lovable-uploads/119c5dc0-5a7e-4226-b6e4-3ab042b944b2.png"} 
                   alt="Reserva Rio Uru" 
                   className="h-10" 
                 />
