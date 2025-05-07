@@ -257,7 +257,7 @@ const Map = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundBlendMode: "overlay"
-              }} className="relative z-10 p-8 h-full flex flex-col justify-between bg-white/0">
+              }} className="relative z-10 p-8 h-full flex flex-col justify-between bg-black/[0.52]">
                   <div className="flex items-center space-x-2 mt-4">
                     <motion.div initial={{
                     width: 0
