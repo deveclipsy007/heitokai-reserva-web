@@ -1,65 +1,61 @@
 
-// Configuração para se comunicar com a API da OpenAI
-import { toast } from "sonner";
+// This file contains the integration with OpenAI API
 
-type Message = {
-  role: 'user' | 'assistant' | 'system';
-  content: string;
-};
-
-// Texto de contextualização sobre o site
-const systemPrompt = `
-Você é um assistente virtual para o Condomínio Reserva Rio Uru, um empreendimento de alto padrão localizado às margens do Rio Uru.
-
-Informações sobre o empreendimento:
-- Condomínio de alto padrão com áreas de até 800m²
-- Localizado às margens do Rio Uru
-- Oferece exclusividade, contato com a natureza e sofisticação para famílias
-- Desenvolvido pela empresa Heitokai
-- Possui infraestrutura completa de lazer e segurança
-- Terrenos amplos e bem planejados para construção de casas personalizadas
-- Acesso privilegiado ao rio e áreas verdes preservadas
-- Localizado em região de fácil acesso e próximo a serviços essenciais
-
-Seu objetivo é ser cordial, prestativo e fornecer informações precisas sobre o empreendimento para potenciais compradores e investidores. Se não souber alguma informação específica, explique que pode encaminhar a dúvida para a equipe de vendas.
-
-Responda sempre em português do Brasil, com tom amigável mas profissional.
-`;
-
-export const sendMessageToOpenAI = async (messages: Message[]): Promise<string> => {
+/**
+ * Sends messages to OpenAI and returns the response
+ */
+export const sendMessageToOpenAI = async (messages: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>) => {
   try {
-    // Preparar o histórico de mensagens, incluindo o system prompt
-    const apiMessages = [
-      { role: 'system', content: systemPrompt },
+    // Get the API key from environment variables
+    const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+    
+    if (!apiKey) {
+      throw new Error("API key not found. Please add VITE_OPENAI_API_KEY to your .env file");
+    }
+
+    // Add system message with context about the condominium
+    const conversationWithContext = [
+      { 
+        role: 'system', 
+        content: `Você é um assistente para o Condomínio Reserva Rio Uru. Forneça informações sobre o empreendimento, 
+        localização, características, vantagens de investimento, sobre a empresa e contatos. 
+        Seja cordial e profissional, respondendo em português do Brasil.
+        
+        Informações importantes:
+        - O Reserva Rio Uru é um condomínio fechado de alto padrão.
+        - Está localizado próximo ao Rio Uru, oferecendo contato com a natureza.
+        - Possui infraestrutura completa de lazer e segurança.
+        - É um excelente investimento com valorização prevista na região.
+        - Desenvolvido pela empresa 4B Empreendimentos, conhecida por qualidade e confiabilidade.
+        - Para mais informações, os interessados podem entrar em contato através do formulário no site.
+        
+        Quando não souber a resposta, sugira que a pessoa entre em contato pelo formulário.`
+      },
       ...messages
     ];
-    
+
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
+        'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: apiMessages,
-        temperature: 0.7,
-        max_tokens: 1000,
+        model: 'gpt-3.5-turbo',
+        messages: conversationWithContext,
+        temperature: 0.7
       })
     });
-    
+
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Erro na API da OpenAI:", errorData);
-      throw new Error(errorData.error?.message || 'Erro ao comunicar com a OpenAI');
+      const error = await response.json();
+      throw new Error(error.error?.message || 'Failed to get response from OpenAI');
     }
-    
+
     const data = await response.json();
     return data.choices[0].message.content;
-    
-  } catch (error: any) {
-    console.error("Erro na chamada para OpenAI:", error);
-    toast.error("Erro ao conectar com o assistente virtual");
-    return "Desculpe, houve um problema na comunicação. Por favor, tente novamente em alguns instantes.";
+  } catch (error) {
+    console.error('Error in OpenAI request:', error);
+    return "Desculpe, ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde ou entre em contato através do formulário.";
   }
 };
