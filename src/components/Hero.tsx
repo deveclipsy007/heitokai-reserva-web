@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { motion, Variants } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -134,26 +133,7 @@ const Hero = () => {
               }} 
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-medium mb-3 md:mb-4 text-zinc-950"
             >
-              Terrenos exclusivos de até <br />
-              <motion.span 
-                initial={{
-                  opacity: 0,
-                  scale: 0.8
-                }} 
-                animate={{
-                  opacity: 1,
-                  scale: 1
-                }} 
-                transition={{
-                  duration: 0.8,
-                  delay: 1.5,
-                  type: "spring",
-                  stiffness: 100
-                }} 
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl inline-block"
-              >
-                800 m²
-              </motion.span>
+              Seu paraíso, sua reserva.
             </motion.h2>
             
             <motion.p 
