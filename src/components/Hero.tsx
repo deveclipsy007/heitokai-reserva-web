@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -47,7 +48,7 @@ const Hero = () => {
           <motion.img 
             src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
             alt="Promotional image"
-            className="absolute -left-10 top-1/2 -translate-y-1/2 w-[220px] h-[220px] object-cover z-20 rounded-lg"
+            className="absolute -left-10 top-1/2 -translate-y-1/2 w-[220px] h-[220px] object-contain z-20 rounded-lg"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1.3 }}
