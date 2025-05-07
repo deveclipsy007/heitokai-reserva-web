@@ -1,13 +1,11 @@
-
 const Footer = () => {
-  return (
-    <footer className="bg-heitokai-dark text-white py-10">
+  return <footer className="bg-heitokai-dark text-white py-10">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="font-serif text-lg mb-4">Contato</h3>
             <p className="text-sm mb-2">(00) 0000-0000 / (00) 00000-0000</p>
-            <p className="text-sm">contato@heitokai.com.br</p>
+            <p className="text-sm">contato@4bincorporadora.com.br</p>
           </div>
           
           <div>
@@ -46,8 +44,6 @@ const Footer = () => {
           <p className="mt-2">Imagens meramente ilustrativas. O empreendimento somente será comercializado após o registro do memorial de incorporação no cartório de imóveis nos termos da Lei nº 4.591/64.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
