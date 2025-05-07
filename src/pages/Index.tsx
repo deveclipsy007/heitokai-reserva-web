@@ -6,6 +6,7 @@ import Features from "@/components/Features";
 import Map from "@/components/Map";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import AboutUs from "@/components/AboutUs";
 import { TimelineDemo } from "@/components/TimelineDemo";
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion, useScroll, useSpring } from "framer-motion";
@@ -72,8 +73,14 @@ const Index = () => {
         </AnimatedSection>
       </div>
       
-      <div id="fale conosco" className="w-full bg-white">
+      <div id="sobre-nos" className="w-full bg-white">
         <AnimatedSection delay={0.5} className="relative z-10 bg-white w-full">
+          <AboutUs />
+        </AnimatedSection>
+      </div>
+      
+      <div id="fale conosco" className="w-full bg-white">
+        <AnimatedSection delay={0.6} className="relative z-10 bg-white w-full">
           <Contact />
         </AnimatedSection>
       </div>

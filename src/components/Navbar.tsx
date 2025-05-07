@@ -1,113 +1,117 @@
-
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from 'react';
+import { MenuIcon, XIcon } from '@heroicons/react/solid';
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      const isScrolled = window.scrollY > 50;
+      setScrolled(isScrolled);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-white py-2 shadow-md" : "bg-gradient-to-b from-[#0A2647]/80 to-transparent py-4"
-      )}
-    >
-      <div
-        className={cn(
-          "container-custom flex justify-between items-center my-0 py-[5px]",
-          isScrolled ? "" : ""
-        )}
-      >
-        {/* Logo on the left */}
-        <a href="#" className="flex items-center">
-          <img
-            alt="Reserva Rio Uru Heitokai"
-            className="h-12 w-auto md:h-16"
-            src={
-              isScrolled
-                ? "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//Logo%20Principal%204B%203%20cores@2x.png"
-                : "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//Logo%20Principal%204B%203%20cores%20branco@2x.png"
-            }
-          />
-        </a>
-
-        {/* Desktop Menu moved to the right */}
-        <nav className="hidden md:flex gap-8">
-          {["INÍCIO", "SOBRE", "MAPA", "FALE CONOSCO"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className={cn(
-                "font-medium hover:text-heitokai-green transition-colors",
-                isScrolled ? "text-black" : "text-white"
-              )}
-            >
-              {item}
+    <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+      <div className="container-custom mx-auto">
+        <div className="flex h-20 items-center justify-between">
+          <div className="flex items-center">
+            <a href="/" className="flex items-center space-x-2">
+              <img 
+                src="/lovable-uploads/119c5dc0-5a7e-4226-b6e4-3ab042b944b2.png" 
+                alt="Reserva Rio Uru" 
+                className="h-12" 
+              />
             </a>
-          ))}
-        </nav>
+          </div>
+          
+          <nav className="hidden md:flex items-center space-x-8">
+            <a href="/#sobre" className="text-heitokai-dark hover:text-heitokai-green transition-colors">O Empreendimento</a>
+            <a href="/#mapa" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Localização</a>
+            <a href="/#sobre-nos" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Sobre Nós</a>
+            <a href="/#fale conosco" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Contato</a>
+          </nav>
 
-        {/* Mobile Menu Button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className={cn("md:hidden", isScrolled ? "text-black" : "text-white")}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </Button>
-      </div>
-
-      {/* Mobile Menu with Animation */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div 
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-white overflow-hidden shadow-lg"
-          >
-            <motion.nav 
-              initial={{ y: -20 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.3, staggerChildren: 0.1 }}
-              className="flex flex-col gap-2 p-4"
+          <div className="md:hidden">
+            <button
+              onClick={toggleMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-heitokai-dark hover:text-heitokai-green focus:outline-none"
+              aria-expanded="false"
             >
-              {["INÍCIO", "SOBRE", "MAPA", "FALE CONOSCO"].map((item, index) => (
-                <motion.a
-                  key={item}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-black font-medium hover:text-heitokai-green transition-colors py-3 px-4 border-b border-gray-100 last:border-0"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item}
-                </motion.a>
-              ))}
-            </motion.nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <span className="sr-only">Abrir menu</span>
+              {isOpen ? (
+                <XIcon className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
+          </div>
+
+          <div
+            className={`fixed inset-0 z-50 bg-white/95 backdrop-blur-sm transition-transform duration-300 ease-in-out transform ${
+              isOpen ? "translate-x-0" : "translate-x-full"
+            } md:hidden`}
+          >
+            <div className="flex justify-between items-center p-5 border-b">
+              <a href="/" className="flex items-center space-x-2">
+                <img 
+                  src="/lovable-uploads/119c5dc0-5a7e-4226-b6e4-3ab042b944b2.png" 
+                  alt="Reserva Rio Uru" 
+                  className="h-10" 
+                />
+              </a>
+              <button
+                className="rounded-md p-2 text-heitokai-dark focus:outline-none"
+                onClick={toggleMenu}
+              >
+                <span className="sr-only">Fechar menu</span>
+                <XIcon className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </div>
+            <div className="flex flex-col space-y-4 p-5">
+              <a 
+                href="/#sobre" 
+                className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
+                onClick={toggleMenu}
+              >
+                O Empreendimento
+              </a>
+              <a 
+                href="/#mapa" 
+                className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
+                onClick={toggleMenu}
+              >
+                Localização
+              </a>
+              <a 
+                href="/#sobre-nos" 
+                className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
+                onClick={toggleMenu}
+              >
+                Sobre Nós
+              </a>
+              <a 
+                href="/#fale conosco" 
+                className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
+                onClick={toggleMenu}
+              >
+                Contato
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
   );
 };
