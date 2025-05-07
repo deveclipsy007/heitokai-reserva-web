@@ -23,9 +23,16 @@ export const sendMessageToOpenAI = async (
       throw new Error(error.message);
     }
 
-    return data?.content || "Desculpe, ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde ou entre em contato através do formulário.";
+    // Retorna objeto com conteúdo principal e possivelmente uma segunda mensagem
+    return {
+      content: data?.content || "Desculpe, ocorreu um erro. Pode tentar novamente?",
+      secondMessage: data?.secondMessage || null,
+    };
   } catch (error) {
     console.error('Error in OpenAI request:', error);
-    return "Desculpe, ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde ou entre em contato através do formulário.";
+    return {
+      content: "Desculpe, ocorreu um erro. Pode tentar novamente?", 
+      secondMessage: null
+    };
   }
 };

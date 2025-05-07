@@ -19,11 +19,13 @@ interface ChatWindowProps {
 
 const ChatWindow = ({ onClose }: ChatWindowProps) => {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Olá! 😊 Que prazer ter você por aqui! Sou o assistente virtual do Condomínio Reserva Rio Uru. Como posso ajudá-lo hoje?' }
+    { role: 'assistant', content: 'Olá! 😊 Que prazer ter você por aqui! Sou o assistente do Reserva Rio Uru. Como posso ajudá-lo hoje?' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState('');
+  const [isTypingSecondMessage, setIsTypingSecondMessage] = useState(false);
+  const [pendingSecondMessage, setPendingSecondMessage] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
   // Inicializar ID da sessão
@@ -45,6 +47,22 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
   
+  // Efeito para processar a segunda mensagem após delay
+  useEffect(() => {
+    if (pendingSecondMessage && !isLoading && !isTypingSecondMessage) {
+      setIsTypingSecondMessage(true);
+      
+      // Adicionar delay para simular digitação
+      const typingDelay = 1500 + Math.random() * 1500; // 1.5 a 3 segundos
+      
+      setTimeout(() => {
+        setMessages(prev => [...prev, { role: 'assistant', content: pendingSecondMessage }]);
+        setPendingSecondMessage(null);
+        setIsTypingSecondMessage(false);
+      }, typingDelay);
+    }
+  }, [pendingSecondMessage, isLoading, isTypingSecondMessage]);
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
@@ -60,12 +78,17 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
       const response = await sendMessageToOpenAI([...messages, userMessage], sessionId);
       
       // Adicionar resposta do assistente
-      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: response.content }]);
+      
+      // Se houver uma segunda mensagem, configurá-la para ser exibida com delay
+      if (response.secondMessage) {
+        setPendingSecondMessage(response.secondMessage);
+      }
     } catch (error) {
       console.error('Erro ao enviar mensagem para OpenAI:', error);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: 'Desculpe, houve um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.' 
+        content: 'Desculpe, houve um erro. Pode tentar novamente?' 
       }]);
     } finally {
       setIsLoading(false);
@@ -107,7 +130,7 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
               </div>
             </motion.div>
           ))}
-          {isLoading && (
+          {(isLoading || isTypingSecondMessage) && (
             <div className="flex justify-start">
               <div className="bg-gray-100 p-3 rounded-lg rounded-tl-none max-w-[80%]">
                 <div className="flex items-center gap-2">
@@ -131,12 +154,12 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
           onChange={e => setInput(e.target.value)}
           placeholder="Digite sua mensagem..."
           className="flex-1"
-          disabled={isLoading}
+          disabled={isLoading || isTypingSecondMessage}
         />
         <Button 
           type="submit" 
           size="icon"
-          disabled={isLoading || !input.trim()} 
+          disabled={isLoading || isTypingSecondMessage || !input.trim()} 
           className="bg-heitokai-green hover:bg-heitokai-dark"
         >
           <Send className="h-4 w-4" />

@@ -66,6 +66,46 @@ const calculateInterestLevel = (messages) => {
   return "baixo";
 };
 
+// Função para dividir mensagens longas em duas
+const splitIntoTwoMessages = (message) => {
+  // Não dividir mensagens curtas
+  if (message.length < 100) return [message];
+  
+  // Encontrar um bom ponto para dividir (final de frase)
+  const sentences = message.match(/[^.!?]+[.!?]+/g) || [message];
+  
+  if (sentences.length <= 1) return [message];
+  
+  // Calcular um ponto próximo ao meio
+  const midpoint = Math.floor(sentences.length / 2);
+  
+  const firstHalf = sentences.slice(0, midpoint).join('');
+  const secondHalf = sentences.slice(midpoint).join('');
+  
+  return [firstHalf.trim(), secondHalf.trim()];
+};
+
+// Função para encurtar mensagens muito longas
+const shortenMessage = (message) => {
+  const MAX_LENGTH = 250;
+  
+  if (message.length <= MAX_LENGTH) return message;
+  
+  // Tentar manter frases completas
+  const sentences = message.match(/[^.!?]+[.!?]+/g) || [message];
+  
+  let shortened = "";
+  for (const sentence of sentences) {
+    if ((shortened + sentence).length <= MAX_LENGTH) {
+      shortened += sentence;
+    } else {
+      break;
+    }
+  }
+  
+  return shortened.length > 0 ? shortened : message.substring(0, MAX_LENGTH) + "...";
+};
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -97,6 +137,8 @@ serve(async (req) => {
         - Faz perguntas sutis para obter informações
         - É animado e entusiasta sobre o empreendimento
         - Usa emojis ocasionalmente para criar conexão 😊
+        - IMPORTANTE: Responde com frases CURTAS e diretas, sem textos longos
+        - Ocasionalmente, divide respostas em duas mensagens para parecer mais humano
         
         Informações sobre o Reserva Rio Uru:
         - Condomínio fechado de alto padrão próximo ao Rio Uru
@@ -111,10 +153,10 @@ serve(async (req) => {
         3. Construir um relacionamento e não ser invasivo
         
         Quando a pessoa demonstrar interesse forte, sugira:
-        "Adoraria que um de nossos consultores entrasse em contato para dar mais detalhes! Poderia me dizer seu nome completo e telefone com DDD?"
+        "Adoraria que um de nossos consultores entrasse em contato! Poderia me dizer seu nome e telefone com DDD?"
         
         Se a pessoa já compartilhou nome e telefone, agradeça e diga:
-        "Obrigado pelas informações! Vou passar para nossa equipe e logo alguém entrará em contato para contar mais sobre o Reserva Rio Uru. Tem mais alguma pergunta que eu possa responder agora?"
+        "Obrigado pelas informações! Logo alguém entrará em contato com você. Tem mais alguma pergunta?"
         
         Responda sempre em português do Brasil de forma calorosa e envolvente.`
       },
@@ -184,6 +226,7 @@ serve(async (req) => {
         model: "gpt-4o-mini",
         messages: conversationWithContext,
         temperature: 0.8, // Ligeiramente mais criativo
+        max_tokens: 300, // Limitar tamanho das respostas
       })
     });
 
@@ -194,7 +237,26 @@ serve(async (req) => {
     }
 
     const data = await response.json();
-    const responseData = data.choices[0].message;
+    let responseText = data.choices[0].message.content;
+    
+    // Encurtar a resposta se for muito longa
+    responseText = shortenMessage(responseText);
+    
+    // Decidir se vamos dividir em duas mensagens
+    // 30% de chance de dividir a mensagem se for longa o suficiente
+    const shouldSplit = responseText.length > 80 && Math.random() < 0.3;
+    
+    const responseMessages = shouldSplit ? 
+      splitIntoTwoMessages(responseText) : 
+      [responseText];
+    
+    // Retornar a primeira parte ou a mensagem completa se não for dividida
+    const responseData = {
+      content: responseMessages[0],
+      role: 'assistant',
+      // Incluir a segunda parte se existir
+      secondMessage: responseMessages.length > 1 ? responseMessages[1] : null
+    };
     
     return new Response(JSON.stringify(responseData), {
       headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -204,7 +266,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         error: error.message || "Failed to process request",
-        content: "Desculpe, ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde ou entre em contato através do formulário.",
+        content: "Desculpe, ocorreu um erro. Pode tentar novamente?",
       }),
       {
         status: 500,
