@@ -131,6 +131,18 @@ const VideoSection = () => {
         <source src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//IMG_8915.MP4" type="video/mp4" />
         Seu navegador não suporta a tag de vídeo.
       </video>
+      
+      {videoError && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+          <p className="text-white text-center p-4">{videoError}</p>
+        </div>
+      )}
+      
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+          <Loader className="h-8 w-8 text-white animate-spin" />
+        </div>
+      )}
     </div>
   );
 };
