@@ -31,7 +31,7 @@ const Navbar = () => {
       <div
         className={cn(
           "container-custom flex justify-between items-center my-0 py-[5px]",
-          isScrolled ? "bg-white" : "bg-transparent backdrop-blur-sm"
+          isScrolled ? "" : ""
         )}
       >
         {/* Logo on the left */}
