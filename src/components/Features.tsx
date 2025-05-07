@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -9,22 +8,22 @@ const Features = () => {
     {
       title: "NATUREZA E RIO EXCLUSIVOS",
       icon: "🌿",
-      description: "Um santuário natural com acesso privilegiado a águas cristalinas, onde cada amanhecer revela uma nova dimensão de beleza e tranquilidade que só o contato genuíno com a natureza pode proporcionar."
+      description: "Um santuário natural com acesso privilegiado às margens do Rio Uru, onde cada amanhecer revela uma paisagem deslumbrante de águas cristalinas e vegetação exuberante, criando um cenário perfeito para a sua qualidade de vida."
     }, 
     {
-      title: "PAISAGISMO DESLUMBRANTE",
+      title: "PAISAGISMO PREMIADO",
       icon: "🌳",
-      description: "Jardins e espaços verdes projetados por especialistas renomados, criando um ambiente onde as cores da natureza se entrelaçam em uma sinfonia visual que transforma cada vista em uma experiência imersiva."
+      description: "Projeto paisagístico assinado por especialistas renomados, integrando espécies nativas à infraestrutura do condomínio, criando um ambiente onde a biodiversidade local é preservada e valorizada em cada detalhe."
     }, 
     {
-      title: "PRIVACIDADE ABSOLUTA",
+      title: "SEGURANÇA PREMIUM",
       icon: "🔒",
-      description: "Um refúgio exclusivo para poucos privilegiados, onde cada detalhe foi meticulosamente planejado para garantir sua privacidade, conforto e segurança em um ambiente controlado 24 horas."
+      description: "Sistema de segurança completo com monitoramento 24 horas, controle de acesso biométrico e equipe altamente treinada, garantindo tranquilidade total para você e sua família desfrutarem do melhor que a natureza oferece."
     }, 
     {
       title: "HARMONIA PERFEITA",
       icon: "☯️",
-      description: "Arquitetura biofílica revolucionária que integra espaços construídos com o ambiente natural, proporcionando uma experiência de vida em perfeito equilíbrio com o ritmo da natureza."
+      description: "Arquitetura biofílica revolucionária que respeita o meio ambiente e maximiza o bem-estar dos moradores, com construções que se integram à paisagem natural, proporcionando uma experiência de vida verdadeiramente sustentável."
     }
   ];
   
@@ -122,7 +121,7 @@ const Features = () => {
             transition={{ duration: 0.8 }}
             className="text-center font-serif text-3xl md:text-5xl text-heitokai-dark mb-6"
           >
-            ONDE A NATUREZA ENCONTRA SEU ESTILO
+            EXCLUSIVIDADE EM HARMONIA COM A NATUREZA
           </motion.h2>
           
           <motion.div
@@ -138,7 +137,7 @@ const Features = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-center max-w-2xl text-heitokai-dark/80 mb-10"
           >
-            Um conceito revolucionário de vida em harmonia com a natureza, onde cada elemento foi pensado para encantar seus sentidos e elevar sua experiência diária.
+            O Condomínio Reserva Rio Uru Heitokai representa um conceito inovador de moradia que integra sofisticação e consciência ambiental, onde cada elemento foi cuidadosamente planejado para elevar sua experiência de vida em conexão com a natureza.
           </motion.p>
         </motion.div>
         
@@ -205,7 +204,7 @@ const Features = () => {
             />
             
             <h3 className="section-title relative">
-              A oportunidade de uma vida
+              Uma oportunidade exclusiva para poucos
               <motion.span
                 initial={{ width: 0 }}
                 whileInView={{ width: "30%" }}
@@ -215,11 +214,11 @@ const Features = () => {
             </h3>
             
             <p className="mb-6 text-lg text-heitokai-dark/80">
-              O Condomínio Reserva Rio Uru Heitokai é muito mais que um empreendimento imobiliário — é uma declaração de valores e um novo conceito de vida. A materialização perfeita do sonho de viver em completa harmonia com a natureza, sem abrir mão do conforto e sofisticação que você merece.
+              O Condomínio Reserva Rio Uru Heitokai é a materialização de um sonho para quem valoriza exclusividade e contato direto com a natureza. Não é apenas um empreendimento imobiliário — é uma declaração de valores e um novo conceito de vida, onde sustentabilidade e sofisticação andam lado a lado.
             </p>
             
             <p className="text-lg text-heitokai-dark/80">
-              Com localização privilegiada e acesso exclusivo às margens do cristalino Rio Uru, cada lote é uma tela em branco esperando para se transformar na residência dos seus sonhos, cercada pelos sons suaves da natureza e pela energia revitalizante das águas que banham esta terra verdadeiramente abençoada.
+              Com localização estratégica e acesso privilegiado às margens do Rio Uru, cada lote foi projetado para preservar a integração com o ambiente natural enquanto proporciona privacidade absoluta. Aqui, você construirá sua residência dos sonhos em meio a uma infraestrutura completa, cercado pela energia revitalizante das águas cristalinas e da mata preservada.
             </p>
             
             <motion.button
@@ -231,7 +230,7 @@ const Features = () => {
               className="mt-8 btn-primary group overflow-hidden relative"
             >
               <span className="relative z-10 group-hover:text-white transition-colors duration-300">
-                CONHEÇA NOSSOS TERRENOS
+                CONHEÇA NOSSOS TERRENOS PREMIUM
               </span>
               <span className="absolute bottom-0 left-0 w-full h-0 bg-heitokai-dark transition-all duration-300 -z-0 group-hover:h-full"></span>
             </motion.button>
@@ -286,10 +285,10 @@ const Features = () => {
           className="mt-32 text-center"
         >
           <h3 className="font-serif text-2xl md:text-3xl text-heitokai-dark mb-4">
-            Pronto para fazer parte deste paraíso exclusivo?
+            Pronto para investir no futuro da sua família?
           </h3>
           <p className="text-heitokai-dark/80 max-w-2xl mx-auto mb-8">
-            Não perca a oportunidade de garantir seu lugar em um dos empreendimentos mais inovadores e exclusivos da região.
+            Os lotes do Condomínio Reserva Rio Uru Heitokai são limitados. Entre em contato agora mesmo e garanta sua participação neste empreendimento exclusivo.
           </p>
           <motion.a
             href="#contato"
@@ -297,7 +296,7 @@ const Features = () => {
             whileTap={{ scale: 0.95 }}
             className="btn-primary inline-flex items-center gap-2"
           >
-            FALE COM UM CONSULTOR
+            AGENDE UMA VISITA EXCLUSIVA
             <motion.span
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}

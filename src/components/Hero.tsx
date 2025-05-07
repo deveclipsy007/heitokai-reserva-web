@@ -59,7 +59,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 1.2 }}
             className="text-3xl md:text-5xl font-serif font-medium mb-4 text-white lg:text-5xl"
           >
-            Áreas de até <br />
+            Terrenos exclusivos de até <br />
             <motion.span 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -81,7 +81,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 1.7 }}
             className="mb-10 max-w-lg text-white font-medium text-lg"
           >
-            No Reserva Rio Uru Heitokai, a harmonia entre natureza e modernidade cria uma experiência única de vida. Cada elemento foi cuidadosamente planejado para oferecer conforto, exclusividade e uma conexão profunda com o ambiente natural.
+            No Condomínio Reserva Rio Uru Heitokai, exclusividade encontra natureza preservada. Com acesso privilegiado ao cristalino Rio Uru, cada detalhe foi meticulosamente planejado para proporcionar uma experiência de vida sem igual, onde sofisticação e sustentabilidade caminham juntas.
           </motion.p>
           
           <motion.div
@@ -93,7 +93,7 @@ const Hero = () => {
             className="w-full text-center md:text-left"
           >
             <a href="#contato" className="btn-primary block md:inline-block text-center w-full md:w-auto">
-              CONHEÇA O FUTURO DO SEU LAR
+              GARANTA SEU LOTE PREMIUM
             </a>
           </motion.div>
         </motion.div>

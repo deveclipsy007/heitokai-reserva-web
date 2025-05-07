@@ -1,4 +1,3 @@
-
 import { MapPin, Navigation, Compass, Route } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,7 +9,7 @@ const Map = () => {
     <section id="mapa" className="py-16 bg-heitokai-beige/50">
       <div className="container-custom">
         <h2 className="text-center font-serif text-3xl md:text-4xl text-heitokai-dark mb-4">
-          PLANEJAMENTO URBANO E PAISAGISMO
+          LOCALIZAÇÃO ESTRATÉGICA E MASTERPLAN EXCLUSIVO
         </h2>
         
         <div className="flex justify-center mb-10">
@@ -26,8 +25,8 @@ const Map = () => {
               </div>
               <div className="absolute top-0 right-0 w-5 h-5 rounded-full bg-heitokai-light-green text-heitokai-dark flex items-center justify-center text-xs font-bold">1</div>
             </div>
-            <h4 className="text-heitokai-dark font-medium mb-1">Planejamento</h4>
-            <p className="text-sm text-gray-600">Estudo topográfico e ambiental da área</p>
+            <h4 className="text-heitokai-dark font-medium mb-1">Planejamento Sustentável</h4>
+            <p className="text-sm text-gray-600">Análise completa para preservação ambiental</p>
           </div>
           
           <div className="flex flex-col items-center text-center">
@@ -37,8 +36,8 @@ const Map = () => {
               </div>
               <div className="absolute top-0 right-0 w-5 h-5 rounded-full bg-heitokai-light-green text-heitokai-dark flex items-center justify-center text-xs font-bold">2</div>
             </div>
-            <h4 className="text-heitokai-dark font-medium mb-1">Zoneamento</h4>
-            <p className="text-sm text-gray-600">Definição de áreas comuns e privativas</p>
+            <h4 className="text-heitokai-dark font-medium mb-1">Zoneamento Estratégico</h4>
+            <p className="text-sm text-gray-600">Distribuição ideal de áreas privativas e comuns</p>
           </div>
           
           <div className="flex flex-col items-center text-center">
@@ -48,8 +47,8 @@ const Map = () => {
               </div>
               <div className="absolute top-0 right-0 w-5 h-5 rounded-full bg-heitokai-light-green text-heitokai-dark flex items-center justify-center text-xs font-bold">3</div>
             </div>
-            <h4 className="text-heitokai-dark font-medium mb-1">Infraestrutura</h4>
-            <p className="text-sm text-gray-600">Implementação de vias e redes</p>
+            <h4 className="text-heitokai-dark font-medium mb-1">Infraestrutura Premium</h4>
+            <p className="text-sm text-gray-600">Sistemas subterrâneos e vias pavimentadas</p>
           </div>
           
           <div className="flex flex-col items-center text-center">
@@ -59,8 +58,8 @@ const Map = () => {
               </div>
               <div className="absolute top-0 right-0 w-5 h-5 rounded-full bg-heitokai-light-green text-heitokai-dark flex items-center justify-center text-xs font-bold">4</div>
             </div>
-            <h4 className="text-heitokai-dark font-medium mb-1">Paisagismo</h4>
-            <p className="text-sm text-gray-600">Integração com a natureza local</p>
+            <h4 className="text-heitokai-dark font-medium mb-1">Paisagismo Integrado</h4>
+            <p className="text-sm text-gray-600">Preservação da flora nativa em todo o projeto</p>
           </div>
         </div>
         
@@ -76,21 +75,21 @@ const Map = () => {
               <div className="relative z-10 p-6 h-full flex flex-col justify-between">
                 <div className="flex items-center space-x-2 mt-4">
                   <div className="w-10 h-1 bg-heitokai-light-green"></div>
-                  <span className="text-xs uppercase tracking-wider text-heitokai-light-green">Assinatura Arquitetônica</span>
+                  <span className="text-xs uppercase tracking-wider text-heitokai-light-green">Excelência em Planejamento</span>
                 </div>
                 
                 <div className="mt-auto">
                   <p className="text-heitokai-light-green font-serif uppercase text-lg mb-4">ALLAN SÁVIO</p>
-                  <p className="text-xs uppercase mb-4 font-light tracking-wider">ARQUITETO E URBANISTA</p>
+                  <p className="text-xs uppercase mb-4 font-light tracking-wider">ARQUITETO E URBANISTA PREMIADO</p>
                   <Separator className="my-4 bg-white/20" />
                   <p className="text-sm italic">
-                    "É com grande satisfação que expressamos nossos sinceros agradecimentos pela oportunidade de desenvolver este projeto exclusivo, que combina modernidade, natureza e bem-estar em um só lugar."
+                    "O Reserva Rio Uru Heitokai representa o ápice do planejamento urbano sustentável, onde cada detalhe foi pensado para garantir o equilíbrio perfeito entre conforto moderno e preservação ambiental, criando um legado para as futuras gerações."
                   </p>
                   <div className="mt-6 flex items-center">
                     <div className="w-12 h-12 rounded-full bg-heitokai-light-green/30 flex items-center justify-center">
                       <MapPin className="h-6 w-6 text-heitokai-light-green" />
                     </div>
-                    <p className="ml-3 text-xs">Planejamento Urbano<br/>Sustentável</p>
+                    <p className="ml-3 text-xs">Masterplan Premiado<br/>Internacionalmente</p>
                   </div>
                 </div>
               </div>
@@ -230,9 +229,9 @@ const Map = () => {
                   <path d="M12 6V12L16 14" stroke="#2A7A4B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h4 className="font-medium text-heitokai-dark mb-2">Cronograma</h4>
+              <h4 className="font-medium text-heitokai-dark mb-2">Cronograma Preciso</h4>
               <p className="text-sm text-gray-600">
-                Entrega prevista para 2026, com acompanhamento em tempo real das obras
+                Entrega da infraestrutura completa prevista para 2026, com acompanhamento em tempo real do desenvolvimento das obras
               </p>
             </div>
             
@@ -243,9 +242,9 @@ const Map = () => {
                   <path d="M22 4L12 14.01L9 11.01" stroke="#2A7A4B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h4 className="font-medium text-heitokai-dark mb-2">Licenciamento</h4>
+              <h4 className="font-medium text-heitokai-dark mb-2">Documentação Completa</h4>
               <p className="text-sm text-gray-600">
-                Todas as licenças ambientais e urbanísticas aprovadas pelos órgãos competentes
+                Todas as licenças ambientais e urbanísticas aprovadas, garantindo segurança jurídica total para seu investimento
               </p>
             </div>
             
@@ -258,9 +257,9 @@ const Map = () => {
                   <path d="M17 3.13C17.8604 3.35031 18.623 3.85071 19.1676 4.55232C19.7122 5.25392 20.0078 6.11683 20.0078 7.005C20.0078 7.89318 19.7122 8.75608 19.1676 9.45769C18.623 10.1593 17.8604 10.6597 17 10.88" stroke="#2A7A4B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h4 className="font-medium text-heitokai-dark mb-2">Equipe Especializada</h4>
+              <h4 className="font-medium text-heitokai-dark mb-2">Equipe de Excelência</h4>
               <p className="text-sm text-gray-600">
-                Time multidisciplinar com ampla experiência em empreendimentos de alto padrão
+                Incorporadora com mais de 20 anos de experiência em empreendimentos de alto padrão e equipe multidisciplinar premiada
               </p>
             </div>
           </div>

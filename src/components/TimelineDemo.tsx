@@ -11,13 +11,13 @@ export function TimelineDemo() {
       content: (
         <div className="w-full">
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-            O Reserva Rio Uru Heitokai inicia seu desenvolvimento com foco em sustentabilidade e design biofílico
+            O Condomínio Reserva Rio Uru Heitokai inicia sua fase de implementação com foco em preservação ambiental e infraestrutura de alto padrão, estabelecendo novos parâmetros de qualidade na região.
           </p>
           <div className="grid grid-cols-2 gap-4 w-full">
             <Card className="rounded-lg overflow-hidden h-20 md:h-44 lg:h-60 w-full shadow-lg">
               <img 
                 src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png" 
-                alt="Vista do empreendimento" 
+                alt="Vista panorâmica do empreendimento" 
                 className="h-full w-full object-cover"
               />
             </Card>
@@ -37,20 +37,20 @@ export function TimelineDemo() {
       content: (
         <div className="w-full">
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-            Fase de planejamento e estudos técnicos para implementação do condomínio com princípios de harmonia e valorização da natureza.
+            Conclusão dos estudos de impacto ambiental e aprovação do projeto nos órgãos competentes, garantindo o desenvolvimento sustentável do condomínio em harmonia com o ecossistema local.
           </p>
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-            Desenvolvimento do conceito Heitokai - onde natureza e modernidade se encontram em perfeito equilíbrio.
+            Desenvolvimento do conceito Heitokai - integração perfeita entre tecnologia avançada de infraestrutura e respeito aos recursos naturais, criando um ambiente exclusivo para um estilo de vida superior.
           </p>
           <div className="grid grid-cols-2 gap-4 w-full">
             <Card className="rounded-lg overflow-hidden h-20 md:h-44 lg:h-60 w-full shadow-lg">
               <div className="bg-heitokai-green/20 h-full w-full flex items-center justify-center">
-                <p className="text-heitokai-dark font-medium text-center p-4">Estudos de impacto ambiental</p>
+                <p className="text-heitokai-dark font-medium text-center p-4">Certificação ambiental completa</p>
               </div>
             </Card>
             <Card className="rounded-lg overflow-hidden h-20 md:h-44 lg:h-60 w-full shadow-lg">
               <div className="bg-heitokai-light-green/30 h-full w-full flex items-center justify-center">
-                <p className="text-heitokai-dark font-medium text-center p-4">Planejamento urbanístico</p>
+                <p className="text-heitokai-dark font-medium text-center p-4">Masterplan aprovado</p>
               </div>
             </Card>
           </div>
@@ -62,31 +62,31 @@ export function TimelineDemo() {
       content: (
         <div className="w-full">
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-4">
-            O projeto continua em desenvolvimento com as seguintes etapas:
+            O desenvolvimento do Condomínio Reserva Rio Uru Heitokai segue com estas importantes fases:
           </p>
           <div className="mb-8">
             <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Infraestrutura completa
+              ✅ Infraestrutura de padrão internacional
             </div>
             <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Áreas de lazer integradas à natureza
+              ✅ Clube privativo com vista para o Rio Uru
             </div>
             <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Preservação de áreas verdes
+              ✅ Preservação de 60% da área verde nativa
             </div>
             <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Lotes com até 800m²
+              ✅ Lotes premium com até 800m²
             </div>
             <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Acesso exclusivo para moradores
+              ✅ Sistema de segurança e controle de acesso avançado
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 w-full">
             <Card className="rounded-lg overflow-hidden h-20 md:h-44 lg:h-60 w-full shadow-lg bg-heitokai-beige/30 flex items-center justify-center">
-              <p className="text-heitokai-dark font-medium text-center p-4">Lançamento</p>
+              <p className="text-heitokai-dark font-medium text-center p-4">Pré-lançamento exclusivo</p>
             </Card>
             <Card className="rounded-lg overflow-hidden h-20 md:h-44 lg:h-60 w-full shadow-lg bg-heitokai-blue/20 flex items-center justify-center">
-              <p className="text-heitokai-dark font-medium text-center p-4">Entrega das primeiras unidades</p>
+              <p className="text-heitokai-dark font-medium text-center p-4">Entrega das obras de infraestrutura</p>
             </Card>
           </div>
         </div>
