@@ -529,7 +529,7 @@ const Map = () => {
               <p className="text-sm text-gray-600">
                 Acompanhamento em tempo real da evolução do empreendimento através de plataforma digital exclusiva para proprietários
               </p>
-            </div>
+            </motion.div>
             
             <motion.div 
               whileHover={{ y: -5 }}
@@ -546,7 +546,7 @@ const Map = () => {
               <p className="text-sm text-gray-600">
                 Documentação completa e aprovada pelos órgãos competentes, com análise e aprovação de impacto ambiental
               </p>
-            </div>
+            </motion.div>
             
             <motion.div 
               whileHover={{ y: -5 }}
@@ -565,7 +565,7 @@ const Map = () => {
               <p className="text-sm text-gray-600">
                 Administração condominial premium e suporte pós-entrega por especialistas em empreendimentos de alto padrão
               </p>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
         
