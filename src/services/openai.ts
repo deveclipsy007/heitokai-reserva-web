@@ -5,11 +5,17 @@ import { supabase } from "@/integrations/supabase/client";
 /**
  * Sends messages to OpenAI through the Supabase Edge Function and returns the response
  */
-export const sendMessageToOpenAI = async (messages: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>) => {
+export const sendMessageToOpenAI = async (
+  messages: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>,
+  sessionId?: string
+) => {
   try {
     // Call the Supabase Edge Function instead of directly accessing OpenAI
     const { data, error } = await supabase.functions.invoke('openai', {
-      body: { messages },
+      body: { 
+        messages,
+        sessionId 
+      },
     });
 
     if (error) {

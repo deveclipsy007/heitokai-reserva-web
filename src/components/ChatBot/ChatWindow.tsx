@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { sendMessageToOpenAI } from '@/services/openai';
+import { v4 as uuidv4 } from 'uuid';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -18,11 +19,26 @@ interface ChatWindowProps {
 
 const ChatWindow = ({ onClose }: ChatWindowProps) => {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Olá! Como posso ajudar você com informações sobre o Condomínio Reserva Rio Uru?' }
+    { role: 'assistant', content: 'Olá! 😊 Que prazer ter você por aqui! Sou o assistente virtual do Condomínio Reserva Rio Uru. Como posso ajudá-lo hoje?' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [sessionId, setSessionId] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  // Inicializar ID da sessão
+  useEffect(() => {
+    // Verificar se já existe um ID de sessão armazenado
+    const existingSessionId = localStorage.getItem('chat_session_id');
+    if (existingSessionId) {
+      setSessionId(existingSessionId);
+    } else {
+      // Criar novo ID de sessão
+      const newSessionId = uuidv4();
+      localStorage.setItem('chat_session_id', newSessionId);
+      setSessionId(newSessionId);
+    }
+  }, []);
   
   // Função para rolar para o final da conversa quando novas mensagens são adicionadas
   useEffect(() => {
@@ -40,8 +56,8 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
     setIsLoading(true);
     
     try {
-      // Enviar para API do OpenAI
-      const response = await sendMessageToOpenAI([...messages, userMessage]);
+      // Enviar para API do OpenAI com ID da sessão
+      const response = await sendMessageToOpenAI([...messages, userMessage], sessionId);
       
       // Adicionar resposta do assistente
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
