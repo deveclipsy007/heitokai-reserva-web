@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -70,6 +71,13 @@ const Hero = () => {
                 <source src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//IMG_8915.MP4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
+              
+              {/* Added image as requested */}
+              <img 
+                src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
+                alt="Promotional image"
+                className="absolute top-4 right-4 w-[200px] h-[200px] object-cover z-10"
+              />
             </motion.div>
           </div>
         </motion.div>
