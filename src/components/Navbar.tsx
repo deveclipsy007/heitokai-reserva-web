@@ -1,12 +1,14 @@
 
 import { useState, useEffect } from "react";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,20 +27,19 @@ const Navbar = () => {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-white py-2" : "bg-gradient-to-b from-[#0A2647]/80 to-transparent py-4"
+        isScrolled ? "py-2" : "bg-transparent py-4"
       )}
     >
       <div
         className={cn(
-          "container-custom flex justify-between items-center my-0 py-[5px]",
-          isScrolled ? "" : ""
+          "container-custom flex justify-between items-center my-0 py-[5px]"
         )}
       >
         {/* Logo on the left */}
         <a href="#" className="flex items-center">
           <img
             alt="Reserva Rio Uru Heitokai"
-            className="h-16 w-auto"
+            className="h-12 md:h-16 w-auto"
             src={
               isScrolled
                 ? "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//Logo%20Principal%204B%203%20cores@2x.png"
@@ -70,19 +71,19 @@ const Navbar = () => {
           className={cn("md:hidden", isScrolled ? "text-black" : "text-white")}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          <Menu size={24} />
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </Button>
       </div>
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white p-4 shadow-md">
-          <nav className="flex flex-col gap-4">
+        <div className="md:hidden bg-white p-6 shadow-lg absolute w-full">
+          <nav className="flex flex-col gap-6">
             {["INÍCIO", "SOBRE", "MAPA", "FALE CONOSCO"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="text-black font-medium hover:text-heitokai-green transition-colors"
+                className="text-black text-lg font-medium hover:text-heitokai-green transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item}
