@@ -43,7 +43,17 @@ const Hero = () => {
       }} transition={{
         duration: 1,
         delay: 0.5
-      }} className={cn("md:w-1/2 mb-10 md:mb-0", isMobile ? "hidden" : "block")}>
+      }} className={cn("md:w-1/2 mb-10 md:mb-0 relative", isMobile ? "hidden" : "block")}>
+          {/* Promotional image positioned in front of the video container */}
+          <motion.img 
+            src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
+            alt="Promotional image"
+            className="absolute top-4 left-0 w-[200px] h-[200px] object-cover transform -translate-x-1/4 z-20"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 1.3 }}
+          />
+          
           <div className="relative bg-white/5 backdrop-blur-md border border-white/10 h-72 md:h-96 w-full rounded-lg overflow-hidden shadow-2xl">
             <motion.div 
               initial={{
@@ -71,13 +81,6 @@ const Hero = () => {
                 <source src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//IMG_8915.MP4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-              
-              {/* Modified image position to left side with overlap */}
-              <img 
-                src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
-                alt="Promotional image"
-                className="absolute top-4 left-0 w-[200px] h-[200px] object-cover z-10 transform -translate-x-1/4"
-              />
             </motion.div>
           </div>
         </motion.div>
