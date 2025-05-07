@@ -217,7 +217,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         />
       </div>
       
-      <style jsx>{`
+      <style jsx global>{`
         .glow {
           box-shadow: 0 0 10px rgba(197, 226, 165, 0.6), 0 0 20px rgba(197, 226, 165, 0.3);
         }
