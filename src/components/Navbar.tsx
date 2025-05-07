@@ -1,5 +1,6 @@
+
 import { useState, useEffect } from 'react';
-import { MenuIcon, XIcon } from '@heroicons/react/solid';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -51,9 +52,9 @@ const Navbar = () => {
             >
               <span className="sr-only">Abrir menu</span>
               {isOpen ? (
-                <XIcon className="block h-6 w-6" aria-hidden="true" />
+                <X className="block h-6 w-6" aria-hidden="true" />
               ) : (
-                <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                <Menu className="block h-6 w-6" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -76,7 +77,7 @@ const Navbar = () => {
                 onClick={toggleMenu}
               >
                 <span className="sr-only">Fechar menu</span>
-                <XIcon className="h-6 w-6" aria-hidden="true" />
+                <X className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
             <div className="flex flex-col space-y-4 p-5">
