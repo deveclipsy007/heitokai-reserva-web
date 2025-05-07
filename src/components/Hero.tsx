@@ -9,7 +9,7 @@ import { Button } from "./ui/button";
 const Hero = () => {
   const isMobile = useIsMobile();
 
-  return <section id="início" className="relative min-h-screen bg-cover bg-center flex flex-col items-center overflow-hidden" style={{
+  return <section id="início" className="relative min-h-screen bg-cover bg-center flex flex-col items-center overflow-hidden pt-24 md:pt-32" style={{
     backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
     backgroundPosition: "center top"
   }}>
