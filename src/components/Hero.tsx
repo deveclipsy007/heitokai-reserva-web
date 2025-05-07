@@ -2,54 +2,43 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Award, Star, Sparkles } from "lucide-react";
+import { Award, Star, Sparkles, Play } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { useRef, useEffect, useState } from "react";
+import { Button } from "./ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 
 const Hero = () => {
   const isMobile = useIsMobile();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState<string | null>(null);
+  const [videoPlaying, setVideoPlaying] = useState(false);
   
   useEffect(() => {
-    const playVideo = async () => {
+    const loadVideo = () => {
       if (videoRef.current) {
         try {
           // Reset video element
           videoRef.current.pause();
           videoRef.current.currentTime = 0;
           videoRef.current.load();
-          
-          // Wait a moment before trying to play
-          setTimeout(async () => {
-            try {
-              // Try to play with user interaction simulation
-              const playPromise = videoRef.current?.play();
-              if (playPromise !== undefined) {
-                await playPromise;
-                console.log("Vídeo iniciado com sucesso");
-                setVideoLoaded(true);
-              }
-            } catch (playError) {
-              console.error("Erro ao reproduzir vídeo:", playError);
-              setVideoError("Erro ao reproduzir o vídeo");
-            }
-          }, 300);
+          setVideoLoaded(true);
         } catch (error) {
-          console.error("Erro ao iniciar vídeo:", error);
+          console.error("Erro ao carregar vídeo:", error);
           setVideoError("Erro ao carregar o vídeo");
         }
       }
     };
     
-    playVideo();
+    loadVideo();
     
     const video = videoRef.current;
     if (video) {
       const handleError = (e: Event) => {
         console.error('Erro de vídeo:', e);
         setVideoError("Erro no vídeo");
+        setVideoPlaying(false);
       };
       
       const handleCanPlay = () => {
@@ -58,26 +47,53 @@ const Hero = () => {
       
       const handlePlaying = () => {
         console.log('Vídeo está reproduzindo');
+        setVideoPlaying(true);
         setVideoLoaded(true);
       };
       
       const handleWaiting = () => {
         console.log('Vídeo está carregando...');
       };
+      
+      const handlePause = () => {
+        console.log('Vídeo foi pausado');
+        setVideoPlaying(false);
+      };
 
       video.addEventListener('error', handleError);
       video.addEventListener('canplay', handleCanPlay);
       video.addEventListener('playing', handlePlaying);
       video.addEventListener('waiting', handleWaiting);
+      video.addEventListener('pause', handlePause);
       
       return () => {
         video.removeEventListener('error', handleError);
         video.removeEventListener('canplay', handleCanPlay);
         video.removeEventListener('playing', handlePlaying);
         video.removeEventListener('waiting', handleWaiting);
+        video.removeEventListener('pause', handlePause);
       };
     }
   }, []);
+  
+  const handlePlayVideo = () => {
+    if (videoRef.current) {
+      try {
+        videoRef.current.play()
+          .then(() => {
+            console.log("Vídeo iniciado manualmente com sucesso");
+            setVideoPlaying(true);
+          })
+          .catch(error => {
+            console.error("Erro ao reproduzir vídeo manualmente:", error);
+            setVideoError("Erro ao reproduzir o vídeo");
+          });
+      } catch (error) {
+        console.error("Erro ao tentar reproduzir:", error);
+        setVideoError("Erro ao iniciar o vídeo");
+      }
+    }
+  };
   
   return <section id="início" className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" style={{
     backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
@@ -143,7 +159,7 @@ const Hero = () => {
                         setVideoError(null);
                         if (videoRef.current) {
                           videoRef.current.load();
-                          videoRef.current.play().catch(err => console.error('Erro ao tentar reproduzir:', err));
+                          handlePlayVideo();
                         }
                       }}
                     >
@@ -159,12 +175,12 @@ const Hero = () => {
                 muted
                 loop
                 playsInline
-                autoPlay
                 preload="auto"
                 controls={false}
                 onError={(e) => {
                   console.error("Erro de vídeo no evento:", e);
                   setVideoError("Erro ao carregar vídeo");
+                  setVideoPlaying(false);
                 }}
               >
                 <source src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//IMG_8915.MP4" type="video/mp4" />
@@ -174,6 +190,23 @@ const Hero = () => {
               {!videoLoaded && !videoError && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                   <div className="w-12 h-12 border-4 border-heitokai-green/80 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+              
+              {/* Novo botão de play no centro do vídeo */}
+              {videoLoaded && !videoPlaying && !videoError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                  <motion.button
+                    onClick={handlePlayVideo}
+                    className="w-16 h-16 md:w-20 md:h-20 bg-heitokai-green/90 rounded-full flex items-center justify-center hover:bg-heitokai-green transition-all duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
+                  >
+                    <Play className="h-8 w-8 md:h-10 md:w-10 text-white" fill="white" strokeWidth={1} />
+                  </motion.button>
                 </div>
               )}
             </motion.div>
