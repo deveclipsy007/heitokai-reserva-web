@@ -159,13 +159,13 @@ const Hero = () => {
             duration: 1,
             delay: 0.5
           }} 
-          className={cn("md:w-1/2 mb-10 md:mb-0 relative", isMobile ? "hidden" : "block")}
+          className="w-full md:w-1/2 mb-10 md:mb-0 relative"
         >
           {/* Promotional image positioned to extend out from the video container */}
           <motion.img 
             src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
             alt="Promotional image"
-            className="absolute -left-10 top-1/2 -translate-y-1/2 w-[300px] h-[300px] object-contain z-20 rounded-lg"
+            className="absolute -left-10 top-1/2 -translate-y-1/2 w-[300px] h-[300px] object-contain z-20 rounded-lg hidden md:block"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1.3 }}
@@ -174,7 +174,7 @@ const Hero = () => {
             }}
           />
           
-          <div className="relative bg-white/5 backdrop-blur-md border border-white/10 h-72 md:h-96 w-full rounded-lg overflow-hidden shadow-2xl">
+          <div className="relative bg-white/5 backdrop-blur-md border border-white/10 h-60 md:h-72 lg:h-96 w-full rounded-lg overflow-hidden shadow-2xl">
             <motion.div 
               initial={{
                 scale: 1.2,
