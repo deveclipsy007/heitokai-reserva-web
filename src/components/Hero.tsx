@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <section 
       id="início" 
-      className="relative h-screen bg-cover bg-center flex items-center overflow-hidden" 
+      className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" 
       style={{
         backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
         backgroundPosition: "center top"
@@ -21,10 +21,10 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
+        className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"
       />
       
-      <div className="container-custom relative z-10 flex flex-col md:flex-row items-center">
+      <div className="container-custom relative z-10 flex flex-col md:flex-row items-center pt-24 md:pt-0">
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -90,6 +90,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 2 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            className="w-full text-center md:text-left"
           >
             <a href="#contato" className="btn-primary block md:inline-block text-center w-full md:w-auto">
               CONHEÇA O FUTURO DO SEU LAR

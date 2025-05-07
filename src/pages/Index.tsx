@@ -35,7 +35,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen w-full overflow-x-hidden">
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-heitokai-green origin-left z-50"
         style={{ scaleX }}
