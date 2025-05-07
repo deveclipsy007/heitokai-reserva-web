@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import AboutUs from "@/components/AboutUs";
 import { TimelineDemo } from "@/components/TimelineDemo";
 import AnimatedSection from "@/components/AnimatedSection";
+import InvestorSection from "@/components/InvestorSection";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const Index = () => {
@@ -64,6 +65,12 @@ const Index = () => {
       <div className="w-full bg-white">
         <AnimatedSection delay={0.3} className="relative z-10 bg-white w-full">
           <TimelineDemo />
+        </AnimatedSection>
+      </div>
+      
+      <div id="investidores" className="w-full bg-white">
+        <AnimatedSection delay={0.35} className="relative z-10 bg-white w-full">
+          <InvestorSection />
         </AnimatedSection>
       </div>
       
