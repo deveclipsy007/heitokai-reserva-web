@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -46,16 +47,60 @@ const Hero = () => {
           </div>
         </motion.div>
         
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 1,
-        delay: 0.8
-      }} className="md:w-1/2 md:pl-16 text-white rounded-xl py-[30px] px-4 md:px-8 relative bg-gradient-to-br from-white/40 to-white/30 backdrop-blur-md border border-white/10 shadow-lg overflow-hidden">
+        <motion.div 
+          initial={{
+            opacity: 0,
+            y: 30
+          }} 
+          animate={{
+            opacity: 1,
+            y: 0
+          }} 
+          transition={{
+            duration: 1,
+            delay: 0.8
+          }} 
+          className="md:w-1/2 md:pl-16 text-white rounded-xl py-[30px] px-4 md:px-8 relative bg-gradient-to-br from-white/40 to-white/30 backdrop-blur-md border border-white/10 shadow-lg overflow-hidden"
+        >
+          {/* Premium shine animation element */}
+          <motion.div 
+            className="absolute inset-0 opacity-30 bg-gradient-to-r from-transparent via-white to-transparent"
+            style={{ backgroundSize: "200% 100%" }}
+            animate={{
+              backgroundPosition: ["100% 0%", "-100% 0%"],
+            }}
+            transition={{
+              repeat: Infinity,
+              repeatType: "mirror",
+              duration: 6,
+              ease: "easeInOut",
+            }}
+          />
+          
+          {/* Subtle glowing particles */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(6)].map((_, i) => (
+              <motion.div 
+                key={i}
+                className="absolute w-16 h-16 rounded-full bg-white/10 blur-xl"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  opacity: [0.1, 0.3, 0.1],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 2,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  delay: i * 0.7,
+                }}
+              />
+            ))}
+          </div>
+
           {/* Premium seal element */}
           <motion.div initial={{
           rotate: -15,

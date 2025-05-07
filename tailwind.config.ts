@@ -1,4 +1,5 @@
 
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -102,11 +103,21 @@ export default {
 					'0%': { opacity: '0', transform: 'translateY(10px)' },
 					'100%': { opacity: '1', transform: 'translateY(0)' },
 				},
+				'shine': {
+					'0%': { 'background-position': '200% 0' },
+					'100%': { 'background-position': '-200% 0' },
+				},
+				'pulse-glow': {
+					'0%, 100%': { opacity: '0.3' },
+					'50%': { opacity: '0.8' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out',
+				'shine': 'shine 8s ease-in-out infinite',
+				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
 			},
 			backgroundImage: {
 				'hero-pattern': "url('/lovable-uploads/93354d8c-7ef0-4550-8edb-2cac4af265a6.png')",
@@ -116,3 +127,4 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
