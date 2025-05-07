@@ -72,11 +72,11 @@ const Hero = () => {
                 Your browser does not support the video tag.
               </video>
               
-              {/* Added image as requested */}
+              {/* Modified image position to left side with overlap */}
               <img 
                 src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2013_32_15.png"
                 alt="Promotional image"
-                className="absolute top-4 right-4 w-[200px] h-[200px] object-cover z-10"
+                className="absolute top-4 left-0 w-[200px] h-[200px] object-cover z-10 transform -translate-x-1/4"
               />
             </motion.div>
           </div>
