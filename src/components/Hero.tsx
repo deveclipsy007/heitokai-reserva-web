@@ -10,13 +10,38 @@ const Hero = () => {
   const isMobile = useIsMobile();
   const videoRef = useRef<HTMLVideoElement>(null);
   
-  // Initialize video when component mounts
+  // Melhorar a inicialização do vídeo quando o componente montar
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.log("Video autoplay prevented:", error);
-      });
+    const playVideo = async () => {
+      if (videoRef.current) {
+        try {
+          // Garantir que o vídeo está pronto antes de tentar reproduzir
+          videoRef.current.load();
+          await videoRef.current.play();
+          console.log("Vídeo iniciado com sucesso");
+        } catch (error) {
+          console.error("Erro ao iniciar vídeo:", error);
+        }
+      }
+    };
+    
+    playVideo();
+    
+    // Adicionar listeners para eventos do vídeo para ajudar no diagnóstico
+    const video = videoRef.current;
+    if (video) {
+      video.addEventListener('error', (e) => console.error('Erro de vídeo:', e));
+      video.addEventListener('canplay', () => console.log('Vídeo pode ser reproduzido'));
+      video.addEventListener('playing', () => console.log('Vídeo está reproduzindo'));
     }
+    
+    return () => {
+      if (video) {
+        video.removeEventListener('error', (e) => console.error('Erro de vídeo:', e));
+        video.removeEventListener('canplay', () => console.log('Vídeo pode ser reproduzido'));
+        video.removeEventListener('playing', () => console.log('Vídeo está reproduzindo'));
+      }
+    };
   }, []);
   
   return <section id="início" className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" style={{
@@ -79,10 +104,11 @@ const Hero = () => {
                 muted
                 loop
                 playsInline
-                autoPlay
+                preload="auto"
+                controls={false}
               >
                 <source src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//IMG_8915.MP4" type="video/mp4" />
-                Your browser does not support the video tag.
+                Seu navegador não suporta a tag de vídeo.
               </video>
             </motion.div>
           </div>
