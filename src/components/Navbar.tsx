@@ -25,13 +25,13 @@ const Navbar = () => {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-white shadow-md py-2" : "bg-gradient-to-b from-black/50 to-transparent py-4"
+        isScrolled ? "bg-white shadow-md py-2" : "bg-gradient-to-b from-[#0A2647]/80 to-transparent py-4"
       )}
     >
       <div
         className={cn(
           "container-custom flex justify-between items-center rounded-full my-0 py-[5px]",
-          isScrolled ? "bg-white" : "bg-[#0c4f15]/[0.13] backdrop-blur-sm"
+          isScrolled ? "bg-white" : "bg-[#0A4D68]/[0.15] backdrop-blur-sm"
         )}
       >
         {/* Logo on the left */}
