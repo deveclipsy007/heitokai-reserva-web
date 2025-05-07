@@ -30,7 +30,7 @@ const Navbar = () => {
     >
       <div
         className={cn(
-          "container-custom flex justify-between items-center rounded-full my-0 py-[5px]",
+          "container-custom flex justify-between items-center my-0 py-[5px]",
           isScrolled ? "bg-white" : "bg-[#0A4D68]/[0.15] backdrop-blur-sm"
         )}
       >
