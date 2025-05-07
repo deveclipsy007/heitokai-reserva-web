@@ -53,7 +53,7 @@ const Hero = () => {
       }} transition={{
         duration: 1,
         delay: 0.8
-      }} className="md:w-1/2 md:pl-16 text-white rounded-xl py-[30px] px-4 md:px-8 bg-gradient-to-br from-white/40 to-white/50 backdrop-blur-md border border-white/10 shadow-lg">
+      }} className="md:w-1/2 md:pl-16 text-white rounded-xl py-[30px] px-4 md:px-8 bg-gradient-to-br from-white/40 to-white/30 backdrop-blur-md border border-white/10 shadow-lg">
           <motion.h2 initial={{
           opacity: 0
         }} animate={{
