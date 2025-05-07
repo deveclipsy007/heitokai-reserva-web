@@ -4,10 +4,22 @@ import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Award, Star, Sparkles } from "lucide-react";
 import { Badge } from "./ui/badge";
+import { useRef, useEffect } from "react";
+
 const Hero = () => {
   const isMobile = useIsMobile();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Initialize video when component mounts
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Video autoplay prevented:", error);
+      });
+    }
+  }, []);
+  
   return <section id="início" className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden" style={{
-    backgroundImage: "url('https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png')",
     backgroundPosition: "center top"
   }}>
       <div className="absolute inset-0 bg-black/0 rounded-none" />
@@ -32,18 +44,33 @@ const Hero = () => {
         delay: 0.5
       }} className={cn("md:w-1/2 mb-10 md:mb-0", isMobile ? "hidden" : "block")}>
           <div className="relative bg-white/5 backdrop-blur-md border border-white/10 h-72 md:h-96 w-full rounded-lg overflow-hidden shadow-2xl">
-            <motion.div initial={{
-            scale: 1.2,
-            opacity: 0
-          }} animate={{
-            scale: 1,
-            opacity: 1
-          }} transition={{
-            duration: 1.5,
-            delay: 1
-          }} className="absolute inset-0 bg-cover bg-center" style={{
-            backgroundImage: "url('/lovable-uploads/d0cd53f7-90e4-4cb9-bbef-bc2228f62cde.jpg')"
-          }} />
+            <motion.div 
+              initial={{
+                scale: 1.2,
+                opacity: 0
+              }} 
+              animate={{
+                scale: 1,
+                opacity: 1
+              }} 
+              transition={{
+                duration: 1.5,
+                delay: 1
+              }} 
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <video 
+                ref={videoRef}
+                className="absolute inset-0 w-full h-full object-cover"
+                muted
+                loop
+                playsInline
+                autoPlay
+              >
+                <source src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//IMG_8915.MP4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </motion.div>
           </div>
         </motion.div>
         
