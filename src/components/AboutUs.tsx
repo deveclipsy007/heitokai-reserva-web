@@ -110,7 +110,7 @@ const AboutUs = () => {
             variants={itemVariants}
             className="max-w-3xl mx-auto text-gray-600 mt-6"
           >
-            A 4B Incorporadora é parte de uma holding empresarial com décadas de experiência no mercado imobiliário brasileiro, 
+            A 4B Incorporadora é parte da BPS HOLDING, grupo empresarial com sólida trajetória no mercado brasileiro, 
             dedicada à criação de empreendimentos exclusivos que unem sofisticação, sustentabilidade e valorização patrimonial.
           </motion.p>
         </motion.div>
@@ -140,10 +140,12 @@ const AboutUs = () => {
                 </motion.div>
                 <h3 className="text-2xl font-serif font-medium mb-4 text-heitokai-dark">Nossa História</h3>
                 <p className="text-gray-600">
-                  Fundada há mais de 25 anos, a 4B Incorporadora nasceu do sonho de transformar o mercado imobiliário
-                  de alto padrão no Brasil. Como parte de uma sólida holding empresarial, combinamos a estabilidade
-                  financeira de um grande grupo com a agilidade e visão inovadora necessárias para criar empreendimentos 
-                  únicos e sustentáveis que se destacam na paisagem urbana e natural.
+                  A BPS HOLDING nasce de uma jornada empresarial de mais de seis décadas, unificando diversos 
+                  segmentos de sucesso em uma plataforma sólida de investimentos. Com atuação diversificada no comércio, 
+                  agropecuária, mercado imobiliário, educação e saúde, o grupo gera mais de 300 empregos e mantém presença 
+                  significativa em diversos estados brasileiros. Como parte deste legado de excelência, a 4B Incorporadora 
+                  surge como a mais recente expressão da visão inovadora e compromisso com a qualidade que definem a história 
+                  do grupo.
                 </p>
               </CardContent>
             </Card>
