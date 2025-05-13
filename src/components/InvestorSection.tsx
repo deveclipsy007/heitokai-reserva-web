@@ -6,25 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { CreditCard, TrendingUp, PiggyBank, ChartBar, ArrowUp } from "lucide-react";
+import { CreditCard, TrendingUp, PiggyBank, ChartBar, ArrowUp, Home, Tree } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { 
-  LineChart, 
-  Line, 
-  AreaChart, 
-  Area, 
-  XAxis, 
-  YAxis, 
-  Tooltip, 
-  CartesianGrid, 
-  ResponsiveContainer,
-  Legend
-} from "recharts";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent
-} from "@/components/ui/chart";
+import InvestmentCalculator from "./investor/InvestmentCalculator";
+import InvestmentGraphs from "./investor/InvestmentGraphs";
+import PropertyGrowthVisualization from "./investor/PropertyGrowthVisualization";
 
 const InvestorSection = () => {
   // Atualizados os valores iniciais e ranges para os novos requisitos
@@ -202,278 +188,115 @@ const InvestorSection = () => {
           </motion.p>
         </motion.div>
         
+        {/* Seção Lado a Lado */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+          {/* Por que investir + Visualização Animada */}
+          <div className="grid grid-cols-1 gap-10">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h3 className="section-title relative mb-6">
+                Por que investir no Heitokai?
+                <motion.span
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "30%" }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-heitokai-green to-transparent rounded-full"
+                />
+              </h3>
+              
+              <ul className="space-y-6">
+                {[
+                  {
+                    title: "Localização Estratégica",
+                    description: "Situado em uma região de crescente valorização em Goiás, com acesso privilegiado ao Rio Uru e áreas de preservação ambiental."
+                  },
+                  {
+                    title: "Demanda Crescente",
+                    description: "O mercado goiano para propriedades premium em ambientes naturais está em franca expansão, com demanda superando a oferta."
+                  },
+                  {
+                    title: "Infraestrutura Completa",
+                    description: "Investimento já realizado em infraestrutura de alto padrão, reduzindo riscos e acelerando o retorno financeiro."
+                  },
+                  {
+                    title: "Potencial de Valorização",
+                    description: "Histórico de valorização acima da média do mercado imobiliário tradicional, com projeção de crescimento sustentado."
+                  }
+                ].map((item, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="flex gap-4"
+                  >
+                    <div className="mt-1 bg-heitokai-light-green/30 h-6 w-6 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="h-3 w-3 rounded-full bg-heitokai-green"></div>
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-xl text-heitokai-dark font-medium mb-2">{item.title}</h4>
+                      <p className="text-heitokai-dark/70">{item.description}</p>
+                    </div>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+            
+            {/* Visualização Animada do Crescimento do Empreendimento */}
+            <PropertyGrowthVisualization 
+              investmentValue={initialInvestment}
+              months={months}
+              appreciationRate={appreciationRate}
+              maxInvestment={50000}
+            />
+          </div>
+          
+          {/* Calculadora de Investimento Lado a Lado com Gráfico */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            className="relative flex flex-col gap-6"
           >
-            <h3 className="section-title relative mb-6">
-              Por que investir no Heitokai?
-              <motion.span
-                initial={{ width: 0 }}
-                whileInView={{ width: "30%" }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-heitokai-green to-transparent rounded-full"
+            <div className="grid grid-cols-1 gap-6">
+              {/* Calculadora */}
+              <InvestmentCalculator 
+                initialInvestment={initialInvestment}
+                setInitialInvestment={setInitialInvestment}
+                months={months}
+                setMonths={setMonths}
+                appreciationRate={appreciationRate}
+                setAppreciationRate={setAppreciationRate}
+                propertyValue={propertyValue}
+                futureValue={futureValue}
+                formatCurrency={formatCurrency}
+                roi={roi}
               />
-            </h3>
-            
-            <ul className="space-y-6">
-              {[
-                {
-                  title: "Localização Estratégica",
-                  description: "Situado em uma região de crescente valorização em Goiás, com acesso privilegiado ao Rio Uru e áreas de preservação ambiental."
-                },
-                {
-                  title: "Demanda Crescente",
-                  description: "O mercado goiano para propriedades premium em ambientes naturais está em franca expansão, com demanda superando a oferta."
-                },
-                {
-                  title: "Infraestrutura Completa",
-                  description: "Investimento já realizado em infraestrutura de alto padrão, reduzindo riscos e acelerando o retorno financeiro."
-                },
-                {
-                  title: "Potencial de Valorização",
-                  description: "Histórico de valorização acima da média do mercado imobiliário tradicional, com projeção de crescimento sustentado."
-                }
-              ].map((item, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex gap-4"
-                >
-                  <div className="mt-1 bg-heitokai-light-green/30 h-6 w-6 rounded-full flex items-center justify-center flex-shrink-0">
-                    <div className="h-3 w-3 rounded-full bg-heitokai-green"></div>
-                  </div>
-                  <div>
-                    <h4 className="font-serif text-xl text-heitokai-dark font-medium mb-2">{item.title}</h4>
-                    <p className="text-heitokai-dark/70">{item.description}</p>
-                  </div>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="absolute -inset-4 bg-gradient-to-br from-heitokai-light-green/20 to-heitokai-green/5 rounded-xl blur-xl -z-10"></div>
-            
-            <Card className="border border-heitokai-light-green/30 overflow-hidden shadow-lg bg-white/90 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-2xl">Calculadora de Investimento</CardTitle>
-                <CardDescription>Simule seu potencial retorno financeiro</CardDescription>
-              </CardHeader>
               
-              <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <Label htmlFor="investment">Investimento Inicial</Label>
-                    <span className="font-medium text-heitokai-green">{formatCurrency(initialInvestment)}</span>
-                  </div>
-                  <Slider
-                    id="investment"
-                    min={499}
-                    max={50000}
-                    step={100}
-                    value={[initialInvestment]}
-                    onValueChange={(value) => setInitialInvestment(value[0])}
-                    className="py-4"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <Label htmlFor="months">Período (meses)</Label>
-                    <span className="font-medium text-heitokai-green">{months} meses</span>
-                  </div>
-                  <Slider
-                    id="months"
-                    min={1}
-                    max={120}
-                    step={1}
-                    value={[months]}
-                    onValueChange={(value) => setMonths(value[0])}
-                    className="py-4"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <Label htmlFor="appreciation">Taxa de Valorização Mensal</Label>
-                    <span className="font-medium text-heitokai-green">{appreciationRate}%</span>
-                  </div>
-                  <Slider
-                    id="appreciation"
-                    min={0.5}
-                    max={5}
-                    step={0.1}
-                    value={[appreciationRate]}
-                    onValueChange={(value) => setAppreciationRate(value[0])}
-                    className="py-4"
-                  />
-                </div>
-                
-                <div className="pt-4 border-t border-border">
-                  <div className="flex justify-between mb-2">
-                    <span className="text-muted-foreground">Valor Futuro Estimado:</span>
-                    <span className="font-semibold text-xl">{formatCurrency(futureValue)}</span>
-                  </div>
-                  
-                  <div className="text-xs text-muted-foreground mb-4 text-right">
-                    Sobre o valor inicial de {formatCurrency(propertyValue)} por lote
-                  </div>
-                  
-                  <div
-                    className="w-full h-2 bg-gray-200 rounded-full overflow-hidden"
-                  >
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${Math.min(100, roi)}%` }}
-                      transition={{ duration: 1, delay: 0.2 }}
-                      className="h-full bg-gradient-to-r from-heitokai-green/70 to-heitokai-green"
-                    />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              {/* Gráfico */}
+              <InvestmentGraphs 
+                investmentData={investmentData}
+                breakdownData={breakdownData}
+                chartConfig={chartConfig}
+                formatCurrency={formatCurrency}
+                months={months}
+              />
+            </div>
           </motion.div>
         </div>
         
-        {/* Seção de Gráficos */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-16"
-        >
-          <h3 className="section-subtitle text-center mb-12">Visualização do Crescimento do Investimento</h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            {/* Gráfico de Linha - Crescimento ao longo do tempo */}
-            <Card className="border border-heitokai-light-green/30 bg-white/90 backdrop-blur-sm overflow-hidden shadow-md">
-              <CardHeader>
-                <CardTitle className="text-lg">Crescimento ao Longo do Tempo</CardTitle>
-                <CardDescription>Projeção de valorização em {months} meses</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ChartContainer 
-                  config={chartConfig} 
-                  className="w-full aspect-[4/3] md:aspect-video"
-                >
-                  <LineChart data={investmentData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis 
-                      dataKey="mes" 
-                      label={{ value: 'Meses', position: 'insideBottom', offset: -15 }}
-                      tick={{ fontSize: 12 }}
-                    />
-                    <YAxis 
-                      tickFormatter={(value) => `R$${value.toLocaleString()}`}
-                      width={60} 
-                      tick={{ fontSize: 12 }}
-                    />
-                    <ChartTooltip
-                      content={
-                        <ChartTooltipContent 
-                          formatter={(value) => formatCurrency(Number(value))} 
-                        />
-                      }
-                    />
-                    <Legend verticalAlign="top" height={36} />
-                    <Line 
-                      type="monotone" 
-                      dataKey="investimento" 
-                      name="Investimento Inicial" 
-                      strokeDasharray="5 5"
-                      stroke="#d1d5db"
-                      strokeWidth={2}
-                      dot={false}
-                      animationDuration={1500}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="valor"
-                      name="Valor do Investimento" 
-                      stroke="#16A34A" 
-                      strokeWidth={2}
-                      activeDot={{ r: 6, fill: "#16A34A", stroke: "#fff", strokeWidth: 2 }}
-                      animationDuration={2000}
-                    />
-                  </LineChart>
-                </ChartContainer>
-              </CardContent>
-            </Card>
-
-            {/* Gráfico de Área - Composição do valor */}
-            <Card className="border border-heitokai-light-green/30 bg-white/90 backdrop-blur-sm overflow-hidden shadow-md">
-              <CardHeader>
-                <CardTitle className="text-lg">Composição do Retorno</CardTitle>
-                <CardDescription>Investimento inicial vs. lucro projetado</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ChartContainer 
-                  config={chartConfig} 
-                  className="w-full aspect-[4/3] md:aspect-video"
-                >
-                  <AreaChart data={investmentData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis 
-                      dataKey="mes" 
-                      label={{ value: 'Meses', position: 'insideBottom', offset: -15 }}
-                      tick={{ fontSize: 12 }}
-                    />
-                    <YAxis 
-                      tickFormatter={(value) => `R$${value.toLocaleString()}`}
-                      width={60}
-                      tick={{ fontSize: 12 }}
-                    />
-                    <ChartTooltip
-                      content={
-                        <ChartTooltipContent 
-                          formatter={(value) => formatCurrency(Number(value))} 
-                        />
-                      }
-                    />
-                    <Legend verticalAlign="top" height={36} />
-                    <Area 
-                      type="monotone" 
-                      dataKey="investimento" 
-                      name="Investimento Inicial" 
-                      stackId="1"
-                      stroke="#d1d5db" 
-                      fill="#d1d5db"
-                      animationDuration={1200}
-                    />
-                    <Area 
-                      type="monotone" 
-                      dataKey={(data) => data.valor - data.investimento > 0 ? data.valor - data.investimento : 0} 
-                      name="Lucro" 
-                      stackId="1"
-                      stroke="#86EFAC" 
-                      fill="#86EFAC"
-                      animationDuration={2000}
-                    />
-                  </AreaChart>
-                </ChartContainer>
-              </CardContent>
-            </Card>
-          </div>
-        </motion.div>
-        
+        {/* Stats Cards */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
         >
           {statCards.map((card, index) => (
             <motion.div
@@ -500,7 +323,7 @@ const InvestorSection = () => {
           ))}
         </motion.div>
         
-        <div className="mt-20 text-center">
+        <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
