@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { CreditCard, TrendingUp, PiggyBank, ChartBar, ArrowUp, Home, Trees, Percent, Wallet, BarChart3 } from 'lucide-react';
+import { TrendingUp, CreditCard, ChartBar, PiggyBank, Wallet, BarChart3, Percent } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import InvestmentCalculator from "./investor/InvestmentCalculator";
 import InvestmentGraphs from "./investor/InvestmentGraphs";
@@ -14,7 +14,7 @@ import PropertyGrowthVisualization from "./investor/PropertyGrowthVisualization"
 import { toast } from "@/hooks/use-toast";
 
 const InvestorSection = () => {
-  // Atualizados os valores iniciais e ranges para os novos requisitos
+  // Valores iniciais e ranges para os requisitos
   const [initialInvestment, setInitialInvestment] = useState(499);
   const [months, setMonths] = useState(12);
   const [appreciationRate, setAppreciationRate] = useState(2);
@@ -263,6 +263,7 @@ const InvestorSection = () => {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-white/80 backdrop-blur-sm p-6 rounded-md border border-heitokai-light-green/30 shadow-sm"
               >
@@ -290,7 +291,7 @@ const InvestorSection = () => {
           Simulador de Investimento
         </motion.h3>
         
-        {/* Visualização Animada do Crescimento do Empreendimento */}
+        {/* Visualização das Vantagens e Visualização do Crescimento */}
         <div className="mb-12">
           <PropertyGrowthVisualization 
             investmentValue={initialInvestment}
