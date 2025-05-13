@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { CreditCard, TrendingUp, PiggyBank, ChartBar, ArrowUp, Home, Tree } from "lucide-react";
+import { CreditCard, TrendingUp, PiggyBank, ChartBar, ArrowUp, Home, Trees } from "lucide-react";
 import { cn } from "@/lib/utils";
 import InvestmentCalculator from "./investor/InvestmentCalculator";
 import InvestmentGraphs from "./investor/InvestmentGraphs";

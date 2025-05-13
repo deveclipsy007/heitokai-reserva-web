@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Card, CardContent } from "@/components/ui/card";
-import { Home, Tree, Sun, Waves } from 'lucide-react';
+import { Home, Trees, Sun, Waves } from 'lucide-react';
 
 interface PropertyGrowthVisualizationProps {
   investmentValue: number;
@@ -116,7 +116,7 @@ const PropertyGrowthVisualization = ({
                   zIndex: Math.floor(Math.random() * 20)
                 }}
               >
-                <Tree 
+                <Trees 
                   className="text-green-600/90" 
                   size={16 + (i % 3) * 4} 
                 />
