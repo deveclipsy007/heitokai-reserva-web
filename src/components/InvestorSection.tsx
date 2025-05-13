@@ -6,11 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { CreditCard, TrendingUp, PiggyBank, ChartBar, ArrowUp, Home, Trees } from "lucide-react";
+import { CreditCard, TrendingUp, PiggyBank, ChartBar, ArrowUp, Home, Trees, Percent, Wallet, Graph } from "lucide-react";
 import { cn } from "@/lib/utils";
 import InvestmentCalculator from "./investor/InvestmentCalculator";
 import InvestmentGraphs from "./investor/InvestmentGraphs";
 import PropertyGrowthVisualization from "./investor/PropertyGrowthVisualization";
+import { toast } from "@/hooks/use-toast";
 
 const InvestorSection = () => {
   // Atualizados os valores iniciais e ranges para os novos requisitos
@@ -78,6 +79,36 @@ const InvestorSection = () => {
       label: 'Lucro',
       theme: { light: '#86EFAC', dark: '#86EFAC' }
     }
+  };
+  
+  // Função para compartilhar simulação
+  const shareSimulation = () => {
+    // Dados da simulação para compartilhamento
+    const simulationData = {
+      investment: initialInvestment,
+      months: months,
+      rate: appreciationRate,
+      futureValue: futureValue.toFixed(2),
+      roi: roi.toFixed(2)
+    };
+    
+    // Simula cópia para a área de transferência e exibe toast
+    navigator.clipboard.writeText(JSON.stringify(simulationData))
+      .then(() => {
+        toast({
+          title: "Simulação copiada!",
+          description: "Os dados da sua simulação podem ser compartilhados agora.",
+          duration: 3000,
+        });
+      })
+      .catch(() => {
+        toast({
+          title: "Não foi possível copiar",
+          description: "Ocorreu um erro ao copiar sua simulação.",
+          variant: "destructive",
+          duration: 3000,
+        });
+      });
   };
   
   const containerVariants = {
@@ -188,105 +219,124 @@ const InvestorSection = () => {
           </motion.p>
         </motion.div>
         
-        {/* Seção Lado a Lado */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-          {/* Por que investir + Visualização Animada */}
-          <div className="grid grid-cols-1 gap-10">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h3 className="section-title relative mb-6">
-                Por que investir no Heitokai?
-                <motion.span
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "30%" }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                  className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-heitokai-green to-transparent rounded-full"
-                />
-              </h3>
-              
-              <ul className="space-y-6">
-                {[
-                  {
-                    title: "Localização Estratégica",
-                    description: "Situado em uma região de crescente valorização em Goiás, com acesso privilegiado ao Rio Uru e áreas de preservação ambiental."
-                  },
-                  {
-                    title: "Demanda Crescente",
-                    description: "O mercado goiano para propriedades premium em ambientes naturais está em franca expansão, com demanda superando a oferta."
-                  },
-                  {
-                    title: "Infraestrutura Completa",
-                    description: "Investimento já realizado em infraestrutura de alto padrão, reduzindo riscos e acelerando o retorno financeiro."
-                  },
-                  {
-                    title: "Potencial de Valorização",
-                    description: "Histórico de valorização acima da média do mercado imobiliário tradicional, com projeção de crescimento sustentado."
-                  }
-                ].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex gap-4"
-                  >
-                    <div className="mt-1 bg-heitokai-light-green/30 h-6 w-6 rounded-full flex items-center justify-center flex-shrink-0">
-                      <div className="h-3 w-3 rounded-full bg-heitokai-green"></div>
-                    </div>
-                    <div>
-                      <h4 className="font-serif text-xl text-heitokai-dark font-medium mb-2">{item.title}</h4>
-                      <p className="text-heitokai-dark/70">{item.description}</p>
-                    </div>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
+        {/* Benefícios para Investidores */}
+        <div className="mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center mb-10"
+          >
+            <h3 className="font-serif text-2xl md:text-3xl text-heitokai-dark mb-3">
+              Vantagens Exclusivas para Investidores
+            </h3>
             
-            {/* Visualização Animada do Crescimento do Empreendimento */}
-            <PropertyGrowthVisualization 
-              investmentValue={initialInvestment}
-              months={months}
-              appreciationRate={appreciationRate}
-              maxInvestment={50000}
-            />
-          </div>
+            <div className="flex justify-center">
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: "60px" }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="h-1 bg-heitokai-light-green rounded-full mb-4"
+              />
+            </div>
+          </motion.div>
           
-          {/* Calculadora de Investimento Lado a Lado com Gráfico */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Retorno Acima do Mercado",
+                description: "Valorização média de propriedades premium na região supera índices tradicionais de investimento",
+                icon: <Graph className="h-6 w-6 text-heitokai-green" />
+              },
+              {
+                title: "Liquidez Garantida",
+                description: "Programa exclusivo de recompra com valorização mínima garantida após período de carência",
+                icon: <Wallet className="h-6 w-6 text-heitokai-green" />
+              },
+              {
+                title: "Investimento Acessível",
+                description: "Entrada a partir de R$499,00 com planos de parcelas personalizados e flexíveis",
+                icon: <Percent className="h-6 w-6 text-heitokai-green" />
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white/80 backdrop-blur-sm p-6 rounded-md border border-heitokai-light-green/30 shadow-sm"
+              >
+                <div className="bg-heitokai-light-green/20 p-3 rounded-full w-fit mb-4">
+                  {item.icon}
+                </div>
+                <h4 className="font-serif text-xl text-heitokai-dark font-medium mb-2">
+                  {item.title}
+                </h4>
+                <p className="text-heitokai-dark/70">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Seção do Simulador */}
+        <motion.h3
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center font-serif text-2xl md:text-3xl text-heitokai-dark mb-10"
+        >
+          Simulador de Investimento
+        </motion.h3>
+        
+        {/* Visualização Animada do Crescimento do Empreendimento */}
+        <div className="mb-12">
+          <PropertyGrowthVisualization 
+            investmentValue={initialInvestment}
+            months={months}
+            appreciationRate={appreciationRate}
+            maxInvestment={50000}
+          />
+        </div>
+        
+        {/* Calculadora lado a lado com Gráfico */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
+          {/* Calculadora */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <InvestmentCalculator 
+              initialInvestment={initialInvestment}
+              setInitialInvestment={setInitialInvestment}
+              months={months}
+              setMonths={setMonths}
+              appreciationRate={appreciationRate}
+              setAppreciationRate={setAppreciationRate}
+              propertyValue={propertyValue}
+              futureValue={futureValue}
+              formatCurrency={formatCurrency}
+              roi={roi}
+            />
+          </motion.div>
+          
+          {/* Gráfico */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative flex flex-col gap-6"
           >
-            <div className="grid grid-cols-1 gap-6">
-              {/* Calculadora */}
-              <InvestmentCalculator 
-                initialInvestment={initialInvestment}
-                setInitialInvestment={setInitialInvestment}
-                months={months}
-                setMonths={setMonths}
-                appreciationRate={appreciationRate}
-                setAppreciationRate={setAppreciationRate}
-                propertyValue={propertyValue}
-                futureValue={futureValue}
-                formatCurrency={formatCurrency}
-                roi={roi}
-              />
-              
-              {/* Gráfico */}
-              <InvestmentGraphs 
-                investmentData={investmentData}
-                breakdownData={breakdownData}
-                chartConfig={chartConfig}
-                formatCurrency={formatCurrency}
-                months={months}
-              />
-            </div>
+            <InvestmentGraphs 
+              investmentData={investmentData}
+              breakdownData={breakdownData}
+              chartConfig={chartConfig}
+              formatCurrency={formatCurrency}
+              months={months}
+            />
           </motion.div>
         </div>
         
@@ -338,16 +388,30 @@ const InvestorSection = () => {
               O preço atual dos lotes representa uma excelente oportunidade de entrada, com alto potencial de valorização diante da crescente demanda por propriedades exclusivas em ambientes naturais privilegiados em Goiás. Não perca a chance de fazer parte deste empreendimento único com condições especiais para investidores.
             </p>
             
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-primary group overflow-hidden relative"
-            >
-              <span className="relative z-10 group-hover:text-white transition-colors duration-300">
-                FALE COM UM CONSULTOR DE INVESTIMENTOS
-              </span>
-              <span className="absolute bottom-0 left-0 w-full h-0 bg-heitokai-dark transition-all duration-300 -z-0 group-hover:h-full"></span>
-            </motion.button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-primary group overflow-hidden relative"
+                onClick={shareSimulation}
+              >
+                <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+                  COMPARTILHAR SIMULAÇÃO
+                </span>
+                <span className="absolute bottom-0 left-0 w-full h-0 bg-heitokai-dark transition-all duration-300 -z-0 group-hover:h-full"></span>
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-primary group overflow-hidden relative"
+              >
+                <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+                  FALE COM UM CONSULTOR
+                </span>
+                <span className="absolute bottom-0 left-0 w-full h-0 bg-heitokai-dark transition-all duration-300 -z-0 group-hover:h-full"></span>
+              </motion.button>
+            </div>
           </motion.div>
         </div>
       </div>
