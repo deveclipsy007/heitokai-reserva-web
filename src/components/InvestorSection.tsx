@@ -1,3 +1,4 @@
+
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -5,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { CreditCard, TrendingUp, PiggyBank, ChartBar, ArrowUp, Home, Trees, Percent, Wallet, BarChart3 } from "lucide-react";
+import { CreditCard, TrendingUp, PiggyBank, ChartBar, ArrowUp, Home, Trees, Percent, Wallet, BarChart3 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import InvestmentCalculator from "./investor/InvestmentCalculator";
 import InvestmentGraphs from "./investor/InvestmentGraphs";
