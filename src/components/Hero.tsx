@@ -1,7 +1,8 @@
+
 import { cn } from "@/lib/utils";
 import { motion, Variants } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Star, Sparkles } from "lucide-react";
+import { Star, Sparkles, ArrowDown } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import VideoSection from "./VideoSection";
@@ -24,6 +25,19 @@ const particleVariants: Variants = {
   }
 };
 
+// Animação para a seta
+const arrowVariants: Variants = {
+  animate: {
+    y: [0, 10, 0],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      repeatType: "loop",
+      ease: "easeInOut"
+    }
+  }
+};
+
 const Hero = () => {
   const isMobile = useIsMobile();
   
@@ -35,6 +49,14 @@ const Hero = () => {
       top: `${Math.random() * 100}%`,
       delay: i * 0.7
     })), []);
+    
+  // Função para rolar suavemente para a próxima seção
+  const scrollToNextSection = () => {
+    const sobreSection = document.getElementById('sobre');
+    if (sobreSection) {
+      sobreSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section 
@@ -258,6 +280,24 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+      
+      {/* Seta animada para descer - Nova adição */}
+      <motion.div 
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer z-20"
+        onClick={scrollToNextSection}
+        whileHover={{ scale: 1.2 }}
+        variants={arrowVariants}
+        animate="animate"
+      >
+        <div className="flex flex-col items-center">
+          <span className="text-white text-sm mb-2 font-medium bg-heitokai-green/80 px-3 py-1 rounded-full backdrop-blur-sm">
+            Saiba mais
+          </span>
+          <div className="bg-heitokai-green rounded-full p-2 shadow-lg border-2 border-white/30">
+            <ArrowDown className="h-6 w-6 text-white" />
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 };
