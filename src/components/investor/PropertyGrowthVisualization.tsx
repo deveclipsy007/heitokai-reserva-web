@@ -1,8 +1,7 @@
-
 import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Home, Trees, Sun, Waves, Map, MapPin, Graph, Wallet } from 'lucide-react';
+import { Home, Trees, Sun, Waves, Map, MapPin, BarChart3, Wallet } from 'lucide-react';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface PropertyGrowthVisualizationProps {
@@ -346,7 +345,7 @@ const PropertyGrowthVisualization = ({
                 >
                   <div className="px-2 py-1 bg-white/80 backdrop-blur-sm shadow-sm rounded-full">
                     <div className="relative mb-1 text-center text-[10px] font-medium text-heitokai-dark/90 flex gap-1 items-center">
-                      <Graph size={10} className="text-heitokai-green" />
+                      <BarChart3 size={10} className="text-heitokai-green" />
                       Desenvolvimento: {Math.round(progressLevel * 20)}%
                     </div>
                     <motion.div 
