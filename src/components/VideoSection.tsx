@@ -23,8 +23,8 @@ const VideoSection = () => {
   const [buffering, setBuffering] = useState(true);
   const { toast } = useToast();
 
-  // Fix video URL
-  const videoUrl = "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars/IMG_8915.MP4";
+  // Updated video URL
+  const videoUrl = "https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//freepik__aerial-shot-transform-a-muddy-brown-river-into-a-c__77961.mp4";
 
   // Memoizar a função de log para evitar recriação em cada renderização
   const addToLog = useCallback((event: string, details?: string, error?: any) => {
