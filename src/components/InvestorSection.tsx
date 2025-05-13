@@ -1,23 +1,44 @@
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { CreditCard, TrendingUp, PiggyBank, ChartBar } from "lucide-react";
+import { CreditCard, TrendingUp, PiggyBank, ChartBar, ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { 
+  LineChart, 
+  Line, 
+  AreaChart, 
+  Area, 
+  XAxis, 
+  YAxis, 
+  Tooltip, 
+  CartesianGrid, 
+  ResponsiveContainer,
+  Legend
+} from "recharts";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent
+} from "@/components/ui/chart";
 
 const InvestorSection = () => {
-  const [initialInvestment, setInitialInvestment] = useState(500000);
-  const [years, setYears] = useState(5);
-  const [appreciationRate, setAppreciationRate] = useState(12);
+  // Atualizados os valores iniciais e ranges para os novos requisitos
+  const [initialInvestment, setInitialInvestment] = useState(499);
+  const [months, setMonths] = useState(12);
+  const [appreciationRate, setAppreciationRate] = useState(2);
+  const [propertyValue] = useState(150000); // Valor do imóvel
   
+  // Calcula o valor futuro com base na valorização mensal
   const calculateFutureValue = () => {
-    return initialInvestment * Math.pow(1 + appreciationRate / 100, years);
+    return initialInvestment * Math.pow(1 + appreciationRate / 100, months);
   };
 
+  // Calcula o lucro
   const calculateProfit = () => {
     return calculateFutureValue() - initialInvestment;
   };
@@ -26,12 +47,51 @@ const InvestorSection = () => {
   const profit = calculateProfit();
   const roi = (profit / initialInvestment) * 100;
   
+  // Formata valores monetários com R$
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', { 
       style: 'currency', 
       currency: 'BRL',
-      maximumFractionDigits: 0
+      maximumFractionDigits: value < 1000 ? 2 : 0
     }).format(value);
+  };
+  
+  // Dados para os gráficos
+  const investmentData = useMemo(() => {
+    const data = [];
+    for (let i = 0; i <= months; i++) {
+      const monthValue = initialInvestment * Math.pow(1 + appreciationRate / 100, i);
+      data.push({
+        mes: i,
+        valor: Number(monthValue.toFixed(2)),
+        investimento: initialInvestment
+      });
+    }
+    return data;
+  }, [initialInvestment, months, appreciationRate]);
+  
+  // Dados para o gráfico de composição
+  const breakdownData = useMemo(() => {
+    return [
+      { name: 'Investimento Inicial', value: initialInvestment },
+      { name: 'Lucro Estimado', value: profit }
+    ];
+  }, [initialInvestment, profit]);
+
+  // Configuração de cores para os gráficos
+  const chartConfig = {
+    valor: {
+      label: 'Valor Total',
+      theme: { light: '#16A34A', dark: '#16A34A' }
+    },
+    investimento: {
+      label: 'Investimento Inicial',
+      theme: { light: '#d1d5db', dark: '#d1d5db' }
+    },
+    lucro: {
+      label: 'Lucro',
+      theme: { light: '#86EFAC', dark: '#86EFAC' }
+    }
   };
   
   const containerVariants = {
@@ -49,21 +109,21 @@ const InvestorSection = () => {
   
   const statCards = [
     {
-      title: "Valorização Anual",
+      title: "Valorização Mensal",
       value: `${appreciationRate}%`,
-      description: "Média de valorização na região",
+      description: "Taxa de valorização mensal",
       icon: <TrendingUp className="text-heitokai-green" />
     },
     {
       title: "Retorno sobre Investimento",
       value: `${roi.toFixed(0)}%`,
-      description: `Em ${years} anos`,
+      description: `Em ${months} meses`,
       icon: <ChartBar className="text-heitokai-green" />
     },
     {
       title: "Lucro Estimado",
       value: formatCurrency(profit),
-      description: `Em ${years} anos`,
+      description: `Em ${months} meses`,
       icon: <PiggyBank className="text-heitokai-green" />
     }
   ];
@@ -220,9 +280,9 @@ const InvestorSection = () => {
                   </div>
                   <Slider
                     id="investment"
-                    min={300000}
-                    max={2000000}
-                    step={50000}
+                    min={499}
+                    max={50000}
+                    step={100}
                     value={[initialInvestment]}
                     onValueChange={(value) => setInitialInvestment(value[0])}
                     className="py-4"
@@ -231,30 +291,30 @@ const InvestorSection = () => {
                 
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <Label htmlFor="years">Período (anos)</Label>
-                    <span className="font-medium text-heitokai-green">{years} anos</span>
+                    <Label htmlFor="months">Período (meses)</Label>
+                    <span className="font-medium text-heitokai-green">{months} meses</span>
                   </div>
                   <Slider
-                    id="years"
+                    id="months"
                     min={1}
-                    max={20}
+                    max={120}
                     step={1}
-                    value={[years]}
-                    onValueChange={(value) => setYears(value[0])}
+                    value={[months]}
+                    onValueChange={(value) => setMonths(value[0])}
                     className="py-4"
                   />
                 </div>
                 
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <Label htmlFor="appreciation">Taxa de Valorização Anual</Label>
+                    <Label htmlFor="appreciation">Taxa de Valorização Mensal</Label>
                     <span className="font-medium text-heitokai-green">{appreciationRate}%</span>
                   </div>
                   <Slider
                     id="appreciation"
-                    min={5}
-                    max={20}
-                    step={1}
+                    min={0.5}
+                    max={5}
+                    step={0.1}
                     value={[appreciationRate]}
                     onValueChange={(value) => setAppreciationRate(value[0])}
                     className="py-4"
@@ -265,6 +325,10 @@ const InvestorSection = () => {
                   <div className="flex justify-between mb-2">
                     <span className="text-muted-foreground">Valor Futuro Estimado:</span>
                     <span className="font-semibold text-xl">{formatCurrency(futureValue)}</span>
+                  </div>
+                  
+                  <div className="text-xs text-muted-foreground mb-4 text-right">
+                    Sobre o valor inicial de {formatCurrency(propertyValue)} por lote
                   </div>
                   
                   <div
@@ -282,6 +346,127 @@ const InvestorSection = () => {
             </Card>
           </motion.div>
         </div>
+        
+        {/* Seção de Gráficos */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-16"
+        >
+          <h3 className="section-subtitle text-center mb-12">Visualização do Crescimento do Investimento</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            {/* Gráfico de Linha - Crescimento ao longo do tempo */}
+            <Card className="border border-heitokai-light-green/30 bg-white/90 backdrop-blur-sm overflow-hidden shadow-md">
+              <CardHeader>
+                <CardTitle className="text-lg">Crescimento ao Longo do Tempo</CardTitle>
+                <CardDescription>Projeção de valorização em {months} meses</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ChartContainer 
+                  config={chartConfig} 
+                  className="w-full aspect-[4/3] md:aspect-video"
+                >
+                  <LineChart data={investmentData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                    <XAxis 
+                      dataKey="mes" 
+                      label={{ value: 'Meses', position: 'insideBottom', offset: -15 }}
+                      tick={{ fontSize: 12 }}
+                    />
+                    <YAxis 
+                      tickFormatter={(value) => `R$${value.toLocaleString()}`}
+                      width={60} 
+                      tick={{ fontSize: 12 }}
+                    />
+                    <ChartTooltip
+                      content={
+                        <ChartTooltipContent 
+                          formatter={(value) => formatCurrency(Number(value))} 
+                        />
+                      }
+                    />
+                    <Legend verticalAlign="top" height={36} />
+                    <Line 
+                      type="monotone" 
+                      dataKey="investimento" 
+                      name="Investimento Inicial" 
+                      strokeDasharray="5 5"
+                      stroke="#d1d5db"
+                      strokeWidth={2}
+                      dot={false}
+                      animationDuration={1500}
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="valor"
+                      name="Valor do Investimento" 
+                      stroke="#16A34A" 
+                      strokeWidth={2}
+                      activeDot={{ r: 6, fill: "#16A34A", stroke: "#fff", strokeWidth: 2 }}
+                      animationDuration={2000}
+                    />
+                  </LineChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+
+            {/* Gráfico de Área - Composição do valor */}
+            <Card className="border border-heitokai-light-green/30 bg-white/90 backdrop-blur-sm overflow-hidden shadow-md">
+              <CardHeader>
+                <CardTitle className="text-lg">Composição do Retorno</CardTitle>
+                <CardDescription>Investimento inicial vs. lucro projetado</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ChartContainer 
+                  config={chartConfig} 
+                  className="w-full aspect-[4/3] md:aspect-video"
+                >
+                  <AreaChart data={investmentData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                    <XAxis 
+                      dataKey="mes" 
+                      label={{ value: 'Meses', position: 'insideBottom', offset: -15 }}
+                      tick={{ fontSize: 12 }}
+                    />
+                    <YAxis 
+                      tickFormatter={(value) => `R$${value.toLocaleString()}`}
+                      width={60}
+                      tick={{ fontSize: 12 }}
+                    />
+                    <ChartTooltip
+                      content={
+                        <ChartTooltipContent 
+                          formatter={(value) => formatCurrency(Number(value))} 
+                        />
+                      }
+                    />
+                    <Legend verticalAlign="top" height={36} />
+                    <Area 
+                      type="monotone" 
+                      dataKey="investimento" 
+                      name="Investimento Inicial" 
+                      stackId="1"
+                      stroke="#d1d5db" 
+                      fill="#d1d5db"
+                      animationDuration={1200}
+                    />
+                    <Area 
+                      type="monotone" 
+                      dataKey={(data) => data.valor - data.investimento > 0 ? data.valor - data.investimento : 0} 
+                      name="Lucro" 
+                      stackId="1"
+                      stroke="#86EFAC" 
+                      fill="#86EFAC"
+                      animationDuration={2000}
+                    />
+                  </AreaChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+          </div>
+        </motion.div>
         
         <motion.div
           variants={containerVariants}
