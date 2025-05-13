@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { Card } from "@/components/ui/card";
@@ -16,7 +15,7 @@ export function TimelineDemo() {
           </p>
           <div className="grid grid-cols-2 gap-4 w-full">
             <Card className="rounded-lg overflow-hidden h-20 md:h-44 lg:h-60 w-full shadow-lg">
-              <img src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//WhatsApp%20Image%202025-05-07%20at%2010.29.02.jpeg" alt="Vista panorâmica do empreendimento" className="h-full w-full object-cover" />
+              <img alt="Vista panorâmica do empreendimento" className="h-full w-full object-cover" src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//ChatGPT%20Image%207%20de%20mai.%20de%202025,%2020_28_04.png" />
             </Card>
             <Card className="rounded-lg overflow-hidden h-20 md:h-44 lg:h-60 w-full shadow-lg">
               <img src="https://cnkcoxooaetehlufjwbr.supabase.co/storage/v1/object/public/avatars//bg_site%202.png" alt="Localização aérea" className="h-full w-full object-cover" />
