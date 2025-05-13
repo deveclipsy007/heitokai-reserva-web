@@ -245,7 +245,7 @@ const InvestorSection = () => {
               {
                 title: "Retorno Acima do Mercado",
                 description: "Valorização média de propriedades premium na região supera índices tradicionais de investimento",
-                icon: <Graph className="h-6 w-6 text-heitokai-green" />
+                icon: <BarChart3 className="h-6 w-6 text-heitokai-green" />
               },
               {
                 title: "Liquidez Garantida",
