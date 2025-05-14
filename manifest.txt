@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: Heitoraí Reservation System
+Specification-Title: Heitoraí Web Reservation
+Specification-Version: 1.0.0
+Implementation-Title: Heitoraí Web Reservation
+Implementation-Version: 1.0.0-BUILD-{timestamp}
+Build-Date: 2024-01-07T10:30:00Z
+Last-Modified: 2024-01-07T10:30:00Z
+Main-Class: com.Heitoraí.reservation.MainApplication
