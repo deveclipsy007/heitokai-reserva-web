@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { TrendingUp, ArrowUp, BarChart3, Wallet, PiggyBank, Percent, ChartBar, Home, Trees, Shield } from 'lucide-react';
+import { TrendingUp, ArrowUp, BarChart3, Wallet, PiggyBank, Percent, ChartBar, Home, Trees, Shield, DollarSign, Building, Award, Clock, Map, BadgePercent, Landmark } from 'lucide-react';
 
 interface PropertyGrowthVisualizationProps {
   investmentValue: number;
@@ -65,7 +65,7 @@ const PropertyGrowthVisualization = ({
   const traditionalInvestmentReturn = months * 0.6; // Simplified model: 0.6% monthly
   const savingsReturn = months * 0.3; // Simplified model: 0.3% monthly
   
-  // Vantagens de investir no Rio Uru - dados para os tópicos
+  // Lista ampliada de vantagens de investir no Rio Uru
   const advantages = [
     {
       icon: <Home className="h-6 w-6 text-heitokai-green" />,
@@ -90,16 +90,49 @@ const PropertyGrowthVisualization = ({
       title: "Retorno Superior",
       description: "Desempenho histórico do empreendimento supera outros tipos de investimentos tradicionais.",
       highlight: `${annualizedROI.toFixed(1)}% ao ano`
+    },
+    {
+      icon: <Building className="h-6 w-6 text-heitokai-green" />,
+      title: "Infraestrutura Completa",
+      description: "Empreendimento com toda infraestrutura necessária, elevando o padrão e valor dos lotes.",
+      highlight: "Valor agregado"
+    },
+    {
+      icon: <Map className="h-6 w-6 text-heitokai-green" />,
+      title: "Área em Expansão",
+      description: "Região com crescimento acelerado e investimentos públicos e privados previstos.",
+      highlight: "Alto potencial"
+    },
+    {
+      icon: <DollarSign className="h-6 w-6 text-heitokai-green" />,
+      title: "Liquidez Garantida",
+      description: "Facilidade de revenda com programa de recompra após período de carência.",
+      highlight: "Baixo risco"
+    },
+    {
+      icon: <BadgePercent className="h-6 w-6 text-heitokai-green" />,
+      title: "Condições Flexíveis",
+      description: "Opções de entrada e parcelamento que facilitam o acesso ao investimento.",
+      highlight: "Acessível"
+    },
+    {
+      icon: <Landmark className="h-6 w-6 text-heitokai-green" />,
+      title: "Valorização Histórica",
+      description: "Região com histórico comprovado de valorização imobiliária acima da média do mercado.",
+      highlight: `+${Math.round(appreciationRate * 2)}% ao ano`
+    },
+    {
+      icon: <Award className="h-6 w-6 text-heitokai-green" />,
+      title: "Exclusividade",
+      description: "Número limitado de lotes disponíveis, criando escassez e impulsionando a valorização.",
+      highlight: "Alta demanda"
+    },
+    {
+      icon: <Clock className="h-6 w-6 text-heitokai-green" />,
+      title: "Timing Ideal",
+      description: "Momento perfeito para investir antes da valorização prevista com a conclusão das obras.",
+      highlight: "Oportunidade única"
     }
-  ];
-  
-  // Animações para os elementos monetários flutuantes
-  const floatingElements = [
-    { delay: 0, duration: 2.5, x: -10 },
-    { delay: 0.3, duration: 2.2, x: 5 },
-    { delay: 0.7, duration: 2.8, x: -8 },
-    { delay: 1.1, duration: 2.4, x: 12 },
-    { delay: 0.5, duration: 2.7, x: -5 }
   ];
 
   return (
@@ -123,7 +156,7 @@ const PropertyGrowthVisualization = ({
           <div className="grid grid-cols-1 lg:grid-cols-7 gap-0">
             {/* Vantagens de Investir - 4/7 colunas */}
             <div className="col-span-1 lg:col-span-4 p-4">
-              <div className="relative h-64 md:h-80 bg-gradient-to-b from-white to-heitokai-light-green/10 rounded-md overflow-hidden border border-heitokai-light-green/20 p-4">
+              <div className="relative h-auto md:h-auto bg-gradient-to-b from-white to-heitokai-light-green/10 rounded-md overflow-hidden border border-heitokai-light-green/20 p-4">
                 {/* Título principal */}
                 <div className="mb-4">
                   <h3 className="text-lg font-semibold text-heitokai-dark">Benefícios do Investimento</h3>
@@ -132,15 +165,15 @@ const PropertyGrowthVisualization = ({
                   </p>
                 </div>
                 
-                {/* Lista de vantagens com animações */}
-                <div className="space-y-3">
+                {/* Grid de vantagens com animações */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[500px] overflow-y-auto pr-1">
                   {advantages.map((advantage, index) => (
                     <motion.div
                       key={`advantage-${index}`}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: 0.2 * index }}
-                      className="flex items-start gap-3 bg-white/60 backdrop-blur-sm p-2 rounded-md border border-heitokai-light-green/20"
+                      transition={{ duration: 0.5, delay: 0.1 * index }}
+                      className="flex items-start gap-3 bg-white/70 backdrop-blur-sm p-2 rounded-md border border-heitokai-light-green/20 hover:shadow-md hover:bg-white/90 transition-all duration-300"
                     >
                       <motion.div 
                         className="p-2 bg-heitokai-light-green/20 rounded-full flex-shrink-0"
@@ -156,7 +189,7 @@ const PropertyGrowthVisualization = ({
                           <motion.div 
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.5 + (0.2 * index), duration: 0.3 }}
+                            transition={{ delay: 0.3 + (0.1 * index), duration: 0.3 }}
                             className="bg-heitokai-green/10 px-2 py-0.5 rounded-full"
                           >
                             <span className="text-xs font-semibold text-heitokai-green">
@@ -169,33 +202,6 @@ const PropertyGrowthVisualization = ({
                     </motion.div>
                   ))}
                 </div>
-                
-                {/* Animação dos elementos monetários flutuantes */}
-                {floatingElements.map((element, index) => (
-                  <motion.div
-                    key={`coin-${index}`}
-                    className="absolute"
-                    style={{ 
-                      bottom: `${(index + 1) * 10}%`, 
-                      left: `${10 + (index * 15)}%` 
-                    }}
-                    initial={{ y: 100, opacity: 0 }}
-                    animate={{ 
-                      y: [0, -80, -160],
-                      opacity: [1, 1, 0]
-                    }}
-                    transition={{ 
-                      duration: element.duration,
-                      delay: element.delay,
-                      repeat: Infinity,
-                      repeatDelay: 1
-                    }}
-                  >
-                    <div className="flex items-center justify-center w-8 h-8 bg-heitokai-green/90 rounded-full text-white shadow-lg">
-                      <TrendingUp className="h-4 w-4" />
-                    </div>
-                  </motion.div>
-                ))}
                 
                 {/* Indicador de valorização */}
                 <motion.div

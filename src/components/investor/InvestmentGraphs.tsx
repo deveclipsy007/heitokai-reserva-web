@@ -18,7 +18,8 @@ import {
   Cell,
   BarChart,
   Bar,
-  ReferenceLine
+  ReferenceLine,
+  Label
 } from "recharts";
 import {
   ChartContainer,
@@ -133,65 +134,59 @@ const InvestmentGraphs = ({
             </TabsList>
             
             <TabsContent value="line" className="relative">
-              <ChartContainer 
-                config={chartConfig} 
-                className="w-full aspect-[4/3] md:aspect-video"
-              >
-                <LineChart 
-                  data={investmentData} 
-                  margin={{ top: 10, right: 10, left: 10, bottom: 20 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis 
-                    dataKey="mes" 
-                    label={{ value: 'Meses', position: 'insideBottom', offset: -15 }}
-                    tick={{ fontSize: 12 }}
-                  />
-                  <YAxis 
-                    tickFormatter={(value) => `R$${value.toLocaleString()}`}
-                    width={60} 
-                    tick={{ fontSize: 12 }}
-                    domain={['dataMin', 'dataMax']}
-                  />
-                  <ChartTooltip
-                    content={
-                      <ChartTooltipContent 
-                        formatter={(value) => formatCurrency(Number(value))} 
-                      />
-                    }
-                  />
-                  <Legend verticalAlign="top" height={36} />
-                  <Line 
-                    type="monotone" 
-                    dataKey="investimento" 
-                    name="Investimento Inicial" 
-                    strokeDasharray="5 5"
-                    stroke="#d1d5db"
-                    strokeWidth={2}
-                    dot={false}
-                    animationDuration={1500}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="valor"
-                    name="Valor do Investimento" 
-                    stroke="#16A34A" 
-                    strokeWidth={2}
-                    activeDot={{ r: 6, fill: "#16A34A", stroke: "#fff", strokeWidth: 2 }}
-                    animationDuration={2000}
-                    isAnimationActive={true}
-                  />
-                  <ReferenceLine
-                    y={investmentData[investmentData.length - 1]?.valor}
-                    stroke="#16A34A"
-                    strokeDasharray="3 3"
-                    strokeWidth={1}
+              <div className={`w-full aspect-[4/3] md:aspect-video ${chartConfig ? 'chart-container' : ''}`}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart 
+                    data={investmentData} 
+                    margin={{ top: 10, right: 10, left: 10, bottom: 20 }}
                   >
-                    <label fill="#16A34A" fontSize={10}>
-                      Valor Final
-                    </label>
-                  </ReferenceLine>
-                </LineChart>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                    <XAxis 
+                      dataKey="mes" 
+                      tick={{ fontSize: 12 }}
+                    >
+                      <Label value="Meses" position="insideBottom" offset={-15} />
+                    </XAxis>
+                    <YAxis 
+                      tickFormatter={(value) => `R$${value.toLocaleString()}`}
+                      width={60} 
+                      tick={{ fontSize: 12 }}
+                      domain={['dataMin', 'dataMax']}
+                    />
+                    <Tooltip formatter={(value) => formatCurrency(Number(value))} />
+                    <Legend verticalAlign="top" height={36} />
+                    <Line 
+                      type="monotone" 
+                      dataKey="investimento" 
+                      name="Investimento Inicial" 
+                      strokeDasharray="5 5"
+                      stroke="#d1d5db"
+                      strokeWidth={2}
+                      dot={false}
+                      animationDuration={1500}
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="valor"
+                      name="Valor do Investimento" 
+                      stroke="#16A34A" 
+                      strokeWidth={2}
+                      activeDot={{ r: 6, fill: "#16A34A", stroke: "#fff", strokeWidth: 2 }}
+                      animationDuration={2000}
+                      isAnimationActive={true}
+                    />
+                    <ReferenceLine
+                      y={investmentData[investmentData.length - 1]?.valor}
+                      stroke="#16A34A"
+                      strokeDasharray="3 3"
+                      strokeWidth={1}
+                    >
+                      <Label position="right" fontSize={10} fill="#16A34A">
+                        Valor Final
+                      </Label>
+                    </ReferenceLine>
+                  </LineChart>
+                </ResponsiveContainer>
                 
                 {/* Animated money icons overlay */}
                 {moneyIcons.map((icon, index) => (
@@ -211,7 +206,7 @@ const InvestmentGraphs = ({
                     </div>
                   </motion.div>
                 ))}
-              </ChartContainer>
+              </div>
             </TabsContent>
             
             <TabsContent value="pie" className="relative">
