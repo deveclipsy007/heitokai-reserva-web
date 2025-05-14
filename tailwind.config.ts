@@ -69,7 +69,11 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				// Cores personalizadas para o projeto
+<<<<<<< HEAD
+				Heitoraí: {
+=======
 				heitokai: {
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
 					'green': '#2A7A4B',       // Verde escuro
 					'light-green': '#C5E2A5', // Verde claro
 					'blue': '#4A8DB7',        // Azul rio
