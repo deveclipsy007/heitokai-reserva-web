@@ -217,28 +217,7 @@ const PropertyGrowthVisualization = ({
                 </div>
                 
                 {/* Métricas Principais */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-white/60 backdrop-blur-sm border border-heitokai-light-green/20 rounded-md p-3">
-                    <div className="text-xs text-heitokai-dark/70">ROI Anualizado</div>
-                    <motion.div animate={{
-                    scale: [1, 1.05, 1]
-                  }} transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    repeatDelay: 5
-                  }} className="text-xl font-semibold text-heitokai-dark flex items-center">
-                      {annualizedROI.toFixed(1)}%
-                      <ArrowUp className="h-4 w-4 text-heitokai-green ml-1" />
-                    </motion.div>
-                  </div>
-                  
-                  <div className="bg-white/60 backdrop-blur-sm border border-heitokai-light-green/20 rounded-md p-3">
-                    <div className="text-xs text-heitokai-dark/70">Período de Retorno</div>
-                    <div className="text-xl font-semibold text-heitokai-dark">
-                      {Math.ceil(100 / appreciationRate)} meses
-                    </div>
-                  </div>
-                </div>
+                
                 
                 {/* Dados Adicionais */}
                 <div className="bg-white/60 backdrop-blur-sm border border-heitokai-light-green/20 rounded-md p-3">
