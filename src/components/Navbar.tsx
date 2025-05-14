@@ -69,16 +69,27 @@ const Navbar = () => {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
+<<<<<<< HEAD
             <a href="#sobre" className="text-Heitoraí-dark hover:text-Heitoraí-green transition-colors">O Empreendimento</a>
             <a href="#mapa" className="text-Heitoraí-dark hover:text-Heitoraí-green transition-colors">Localização</a>
             <a href="#sobre-nos" className="text-Heitoraí-dark hover:text-Heitoraí-green transition-colors">Sobre Nós</a>
             <a href="#fale-conosco" className="text-Heitoraí-dark hover:text-Heitoraí-green transition-colors">Contato</a>
+=======
+            <a href="#sobre" className="text-heitokai-dark hover:text-heitokai-green transition-colors">O Empreendimento</a>
+            <a href="#mapa" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Localização</a>
+            <a href="#sobre-nos" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Sobre Nós</a>
+            <a href="#fale-conosco" className="text-heitokai-dark hover:text-heitokai-green transition-colors">Contato</a>
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           </nav>
 
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
+<<<<<<< HEAD
               className="inline-flex items-center justify-center p-2 rounded-md text-Heitoraí-dark hover:text-Heitoraí-green focus:outline-none"
+=======
+              className="inline-flex items-center justify-center p-2 rounded-md text-heitokai-dark hover:text-heitokai-green focus:outline-none"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               aria-expanded="false"
             >
               <span className="sr-only">Abrir menu</span>
@@ -104,7 +115,11 @@ const Navbar = () => {
                 />
               </a>
               <button
+<<<<<<< HEAD
                 className="rounded-md p-2 text-Heitoraí-dark focus:outline-none"
+=======
+                className="rounded-md p-2 text-heitokai-dark focus:outline-none"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 onClick={toggleMenu}
               >
                 <span className="sr-only">Fechar menu</span>
@@ -114,28 +129,44 @@ const Navbar = () => {
             <div className="flex flex-col space-y-4 p-5">
               <a 
                 href="#sobre" 
+<<<<<<< HEAD
                 className="px-3 py-2 text-lg font-medium text-Heitoraí-dark hover:text-Heitoraí-green"
+=======
+                className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 onClick={handleMenuItemClick}
               >
                 O Empreendimento
               </a>
               <a 
                 href="#mapa" 
+<<<<<<< HEAD
                 className="px-3 py-2 text-lg font-medium text-Heitoraí-dark hover:text-Heitoraí-green"
+=======
+                className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 onClick={handleMenuItemClick}
               >
                 Localização
               </a>
               <a 
                 href="#sobre-nos" 
+<<<<<<< HEAD
                 className="px-3 py-2 text-lg font-medium text-Heitoraí-dark hover:text-Heitoraí-green"
+=======
+                className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 onClick={handleMenuItemClick}
               >
                 Sobre Nós
               </a>
               <a 
                 href="#fale-conosco" 
+<<<<<<< HEAD
                 className="px-3 py-2 text-lg font-medium text-Heitoraí-dark hover:text-Heitoraí-green"
+=======
+                className="px-3 py-2 text-lg font-medium text-heitokai-dark hover:text-heitokai-green"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 onClick={handleMenuItemClick}
               >
                 Contato

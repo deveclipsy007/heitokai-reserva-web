@@ -108,7 +108,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
   return (
     <div
+<<<<<<< HEAD
       className="w-full bg-gradient-to-b from-white to-Heitoraí-beige/30 dark:from-neutral-950 dark:to-neutral-900 font-sans px-4 md:px-10 py-16"
+=======
+      className="w-full bg-gradient-to-b from-white to-heitokai-beige/30 dark:from-neutral-950 dark:to-neutral-900 font-sans px-4 md:px-10 py-16"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
       ref={containerRef}
     >
       <div className="max-w-7xl mx-auto py-10 px-4 md:px-8 lg:px-10">
@@ -116,17 +120,29 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
+<<<<<<< HEAD
           className="text-center font-serif text-3xl md:text-5xl mb-6 text-Heitoraí-dark dark:text-white max-w-4xl mx-auto"
         >
           Vantagens Exclusivas Heitoraí
+=======
+          className="text-center font-serif text-3xl md:text-5xl mb-6 text-heitokai-dark dark:text-white max-w-4xl mx-auto"
+        >
+          Vantagens Exclusivas Heitokai
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
+<<<<<<< HEAD
           className="text-center text-Heitoraí-dark/80 dark:text-neutral-300 text-sm md:text-base max-w-2xl mx-auto mb-16"
         >
           Descubra o que torna o Reserva Rio Uru Heitoraí uma oportunidade única, combinando 
+=======
+          className="text-center text-heitokai-dark/80 dark:text-neutral-300 text-sm md:text-base max-w-2xl mx-auto mb-16"
+        >
+          Descubra o que torna o Reserva Rio Uru Heitokai uma oportunidade única, combinando 
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           natureza preservada, infraestrutura de alto padrão e valorização excepcional para 
           criar o refúgio perfeito para sua família e seu patrimônio.
         </motion.p>
@@ -151,7 +167,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                 transition={{ duration: 0.5, delay: 0.2 * index }}
               >
                 <motion.div 
+<<<<<<< HEAD
                   className={`h-10 w-10 rounded-full ${activeIndex === index ? 'bg-Heitoraí-green' : 'bg-Heitoraí-light-green/70'} dark:bg-neutral-800 border border-Heitoraí-green/30 dark:border-neutral-700 flex items-center justify-center`}
+=======
+                  className={`h-10 w-10 rounded-full ${activeIndex === index ? 'bg-heitokai-green' : 'bg-heitokai-light-green/70'} dark:bg-neutral-800 border border-heitokai-green/30 dark:border-neutral-700 flex items-center justify-center`}
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                   animate={{ 
                     scale: activeIndex === index ? [1, 1.2, 1] : 1,
                     backgroundColor: activeIndex === index ? '#2A7A4B' : 'rgba(197, 226, 165, 0.7)'
@@ -169,7 +189,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                 </motion.div>
               </motion.div>
               <motion.h3 
+<<<<<<< HEAD
                 className="hidden md:block text-xl md:pl-20 md:text-4xl font-bold text-Heitoraí-dark dark:text-neutral-500"
+=======
+                className="hidden md:block text-xl md:pl-20 md:text-4xl font-bold text-heitokai-dark dark:text-neutral-500"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 animate={{ 
                   x: activeIndex === index ? [0, 5, 0] : 0,
                   color: activeIndex === index ? '#1E3A29' : '#4A4A4A'
@@ -182,7 +206,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
             <div className="relative pl-20 pr-4 md:pl-4 w-full">
               <motion.h3 
+<<<<<<< HEAD
                 className="md:hidden block text-2xl mb-4 text-left font-bold text-Heitoraí-dark dark:text-neutral-500"
+=======
+                className="md:hidden block text-2xl mb-4 text-left font-bold text-heitokai-dark dark:text-neutral-500"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 animate={{ 
                   x: activeIndex === index ? [0, 5, 0] : 0,
                   color: activeIndex === index ? '#1E3A29' : '#4A4A4A'
@@ -206,14 +234,22 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           style={{
             height: height + "px",
           }}
+<<<<<<< HEAD
           className="absolute md:left-8 left-8 top-0 overflow-hidden w-[3px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-Heitoraí-light-green/30 dark:via-neutral-700 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+=======
+          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[3px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-heitokai-light-green/30 dark:via-neutral-700 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
         >
           <motion.div
             style={{
               height: heightTransform,
               opacity: opacityTransform,
             }}
+<<<<<<< HEAD
             className="absolute inset-x-0 top-0 w-[3px] bg-gradient-to-t from-Heitoraí-green via-Heitoraí-light-green to-transparent from-[0%] via-[10%] rounded-full glow"
+=======
+            className="absolute inset-x-0 top-0 w-[3px] bg-gradient-to-t from-heitokai-green via-heitokai-light-green to-transparent from-[0%] via-[10%] rounded-full glow"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           />
         </div>
         
@@ -222,7 +258,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           {[...Array(10)].map((_, i) => (
             <motion.div
               key={i}
+<<<<<<< HEAD
               className="absolute w-3 h-3 rounded-full bg-Heitoraí-green/40 blur-sm"
+=======
+              className="absolute w-3 h-3 rounded-full bg-heitokai-green/40 blur-sm"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               style={{
                 top: `${(i * 10) + Math.random() * 10}%`,
                 left: `${Math.random() * 20}px`
@@ -247,7 +287,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
+<<<<<<< HEAD
               className="absolute w-2 h-2 rounded-full bg-Heitoraí-light-green/30"
+=======
+              className="absolute w-2 h-2 rounded-full bg-heitokai-light-green/30"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               style={{
                 top: `${(i * 20) + Math.random() * 10}%`,
                 right: `${Math.random() * 40}px`

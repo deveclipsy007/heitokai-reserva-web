@@ -137,7 +137,11 @@ const Hero = () => {
               }} 
               className="mb-2"
             >
+<<<<<<< HEAD
               <Badge className="bg-Heitoraí-green/90 text-white px-3 py-1 gap-1 uppercase text-xs font-semibold">
+=======
+              <Badge className="bg-heitokai-green/90 text-white px-3 py-1 gap-1 uppercase text-xs font-semibold">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 <Sparkles className="h-3 w-3" /> Exclusivo
               </Badge>
             </motion.div>
@@ -221,7 +225,11 @@ const Hero = () => {
               
             {/* Floating elements for premium feeling - Otimizadas */}
             <motion.div 
+<<<<<<< HEAD
               className="absolute -bottom-6 -right-6 w-16 md:w-24 h-16 md:h-24 bg-Heitoraí-blue/10 rounded-full blur-xl" 
+=======
+              className="absolute -bottom-6 -right-6 w-16 md:w-24 h-16 md:h-24 bg-heitokai-blue/10 rounded-full blur-xl" 
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.5, 0.8, 0.5]
@@ -234,7 +242,11 @@ const Hero = () => {
             />
             
             <motion.div 
+<<<<<<< HEAD
               className="absolute -top-6 -left-6 w-14 md:w-20 h-14 md:h-20 bg-Heitoraí-green/10 rounded-full blur-xl" 
+=======
+              className="absolute -top-6 -left-6 w-14 md:w-20 h-14 md:h-20 bg-heitokai-green/10 rounded-full blur-xl" 
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               animate={{
                 scale: [1, 1.3, 1],
                 opacity: [0.5, 0.7, 0.5]
@@ -290,10 +302,17 @@ const Hero = () => {
         animate="animate"
       >
         <div className="flex flex-col items-center">
+<<<<<<< HEAD
           <span className="text-white text-sm mb-2 font-medium bg-Heitoraí-green/80 px-3 py-1 rounded-full backdrop-blur-sm">
             Saiba mais
           </span>
           <div className="bg-Heitoraí-green rounded-full p-2 shadow-lg border-2 border-white/30">
+=======
+          <span className="text-white text-sm mb-2 font-medium bg-heitokai-green/80 px-3 py-1 rounded-full backdrop-blur-sm">
+            Saiba mais
+          </span>
+          <div className="bg-heitokai-green rounded-full p-2 shadow-lg border-2 border-white/30">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
             <ArrowDown className="h-6 w-6 text-white" />
           </div>
         </div>

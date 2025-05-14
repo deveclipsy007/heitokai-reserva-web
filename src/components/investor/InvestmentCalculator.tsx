@@ -66,7 +66,11 @@ const InvestmentCalculator = ({
     const element = document.createElement('a');
     // Normalmente aqui teria uma geração de PDF real, mas para o exemplo apenas criamos um elemento falso
     element.setAttribute('href', '#');
+<<<<<<< HEAD
     element.setAttribute('download', 'simulacao_investimento_Heitoraí.pdf');
+=======
+    element.setAttribute('download', 'simulacao_investimento_heitokai.pdf');
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
@@ -82,16 +86,27 @@ const InvestmentCalculator = ({
   }} transition={{
     duration: 0.8
   }} className="h-full">
+<<<<<<< HEAD
       <Card className="border border-Heitoraí-light-green/30 overflow-hidden shadow-lg bg-white/90 backdrop-blur-sm h-full">
         <CardHeader className="pb-2">
           <div className="flex items-center gap-2">
             <motion.div className="p-2 bg-Heitoraí-light-green/20 rounded-full" whileHover={{
+=======
+      <Card className="border border-heitokai-light-green/30 overflow-hidden shadow-lg bg-white/90 backdrop-blur-sm h-full">
+        <CardHeader className="pb-2">
+          <div className="flex items-center gap-2">
+            <motion.div className="p-2 bg-heitokai-light-green/20 rounded-full" whileHover={{
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
             scale: 1.05,
             backgroundColor: "rgba(134, 239, 172, 0.3)"
           }} whileTap={{
             scale: 0.95
           }}>
+<<<<<<< HEAD
               <Calculator className="h-4 w-4 text-Heitoraí-green" />
+=======
+              <Calculator className="h-4 w-4 text-heitokai-green" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
             </motion.div>
             <div>
               <CardTitle className="text-lg">Calculadora de Investimento</CardTitle>
@@ -112,7 +127,11 @@ const InvestmentCalculator = ({
               opacity: 1
             }} transition={{
               duration: 0.3
+<<<<<<< HEAD
             }} className="font-medium text-Heitoraí-green">
+=======
+            }} className="font-medium text-heitokai-green">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 {formatCurrency(initialInvestment)}
               </motion.span>
             </div>
@@ -134,7 +153,11 @@ const InvestmentCalculator = ({
               opacity: 1
             }} transition={{
               duration: 0.3
+<<<<<<< HEAD
             }} className="font-medium text-Heitoraí-green">
+=======
+            }} className="font-medium text-heitokai-green">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 {months} meses
               </motion.span>
             </div>
@@ -156,7 +179,11 @@ const InvestmentCalculator = ({
               opacity: 1
             }} transition={{
               duration: 0.3
+<<<<<<< HEAD
             }} className="font-medium text-Heitoraí-green">
+=======
+            }} className="font-medium text-heitokai-green">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 {appreciationRate}%
               </motion.span>
             </div>
@@ -168,7 +195,11 @@ const InvestmentCalculator = ({
           </div>
           
           <div className="pt-4 border-t border-border/30 grid grid-cols-2 gap-4">
+<<<<<<< HEAD
             <motion.div className="p-3 bg-gradient-to-br from-Heitoraí-light-green/10 to-white rounded-md border border-Heitoraí-light-green/20" whileHover={{
+=======
+            <motion.div className="p-3 bg-gradient-to-br from-heitokai-light-green/10 to-white rounded-md border border-heitokai-light-green/20" whileHover={{
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
             backgroundColor: "rgba(134, 239, 172, 0.15)"
           }} key={`future-${futureValue.toFixed(0)}`}>
               <div className="text-xs text-muted-foreground">Valor Futuro</div>
@@ -181,7 +212,11 @@ const InvestmentCalculator = ({
               </motion.div>
             </motion.div>
             
+<<<<<<< HEAD
             <motion.div className="p-3 bg-gradient-to-br from-Heitoraí-light-green/10 to-white rounded-md border border-Heitoraí-light-green/20" animate={profitAnimation} whileHover={{
+=======
+            <motion.div className="p-3 bg-gradient-to-br from-heitokai-light-green/10 to-white rounded-md border border-heitokai-light-green/20" animate={profitAnimation} whileHover={{
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
             backgroundColor: "rgba(134, 239, 172, 0.15)"
           }}>
               <div className="text-xs text-muted-foreground">Lucro Estimado</div>
@@ -203,17 +238,29 @@ const InvestmentCalculator = ({
               </div>
             </motion.div>
             
+<<<<<<< HEAD
             <motion.div className="p-3 bg-gradient-to-br from-Heitoraí-light-green/10 to-white rounded-md border border-Heitoraí-light-green/20" animate={roiAnimation} whileHover={{
+=======
+            <motion.div className="p-3 bg-gradient-to-br from-heitokai-light-green/10 to-white rounded-md border border-heitokai-light-green/20" animate={roiAnimation} whileHover={{
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
             backgroundColor: "rgba(134, 239, 172, 0.15)"
           }}>
               <div className="text-xs text-muted-foreground">ROI do Período</div>
               <div className="font-semibold text-lg flex items-center gap-1">
                 {roi.toFixed(1)}%
+<<<<<<< HEAD
                 <TrendingUp className="h-3 w-3 text-Heitoraí-green" />
               </div>
             </motion.div>
             
             <motion.div className="p-3 bg-gradient-to-br from-Heitoraí-light-green/10 to-white rounded-md border border-Heitoraí-light-green/20" whileHover={{
+=======
+                <TrendingUp className="h-3 w-3 text-heitokai-green" />
+              </div>
+            </motion.div>
+            
+            <motion.div className="p-3 bg-gradient-to-br from-heitokai-light-green/10 to-white rounded-md border border-heitokai-light-green/20" whileHover={{
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
             backgroundColor: "rgba(134, 239, 172, 0.15)"
           }}>
               <div className="text-xs text-muted-foreground">ROI Anualizado</div>
@@ -239,7 +286,11 @@ const InvestmentCalculator = ({
             duration: 1
           }} style={{
             maxWidth: '100%'
+<<<<<<< HEAD
           }} className="h-2 bg-gradient-to-r from-Heitoraí-light-green to-Heitoraí-green rounded-full overflow-hidden" />
+=======
+          }} className="h-2 bg-gradient-to-r from-heitokai-light-green to-heitokai-green rounded-full overflow-hidden" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           </div>
         </CardContent>
       </Card>

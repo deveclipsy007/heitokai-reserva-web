@@ -102,7 +102,11 @@ const InvestmentGraphs = ({
       transition={{ duration: 0.8, delay: 0.2 }}
       className="relative"
     >
+<<<<<<< HEAD
       <Card className="border border-Heitoraí-light-green/30 bg-white/90 backdrop-blur-sm overflow-hidden shadow-md h-full">
+=======
+      <Card className="border border-heitokai-light-green/30 bg-white/90 backdrop-blur-sm overflow-hidden shadow-md h-full">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
         <CardHeader>
           <CardTitle className="text-lg">Análise de Investimento</CardTitle>
           <CardDescription>
@@ -201,7 +205,11 @@ const InvestmentGraphs = ({
                     animate={controls}
                     initial={{ opacity: 0 }}
                   >
+<<<<<<< HEAD
                     <div className="h-6 w-6 bg-Heitoraí-green rounded-full flex items-center justify-center text-white">
+=======
+                    <div className="h-6 w-6 bg-heitokai-green rounded-full flex items-center justify-center text-white">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                       <ArrowUp className="h-4 w-4" />
                     </div>
                   </motion.div>
@@ -240,14 +248,23 @@ const InvestmentGraphs = ({
               
               {/* Value indicator */}
               <motion.div 
+<<<<<<< HEAD
                 className="absolute bottom-4 right-4 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-md border border-Heitoraí-light-green/30 shadow-sm"
+=======
+                className="absolute bottom-4 right-4 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-md border border-heitokai-light-green/30 shadow-sm"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 }}
                 key={`total-${breakdownData[0]?.value + breakdownData[1]?.value}`}
               >
+<<<<<<< HEAD
                 <div className="text-[10px] text-Heitoraí-dark/70">Valor Total</div>
                 <div className="text-xs font-semibold text-Heitoraí-green">
+=======
+                <div className="text-[10px] text-heitokai-dark/70">Valor Total</div>
+                <div className="text-xs font-semibold text-heitokai-green">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                   {formatCurrency(breakdownData[0]?.value + breakdownData[1]?.value)}
                 </div>
               </motion.div>
@@ -289,14 +306,23 @@ const InvestmentGraphs = ({
               
               {/* Animated growth indicator */}
               <motion.div
+<<<<<<< HEAD
                 className="absolute top-14 right-4 bg-Heitoraí-green/10 px-2 py-1 rounded-full shadow-sm flex items-center gap-1"
+=======
+                className="absolute top-14 right-4 bg-heitokai-green/10 px-2 py-1 rounded-full shadow-sm flex items-center gap-1"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.8 }}
                 key={`growth-indicator-${barChartData.length}`}
               >
+<<<<<<< HEAD
                 <TrendingUp className="h-3 w-3 text-Heitoraí-green" />
                 <span className="text-xs font-medium text-Heitoraí-green">
+=======
+                <TrendingUp className="h-3 w-3 text-heitokai-green" />
+                <span className="text-xs font-medium text-heitokai-green">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                   +{((barChartData[barChartData.length - 1]?.valor / barChartData[0]?.investimento - 1) * 100).toFixed(1)}%
                 </span>
               </motion.div>

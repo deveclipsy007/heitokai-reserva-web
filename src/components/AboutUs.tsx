@@ -59,7 +59,11 @@ const AboutUs = () => {
         {Array.from({ length: 15 }).map((_, index) => (
           <motion.div
             key={index}
+<<<<<<< HEAD
             className="absolute rounded-full bg-Heitoraí-light-green/20"
+=======
+            className="absolute rounded-full bg-heitokai-light-green/20"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
             style={{
               width: Math.random() * 100 + 50,
               height: Math.random() * 100 + 50,
@@ -94,7 +98,11 @@ const AboutUs = () => {
           >
             Sobre Nós
             <motion.span
+<<<<<<< HEAD
               className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-Heitoraí-green to-Heitoraí-light-green"
+=======
+              className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-heitokai-green to-heitokai-light-green"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ delay: 0.6, duration: 0.8 }}
@@ -134,11 +142,19 @@ const AboutUs = () => {
                   transition={{ duration: 0.5 }}
                   className="mb-6"
                 >
+<<<<<<< HEAD
                   <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-Heitoraí-green to-Heitoraí-light-green text-white mb-4">
                     <Building size={30} />
                   </div>
                 </motion.div>
                 <h3 className="text-2xl font-serif font-medium mb-4 text-Heitoraí-dark">Nossa História</h3>
+=======
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-heitokai-green to-heitokai-light-green text-white mb-4">
+                    <Building size={30} />
+                  </div>
+                </motion.div>
+                <h3 className="text-2xl font-serif font-medium mb-4 text-heitokai-dark">Nossa História</h3>
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 <p className="text-gray-600">
                   A BPS HOLDING nasce de uma jornada empresarial de mais de seis décadas, unificando diversos 
                   segmentos de sucesso em uma plataforma sólida de investimentos. Com atuação diversificada no comércio, 
@@ -164,11 +180,19 @@ const AboutUs = () => {
                   transition={{ duration: 0.5 }}
                   className="mb-6"
                 >
+<<<<<<< HEAD
                   <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-Heitoraí-green to-Heitoraí-light-green text-white mb-4">
                     <Trophy size={30} />
                   </div>
                 </motion.div>
                 <h3 className="text-2xl font-serif font-medium mb-4 text-Heitoraí-dark">Nossa Missão</h3>
+=======
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-heitokai-green to-heitokai-light-green text-white mb-4">
+                    <Trophy size={30} />
+                  </div>
+                </motion.div>
+                <h3 className="text-2xl font-serif font-medium mb-4 text-heitokai-dark">Nossa Missão</h3>
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 <p className="text-gray-600">
                   Nossa missão é desenvolver empreendimentos imobiliários que transcendem o conceito tradicional de moradia, 
                   criando espaços que harmonizam luxo, conforto e responsabilidade ambiental. Cada projeto é concebido como 
@@ -185,9 +209,15 @@ const AboutUs = () => {
           variants={containerVariants}
           initial="hidden"
           animate={controls}
+<<<<<<< HEAD
           className="bg-Heitoraí-dark rounded-lg p-10 text-white shadow-2xl relative overflow-hidden mb-20"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-Heitoraí-dark/80 to-Heitoraí-dark opacity-90" />
+=======
+          className="bg-heitokai-dark rounded-lg p-10 text-white shadow-2xl relative overflow-hidden mb-20"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-heitokai-dark/80 to-heitokai-dark opacity-90" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
             {[
@@ -205,7 +235,11 @@ const AboutUs = () => {
                   className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4"
                   whileHover={{ scale: 1.1, boxShadow: "0 0 20px rgba(255,255,255,0.3)" }}
                 >
+<<<<<<< HEAD
                   <item.icon size={30} className="text-Heitoraí-light-green" />
+=======
+                  <item.icon size={30} className="text-heitokai-light-green" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 </motion.div>
                 <motion.h3 
                   className="text-4xl font-bold mb-2 font-serif"
@@ -232,7 +266,11 @@ const AboutUs = () => {
             variants={itemVariants}
             className="text-center mb-10"
           >
+<<<<<<< HEAD
             <h3 className="text-2xl font-serif font-medium text-Heitoraí-dark">Nosso Compromisso</h3>
+=======
+            <h3 className="text-2xl font-serif font-medium text-heitokai-dark">Nosso Compromisso</h3>
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -254,9 +292,15 @@ const AboutUs = () => {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -10 }}
+<<<<<<< HEAD
                 className="bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-lg border-t-4 border-Heitoraí-green"
               >
                 <h4 className="text-xl font-medium mb-4 text-Heitoraí-dark font-serif">{item.title}</h4>
+=======
+                className="bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-lg border-t-4 border-heitokai-green"
+              >
+                <h4 className="text-xl font-medium mb-4 text-heitokai-dark font-serif">{item.title}</h4>
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 <p className="text-gray-600">{item.description}</p>
               </motion.div>
             ))}

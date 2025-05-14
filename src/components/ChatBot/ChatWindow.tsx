@@ -97,7 +97,11 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
   
   return (
     <div className="bg-white rounded-lg shadow-xl w-80 sm:w-96 h-[500px] flex flex-col overflow-hidden border border-gray-200">
+<<<<<<< HEAD
       <div className="p-4 bg-Heitoraí-green text-white font-medium flex justify-between items-center">
+=======
+      <div className="p-4 bg-heitokai-green text-white font-medium flex justify-between items-center">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
         <span>Assistente Reserva Rio Uru</span>
       </div>
       
@@ -114,7 +118,11 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
               <div 
                 className={`max-w-[80%] p-3 rounded-lg ${
                   msg.role === 'user' 
+<<<<<<< HEAD
                     ? 'bg-Heitoraí-green text-white rounded-tr-none' 
+=======
+                    ? 'bg-heitokai-green text-white rounded-tr-none' 
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                     : 'bg-gray-100 text-gray-800 rounded-tl-none'
                 }`}
               >
@@ -160,7 +168,11 @@ const ChatWindow = ({ onClose }: ChatWindowProps) => {
           type="submit" 
           size="icon"
           disabled={isLoading || isTypingSecondMessage || !input.trim()} 
+<<<<<<< HEAD
           className="bg-Heitoraí-green hover:bg-Heitoraí-dark"
+=======
+          className="bg-heitokai-green hover:bg-heitokai-dark"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
         >
           <Send className="h-4 w-4" />
         </Button>

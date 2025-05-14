@@ -37,7 +37,11 @@ const Contact = () => {
   return (
     <section id="fale-conosco" className="py-16 bg-white">
       <div className="container-custom">
+<<<<<<< HEAD
         <h2 className="text-center font-serif text-3xl md:text-4xl text-Heitoraí-dark mb-8">
+=======
+        <h2 className="text-center font-serif text-3xl md:text-4xl text-heitokai-dark mb-8">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           Entre em contato e receba mais informações
         </h2>
         
@@ -97,7 +101,11 @@ const Contact = () => {
             <div className="flex justify-center">
               <Button
                 type="submit"
+<<<<<<< HEAD
                 className="bg-Heitoraí-green hover:bg-Heitoraí-dark text-white py-3 px-8 w-full md:w-auto"
+=======
+                className="bg-heitokai-green hover:bg-heitokai-dark text-white py-3 px-8 w-full md:w-auto"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Enviando..." : "Enviar"}

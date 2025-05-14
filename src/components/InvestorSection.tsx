@@ -129,33 +129,53 @@ const InvestorSection = () => {
       title: "Valorização Mensal",
       value: `${appreciationRate}%`,
       description: "Taxa de valorização mensal",
+<<<<<<< HEAD
       icon: <TrendingUp className="text-Heitoraí-green" />
+=======
+      icon: <TrendingUp className="text-heitokai-green" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
     },
     {
       title: "Retorno sobre Investimento",
       value: `${roi.toFixed(0)}%`,
       description: `Em ${months} meses`,
+<<<<<<< HEAD
       icon: <ChartBar className="text-Heitoraí-green" />
+=======
+      icon: <ChartBar className="text-heitokai-green" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
     },
     {
       title: "Lucro Estimado",
       value: formatCurrency(profit),
       description: `Em ${months} meses`,
+<<<<<<< HEAD
       icon: <PiggyBank className="text-Heitoraí-green" />
+=======
+      icon: <PiggyBank className="text-heitokai-green" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
     }
   ];
 
   return (
     <section id="investidores" className="relative py-24 overflow-hidden">
       {/* Background Elements */}
+<<<<<<< HEAD
       <div className="absolute inset-0 bg-gradient-to-b from-white via-Heitoraí-beige/20 to-white pointer-events-none -z-10" />
+=======
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-heitokai-beige/20 to-white pointer-events-none -z-10" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
       
       {/* Floating Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
+<<<<<<< HEAD
             className="absolute rounded-full bg-Heitoraí-light-green/20"
+=======
+            className="absolute rounded-full bg-heitokai-light-green/20"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
             style={{
               width: `${Math.random() * 200 + 50}px`,
               height: `${Math.random() * 200 + 50}px`,
@@ -187,9 +207,15 @@ const InvestorSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
+<<<<<<< HEAD
             className="bg-Heitoraí-green/10 p-3 rounded-full mb-4"
           >
             <CreditCard className="text-Heitoraí-green h-6 w-6" />
+=======
+            className="bg-heitokai-green/10 p-3 rounded-full mb-4"
+          >
+            <CreditCard className="text-heitokai-green h-6 w-6" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           </motion.div>
           
           <motion.h2 
@@ -197,7 +223,11 @@ const InvestorSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+<<<<<<< HEAD
             className="text-center font-serif text-3xl md:text-5xl text-Heitoraí-dark mb-6"
+=======
+            className="text-center font-serif text-3xl md:text-5xl text-heitokai-dark mb-6"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           >
             OPORTUNIDADE PREMIUM PARA INVESTIDORES
           </motion.h2>
@@ -206,16 +236,26 @@ const InvestorSection = () => {
             initial={{ width: 0 }}
             whileInView={{ width: "80px" }}
             transition={{ duration: 1, delay: 0.5 }}
+<<<<<<< HEAD
             className="h-1 bg-Heitoraí-green rounded-full mb-6"
+=======
+            className="h-1 bg-heitokai-green rounded-full mb-6"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           />
           
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
+<<<<<<< HEAD
             className="text-center max-w-2xl text-Heitoraí-dark/80 mb-10"
           >
             O Condomínio Reserva Rio Uru Heitoraí representa uma oportunidade única de investimento em um dos mercados imobiliários mais promissores do Brasil. A crescente demanda por propriedades exclusivas em Goiás, combinada com nossa localização privilegiada e compromisso com a natureza, cria um potencial de valorização excepcional.
+=======
+            className="text-center max-w-2xl text-heitokai-dark/80 mb-10"
+          >
+            O Condomínio Reserva Rio Uru Heitokai representa uma oportunidade única de investimento em um dos mercados imobiliários mais promissores do Brasil. A crescente demanda por propriedades exclusivas em Goiás, combinada com nossa localização privilegiada e compromisso com a natureza, cria um potencial de valorização excepcional.
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
           </motion.p>
         </motion.div>
         
@@ -227,7 +267,11 @@ const InvestorSection = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center mb-10"
           >
+<<<<<<< HEAD
             <h3 className="font-serif text-2xl md:text-3xl text-Heitoraí-dark mb-3">
+=======
+            <h3 className="font-serif text-2xl md:text-3xl text-heitokai-dark mb-3">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               Vantagens Exclusivas para Investidores
             </h3>
             
@@ -236,7 +280,11 @@ const InvestorSection = () => {
                 initial={{ width: 0 }}
                 whileInView={{ width: "60px" }}
                 transition={{ duration: 0.8, delay: 0.2 }}
+<<<<<<< HEAD
                 className="h-1 bg-Heitoraí-light-green rounded-full mb-4"
+=======
+                className="h-1 bg-heitokai-light-green rounded-full mb-4"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               />
             </div>
           </motion.div>
@@ -246,17 +294,29 @@ const InvestorSection = () => {
               {
                 title: "Retorno Acima do Mercado",
                 description: "Valorização média de propriedades premium na região supera índices tradicionais de investimento",
+<<<<<<< HEAD
                 icon: <BarChart3 className="h-6 w-6 text-Heitoraí-green" />
+=======
+                icon: <BarChart3 className="h-6 w-6 text-heitokai-green" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               },
               {
                 title: "Liquidez Garantida",
                 description: "Programa exclusivo de recompra com valorização mínima garantida após período de carência",
+<<<<<<< HEAD
                 icon: <Wallet className="h-6 w-6 text-Heitoraí-green" />
+=======
+                icon: <Wallet className="h-6 w-6 text-heitokai-green" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               },
               {
                 title: "Investimento Acessível",
                 description: "Entrada a partir de R$499,00 com planos de parcelas personalizados e flexíveis",
+<<<<<<< HEAD
                 icon: <Percent className="h-6 w-6 text-Heitoraí-green" />
+=======
+                icon: <Percent className="h-6 w-6 text-heitokai-green" />
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               }
             ].map((item, index) => (
               <motion.div
@@ -265,6 +325,7 @@ const InvestorSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+<<<<<<< HEAD
                 className="bg-white/80 backdrop-blur-sm p-6 rounded-md border border-Heitoraí-light-green/30 shadow-sm"
               >
                 <div className="bg-Heitoraí-light-green/20 p-3 rounded-full w-fit mb-4">
@@ -274,6 +335,17 @@ const InvestorSection = () => {
                   {item.title}
                 </h4>
                 <p className="text-Heitoraí-dark/70">
+=======
+                className="bg-white/80 backdrop-blur-sm p-6 rounded-md border border-heitokai-light-green/30 shadow-sm"
+              >
+                <div className="bg-heitokai-light-green/20 p-3 rounded-full w-fit mb-4">
+                  {item.icon}
+                </div>
+                <h4 className="font-serif text-xl text-heitokai-dark font-medium mb-2">
+                  {item.title}
+                </h4>
+                <p className="text-heitokai-dark/70">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                   {item.description}
                 </p>
               </motion.div>
@@ -286,7 +358,11 @@ const InvestorSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+<<<<<<< HEAD
           className="text-center font-serif text-2xl md:text-3xl text-Heitoraí-dark mb-10"
+=======
+          className="text-center font-serif text-2xl md:text-3xl text-heitokai-dark mb-10"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
         >
           Simulador de Investimento
         </motion.h3>
@@ -356,15 +432,26 @@ const InvestorSection = () => {
               whileHover={{ y: -5 }}
               transition={{ duration: 0.2 }}
             >
+<<<<<<< HEAD
               <Card className="border border-Heitoraí-light-green/30 h-full bg-white/80 backdrop-blur-sm">
+=======
+              <Card className="border border-heitokai-light-green/30 h-full bg-white/80 backdrop-blur-sm">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                 <CardContent className="pt-6">
                   <div className="flex justify-between items-start">
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">{card.title}</p>
+<<<<<<< HEAD
                       <h4 className="text-3xl font-semibold text-Heitoraí-dark">{card.value}</h4>
                       <p className="text-xs text-muted-foreground mt-1">{card.description}</p>
                     </div>
                     <div className="p-3 bg-Heitoraí-light-green/20 rounded-full">
+=======
+                      <h4 className="text-3xl font-semibold text-heitokai-dark">{card.value}</h4>
+                      <p className="text-xs text-muted-foreground mt-1">{card.description}</p>
+                    </div>
+                    <div className="p-3 bg-heitokai-light-green/20 rounded-full">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
                       {card.icon}
                     </div>
                   </div>
@@ -381,11 +468,19 @@ const InvestorSection = () => {
             transition={{ duration: 0.8 }}
             className="max-w-3xl mx-auto"
           >
+<<<<<<< HEAD
             <h3 className="font-serif text-2xl md:text-3xl text-Heitoraí-dark mb-6">
               Momento ideal para investir
             </h3>
             
             <p className="text-Heitoraí-dark/80 mb-8">
+=======
+            <h3 className="font-serif text-2xl md:text-3xl text-heitokai-dark mb-6">
+              Momento ideal para investir
+            </h3>
+            
+            <p className="text-heitokai-dark/80 mb-8">
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               O preço atual dos lotes representa uma excelente oportunidade de entrada, com alto potencial de valorização diante da crescente demanda por propriedades exclusivas em ambientes naturais privilegiados em Goiás. Não perca a chance de fazer parte deste empreendimento único com condições especiais para investidores.
             </p>
             
@@ -399,7 +494,11 @@ const InvestorSection = () => {
                 <span className="relative z-10 group-hover:text-white transition-colors duration-300">
                   COMPARTILHAR SIMULAÇÃO
                 </span>
+<<<<<<< HEAD
                 <span className="absolute bottom-0 left-0 w-full h-0 bg-Heitoraí-dark transition-all duration-300 -z-0 group-hover:h-full"></span>
+=======
+                <span className="absolute bottom-0 left-0 w-full h-0 bg-heitokai-dark transition-all duration-300 -z-0 group-hover:h-full"></span>
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               </motion.button>
               
               <motion.button
@@ -410,7 +509,11 @@ const InvestorSection = () => {
                 <span className="relative z-10 group-hover:text-white transition-colors duration-300">
                   FALE COM UM CONSULTOR
                 </span>
+<<<<<<< HEAD
                 <span className="absolute bottom-0 left-0 w-full h-0 bg-Heitoraí-dark transition-all duration-300 -z-0 group-hover:h-full"></span>
+=======
+                <span className="absolute bottom-0 left-0 w-full h-0 bg-heitokai-dark transition-all duration-300 -z-0 group-hover:h-full"></span>
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
               </motion.button>
             </div>
           </motion.div>

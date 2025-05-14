@@ -56,14 +56,22 @@ const AnimatedSection = ({ children, className, delay = 0.2 }: AnimatedSectionPr
         style={{
           height: height + "px",
         }}
+<<<<<<< HEAD
         className="absolute left-4 md:left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-Heitoraí-light-green/30 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+=======
+        className="absolute left-4 md:left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-heitokai-light-green/30 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
       >
         <motion.div
           style={{
             height: heightTransform,
             opacity: opacityTransform,
           }}
+<<<<<<< HEAD
           className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-Heitoraí-green via-Heitoraí-light-green to-transparent from-[0%] via-[10%] rounded-full"
+=======
+          className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-heitokai-green via-heitokai-light-green to-transparent from-[0%] via-[10%] rounded-full"
+>>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
         />
       </div>
     </div>
