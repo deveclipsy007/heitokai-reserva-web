@@ -196,7 +196,7 @@ const InvestorSection = () => {
         }} transition={{
           duration: 0.5
         }} className="bg-heitokai-green/10 p-3 rounded-full mb-4">
-            <CreditCard className="text-heitokai-green h-6 w-6" />
+            <CreditCard className="text-heitokai-green h-6 w-6 bg-slate-50" />
           </motion.div>
           
           <motion.h2 initial={{
