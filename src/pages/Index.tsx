@@ -38,11 +38,7 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-white">
       <motion.div
-<<<<<<< HEAD
-        className="fixed top-0 left-0 right-0 h-1 bg-Heitoraí-green origin-left z-50"
-=======
-        className="fixed top-0 left-0 right-0 h-1 bg-heitokai-green origin-left z-50"
->>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
+        className="fixed top-0 left-0 right-0 h-1 bg-heitorai-green origin-left z-50"
         style={{ scaleX }}
       />
       
