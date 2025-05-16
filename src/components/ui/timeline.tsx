@@ -1,11 +1,11 @@
-
 "use client";
 import {
   useMotionValueEvent,
   useScroll,
   useTransform,
   motion,
-  AnimatePresence
+  AnimatePresence,
+  MotionValue
 } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -138,6 +138,9 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     })
   };
 
+  // Create a motion value for the scroll progress to use in light rays rotation
+  const scrollProgressMotionValue = useTransform(scrollYProgress, [0, 1], [-10, 10]);
+
   // Generate random particles for the background animation
   const particles = Array.from({ length: 15 }).map((_, i) => ({
     id: i,
@@ -202,7 +205,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         <motion.div 
           className="absolute -top-[50%] left-[10%] w-[80%] h-[200%] bg-gradient-to-b from-heitokai-light-green/5 to-transparent"
           style={{
-            rotate: useTransform(scrollYProgress, [0, 1], [-10, 10]),
+            rotate: scrollProgressMotionValue,
             opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.15, 0]),
             filter: "blur(50px)",
           }}
