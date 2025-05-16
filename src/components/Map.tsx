@@ -600,42 +600,7 @@ const Map = () => {
         </motion.div>
         
         {/* Elemento UAU - Partículas flutuantes */}
-        <div className="relative mt-16 h-24">
-          {[...Array(10)].map((_, i) => <motion.div key={i} initial={{
-          x: Math.random() * 100 - 50,
-          y: Math.random() * 50 - 25,
-          opacity: 0
-        }} animate={{
-          x: [Math.random() * 100 - 50, Math.random() * 100 - 50],
-          y: [Math.random() * 50 - 25, Math.random() * 50 - 25],
-          opacity: [0, 0.8, 0]
-        }} transition={{
-          duration: 5 + Math.random() * 5,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut",
-          delay: i * 0.5
-        }} className="absolute left-1/2 top-1/2">
-              <div className="w-3 h-3 rounded-full bg-heitokai-green/40 blur-sm" style={{
-            boxShadow: "0 0 8px rgba(42, 122, 75, 0.6)"
-          }} />
-            </motion.div>)}
-          
-          <motion.div initial={{
-          opacity: 0,
-          scale: 0.8
-        }} animate={{
-          opacity: 1,
-          scale: 1
-        }} transition={{
-          duration: 1,
-          delay: 1
-        }} className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <h3 className="text-heitokai-dark/80 text-lg font-medium">
-              Seu futuro começa aqui
-            </h3>
-          </motion.div>
-        </div>
+        
       </div>
     </section>;
 };

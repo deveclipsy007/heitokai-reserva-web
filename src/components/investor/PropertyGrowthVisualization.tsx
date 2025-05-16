@@ -175,7 +175,7 @@ const PropertyGrowthVisualization = ({
                       
                       <div className="flex-1">
                         <div className="flex justify-between items-start">
-                          <h4 className="text-sm font-medium text-heitokai-dark">{advantage.title}</h4>
+                          <h4 className="text-sm font-medium text-heitokai-dark text-green-900">{advantage.title}</h4>
                           <motion.div initial={{
                         opacity: 0,
                         scale: 0.8
@@ -186,7 +186,7 @@ const PropertyGrowthVisualization = ({
                         delay: 0.3 + 0.1 * index,
                         duration: 0.3
                       }} className="bg-heitokai-green/10 px-2 py-0.5 rounded-full">
-                            <span className="text-xs font-semibold text-heitokai-green">
+                            <span className="text-xs font-semibold text-heitokai-green text-green-700">
                               {advantage.highlight}
                             </span>
                           </motion.div>
