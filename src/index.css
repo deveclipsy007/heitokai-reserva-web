@@ -54,11 +54,7 @@
   }
 
   body {
-<<<<<<< HEAD
-    @apply bg-white text-Heitoraí-dark font-sans;
-=======
     @apply bg-white text-heitokai-dark font-sans;
->>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
   }
   
   h1, h2, h3, h4, h5, h6 {
