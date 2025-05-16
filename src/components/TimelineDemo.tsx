@@ -10,7 +10,7 @@ export function TimelineDemo() {
     icon: <MapPin className="h-6 w-6 text-heitorai-green" />,
     content: <div className="w-full">
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-            O Condomínio Reserva Rio Uru Heitokai está estrategicamente localizado em uma das regiões mais promissoras de Goiás, 
+            O Condomínio Reserva Rio Uru Heitoraí está estrategicamente localizado em uma das regiões mais promissoras de Goiás, 
             com fácil acesso às principais vias e a apenas alguns minutos dos principais centros urbanos, combinando tranquilidade 
             e conveniência.
           </p>
@@ -52,7 +52,7 @@ export function TimelineDemo() {
     icon: <Heart className="h-6 w-6 text-heitorai-green" />,
     content: <div className="w-full">
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-4">
-            O Heitokai foi projetado para harmonizar desenvolvimento e preservação ambiental, criando um legado sustentável:
+            O Heitoraí foi projetado para harmonizar desenvolvimento e preservação ambiental, criando um legado sustentável:
           </p>
           <div className="mb-8 px-2">
             <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm my-2"> - Preservação de 60% da área verde nativa</div>
@@ -81,7 +81,7 @@ export function TimelineDemo() {
     icon: <BadgeDollarSign className="h-6 w-6 text-heitorai-green" />,
     content: <div className="w-full">
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-            O Condomínio Reserva Rio Uru Heitokai representa uma oportunidade única de investimento em um empreendimento 
+            O Condomínio Reserva Rio Uru Heitoraí representa uma oportunidade única de investimento em um empreendimento 
             exclusivo em uma região de forte valorização. Com demanda crescente por imóveis de alto padrão em ambientes naturais 
             e proximidade às principais cidades de Goiás, seu investimento tem alto potencial de valorização.
           </p>

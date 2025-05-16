@@ -1,3 +1,4 @@
+
 const Footer = () => {
   return <footer className="bg-heitorai-dark text-white py-10">
       <div className="container-custom">
@@ -36,7 +37,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-white/20 mt-8 pt-8 text-center text-xs text-white/70">
-          <p>© {new Date().getFullYear()} Condomínio Reserva Rio Uru Heitokai. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} Condomínio Reserva Rio Uru Heitoraí. Todos os direitos reservados.</p>
           <p className="mt-2">Imagens meramente ilustrativas. O empreendimento somente será comercializado após o registro do memorial de incorporação no cartório de imóveis nos termos da Lei nº 4.591/64.</p>
         </div>
       </div>
