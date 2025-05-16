@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { motion, useInView, useAnimation, Variants } from 'framer-motion';
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, Building, Users, Heart } from "lucide-react";
 
@@ -109,8 +109,8 @@ const AboutUs = () => {
     })
   };
 
-  // Icon animation
-  const iconVariants = {
+  // Icon animation - fixed typings for repeatType
+  const iconVariants: Variants = {
     initial: { scale: 1, rotate: 0 },
     animate: { 
       scale: [1, 1.2, 1], 
@@ -118,7 +118,7 @@ const AboutUs = () => {
       transition: {
         duration: 2,
         repeat: Infinity,
-        repeatType: "reverse",
+        repeatType: "reverse", // Fixed: Using a valid literal type instead of string
         ease: "easeInOut"
       }
     }
@@ -306,6 +306,7 @@ const AboutUs = () => {
                     transition={{
                       duration: 2,
                       repeat: Infinity,
+                      repeatType: "reverse",
                       ease: "easeInOut"
                     }}
                   />
