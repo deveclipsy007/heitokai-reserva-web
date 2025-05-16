@@ -1,0 +1,5 @@
+# Ignore package-lock.json files
+package-lock.json
+
+# Node modules
+node_modules
