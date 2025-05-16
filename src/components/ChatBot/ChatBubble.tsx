@@ -36,7 +36,7 @@ const ChatBubble = () => {
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className={`flex items-center justify-center w-16 h-16 rounded-full shadow-lg ${
-          isOpen ? 'bg-red-500' : 'bg-heitokai-green'
+          isOpen ? 'bg-red-500' : 'bg-gradient-to-br from-heitorai-green to-heitorai-light-green'
         } text-white focus:outline-none`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
