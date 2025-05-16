@@ -15,8 +15,26 @@ const AboutUs = lazy(() => import("@/components/AboutUs"));
 const TimelineDemo = lazy(() => import("@/components/TimelineDemo").then(module => ({ default: module.TimelineDemo })));
 const InvestorSection = lazy(() => import("@/components/InvestorSection"));
 
-// Componente de carregamento simples
-const LoadingFallback = () => <div className="w-full h-32 flex items-center justify-center">Carregando...</div>;
+// Componente de carregamento com animação
+const LoadingFallback = () => (
+  <div className="w-full h-60 flex items-center justify-center">
+    <motion.div
+      animate={{ 
+        scale: [1, 1.2, 1],
+        opacity: [0.5, 1, 0.5]
+      }}
+      transition={{ 
+        repeat: Infinity, 
+        duration: 1.5,
+        ease: "easeInOut" 
+      }}
+      className="flex flex-col items-center"
+    >
+      <div className="w-16 h-16 border-4 border-heitorai-green/30 border-t-heitorai-green rounded-full animate-spin mb-4" />
+      <p className="text-heitorai-dark/70 text-sm">Carregando...</p>
+    </motion.div>
+  </div>
+);
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
@@ -30,15 +48,20 @@ const Index = () => {
     // Set the background color of the body to white
     document.body.style.backgroundColor = "white";
     
+    // Adiciona classe de scroll suave
+    document.documentElement.style.scrollBehavior = "smooth";
+    
     return () => {
       document.body.style.backgroundColor = "";
+      document.documentElement.style.scrollBehavior = "";
     };
   }, []);
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-white">
+      {/* Barra de progresso de scroll elegante */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-heitorai-green origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-heitorai-green via-heitorai-light-green to-heitorai-green origin-left z-50"
         style={{ scaleX }}
       />
       
@@ -51,7 +74,7 @@ const Index = () => {
       </div>
       
       <div id="sobre" className="w-full bg-white">
-        <AnimatedSection className="relative z-10 bg-white w-full">
+        <AnimatedSection className="relative z-10 bg-white w-full" lightEffect={true}>
           <Suspense fallback={<LoadingFallback />}>
             <Features />
           </Suspense>
@@ -67,7 +90,7 @@ const Index = () => {
       </div>
       
       <div id="investidores" className="w-full bg-white">
-        <AnimatedSection delay={0.35} className="relative z-10 bg-white w-full">
+        <AnimatedSection delay={0.35} className="relative z-10 bg-white w-full" lightEffect={true}>
           <Suspense fallback={<LoadingFallback />}>
             <InvestorSection />
           </Suspense>
@@ -83,7 +106,7 @@ const Index = () => {
       </div>
       
       <div id="sobre-nos" className="w-full bg-white">
-        <AnimatedSection delay={0.5} className="relative z-10 bg-white w-full">
+        <AnimatedSection delay={0.5} className="relative z-10 bg-white w-full" lightEffect={true}>
           <Suspense fallback={<LoadingFallback />}>
             <AboutUs />
           </Suspense>
@@ -97,6 +120,16 @@ const Index = () => {
           </Suspense>
         </AnimatedSection>
       </div>
+      
+      {/* Botão de "voltar ao topo" */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: scrollYProgress.get() > 0.1 ? 1 : 0 }}
+        className="fixed right-6 bottom-20 z-40 bg-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center text-heitorai-dark hover:bg-heitorai-green hover:text-white transition-colors duration-300"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        ↑
+      </motion.button>
       
       <Footer />
       
