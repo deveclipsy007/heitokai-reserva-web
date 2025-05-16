@@ -20,6 +20,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     if (ref.current) {
@@ -29,6 +30,18 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
     const handleScroll = () => {
       if (!ref.current) return;
+      
+      // Calculate scroll progress for background effects
+      const rect = ref.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const elementTop = rect.top;
+      const elementHeight = rect.height;
+      
+      // Calculate how far the element is through the viewport
+      // 0 = just entered bottom of viewport, 1 = just left top of viewport
+      let progress = 1 - (elementTop + elementHeight) / (viewportHeight + elementHeight);
+      progress = Math.max(0, Math.min(1, progress)); // Clamp between 0 and 1
+      setScrollProgress(progress);
       
       const items = ref.current.querySelectorAll('.timeline-item');
       items.forEach((item, index) => {
@@ -65,6 +78,25 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+
+  // Dynamic background properties based on scroll
+  const backgroundOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    [0, 0.15, 0.15, 0]
+  );
+  
+  const backgroundScale = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    [1.2, 1, 1, 1.2]
+  );
+  
+  const backgroundRotate = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [-5, 0, 5]
+  );
 
   // Enhanced animation variants
   const lineVariants = {
@@ -106,11 +138,77 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     })
   };
 
+  // Generate random particles for the background animation
+  const particles = Array.from({ length: 15 }).map((_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 5 + 3,
+    duration: Math.random() * 20 + 10,
+    delay: Math.random() * 2,
+  }));
+
   return (
     <div
-      className="w-full bg-gradient-to-b from-white to-heitokai-beige/30 dark:from-neutral-950 dark:to-neutral-900 font-sans px-4 md:px-10 py-16"
+      className="w-full bg-gradient-to-b from-white to-heitokai-beige/30 dark:from-neutral-950 dark:to-neutral-900 font-sans px-4 md:px-10 py-16 relative overflow-hidden"
       ref={containerRef}
     >
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Gradient background that changes with scroll */}
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-tr from-heitokai-green/5 via-heitokai-light-green/10 to-transparent"
+          style={{ 
+            opacity: backgroundOpacity,
+            scale: backgroundScale,
+            rotate: backgroundRotate
+          }}
+        />
+        
+        {/* Animated circles/particles */}
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full bg-heitokai-green/10 dark:bg-heitokai-light-green/10 blur-xl"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: `${particle.size}rem`,
+              height: `${particle.size}rem`,
+            }}
+            animate={{
+              x: [
+                `${Math.random() * 20 - 10}%`, 
+                `${Math.random() * 20 - 10}%`
+              ],
+              y: [
+                `${Math.random() * 20 - 10}%`, 
+                `${Math.random() * 20 - 10}%`
+              ],
+              opacity: [0.1, 0.3, 0.1],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+              delay: particle.delay,
+            }}
+          />
+        ))}
+        
+        {/* Light rays effect */}
+        <motion.div 
+          className="absolute -top-[50%] left-[10%] w-[80%] h-[200%] bg-gradient-to-b from-heitokai-light-green/5 to-transparent"
+          style={{
+            rotate: useTransform(scrollYProgress, [0, 1], [-10, 10]),
+            opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.15, 0]),
+            filter: "blur(50px)",
+          }}
+        />
+      </div>
+
       <div className="max-w-7xl mx-auto py-10 px-4 md:px-8 lg:px-10">
         <motion.h2 
           initial={{ opacity: 0, y: -20 }}
@@ -217,48 +315,65 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           />
         </div>
         
-        {/* Partículas decorativas animadas */}
+        {/* Partículas decorativas animadas aprimoradas com efeitos de scroll */}
         <div className="absolute left-6 top-0 h-full pointer-events-none">
-          {[...Array(10)].map((_, i) => (
+          {[...Array(15)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute w-3 h-3 rounded-full bg-heitokai-green/40 blur-sm"
               style={{
-                top: `${(i * 10) + Math.random() * 10}%`,
-                left: `${Math.random() * 20}px`
+                top: `${(i * 7) + Math.random() * 10}%`,
+                left: `${Math.random() * 20 - 10}px`,
+                filter: `blur(${2 + Math.random() * 3}px)`,
               }}
               animate={{
                 opacity: [0, 0.7, 0],
                 y: [0, -20, 0],
+                x: [0, Math.random() * 10 - 5, 0],
                 scale: [0, 1, 0]
               }}
               transition={{
-                duration: 5,
-                delay: i * 0.8,
+                duration: 5 + Math.random() * 2,
+                delay: i * 0.4,
                 repeat: Infinity,
-                repeatType: "loop"
+                repeatType: "loop",
+                ease: "easeInOut"
               }}
             />
           ))}
         </div>
         
-        {/* Elementos decorativos adicionais */}
+        {/* Elementos decorativos adicionais com movimento baseado no scroll */}
         <div className="absolute right-6 top-0 h-full pointer-events-none">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 rounded-full bg-heitokai-light-green/30"
+              className="absolute rounded-full"
               style={{
-                top: `${(i * 20) + Math.random() * 10}%`,
-                right: `${Math.random() * 40}px`
+                width: `${Math.random() * 4 + 2}px`,
+                height: `${Math.random() * 4 + 2}px`,
+                top: `${(i * 15) + Math.random() * 10}%`,
+                right: `${Math.random() * 40}px`,
+                backgroundColor: `rgba(197, 226, 165, ${0.3 + Math.random() * 0.4})`,
+                filter: `blur(${1 + Math.random() * 2}px)`,
+                x: useTransform(
+                  scrollYProgress,
+                  [0, 1],
+                  [0, Math.random() * 40 - 20]
+                ),
+                y: useTransform(
+                  scrollYProgress,
+                  [0, 1],
+                  [0, Math.random() * 40 - 20]
+                ),
               }}
               animate={{
                 opacity: [0.2, 0.8, 0.2],
-                x: [0, 15, 0],
+                scale: [1, 1.3, 1],
               }}
               transition={{
-                duration: 8,
-                delay: i * 1.2,
+                duration: 8 + Math.random() * 4,
+                delay: i * 0.6,
                 repeat: Infinity,
                 repeatType: "reverse"
               }}
@@ -267,19 +382,25 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         </div>
       </div>
       
-      {/* Elemento de reflexo inferior */}
-      <div className="relative w-full max-w-7xl mx-auto h-40 overflow-hidden">
+      {/* Elemento de reflexo inferior com animação de scroll */}
+      <motion.div 
+        className="relative w-full max-w-7xl mx-auto h-40 overflow-hidden"
+        style={{
+          opacity: useTransform(scrollProgress, [0, 0.7, 1], [0, 0.4, 0]),
+        }}
+      >
         <motion.div 
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.4 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
           className="absolute w-full h-full"
           style={{
             background: "linear-gradient(to bottom, rgba(197, 226, 165, 0.1), transparent)",
-            transform: "scaleY(-1)"
+            transform: "scaleY(-1)",
+            filter: "blur(10px)",
           }}
         />
-      </div>
+      </motion.div>
       
       <style>{`
         .glow {
