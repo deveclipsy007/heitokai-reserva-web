@@ -1,3 +1,4 @@
+
 "use client";
 import {
   useMotionValueEvent,
@@ -5,7 +6,8 @@ import {
   useTransform,
   motion,
   AnimatePresence,
-  MotionValue
+  MotionValue,
+  useMotionValue
 } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -21,6 +23,9 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const [height, setHeight] = useState(0);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [scrollProgress, setScrollProgress] = useState(0);
+  
+  // Create a MotionValue for the scroll progress
+  const scrollProgressMotion = useMotionValue(0);
 
   useEffect(() => {
     if (ref.current) {
@@ -42,6 +47,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       let progress = 1 - (elementTop + elementHeight) / (viewportHeight + elementHeight);
       progress = Math.max(0, Math.min(1, progress)); // Clamp between 0 and 1
       setScrollProgress(progress);
+      scrollProgressMotion.set(progress); // Update the MotionValue
       
       const items = ref.current.querySelectorAll('.timeline-item');
       items.forEach((item, index) => {
@@ -139,7 +145,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   };
 
   // Create a motion value for the scroll progress to use in light rays rotation
-  const scrollProgressMotionValue = useTransform(scrollYProgress, [0, 1], [-10, 10]);
+  const scrollProgressRotation = useTransform(scrollProgressMotion, [0, 1], [-10, 10]);
 
   // Generate random particles for the background animation
   const particles = Array.from({ length: 15 }).map((_, i) => ({
@@ -205,7 +211,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         <motion.div 
           className="absolute -top-[50%] left-[10%] w-[80%] h-[200%] bg-gradient-to-b from-heitokai-light-green/5 to-transparent"
           style={{
-            rotate: scrollProgressMotionValue,
+            rotate: scrollProgressRotation,
             opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.15, 0]),
             filter: "blur(50px)",
           }}
@@ -389,7 +395,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       <motion.div 
         className="relative w-full max-w-7xl mx-auto h-40 overflow-hidden"
         style={{
-          opacity: useTransform(scrollProgress, [0, 0.7, 1], [0, 0.4, 0]),
+          opacity: useTransform(scrollProgressMotion, [0, 0.7, 1], [0, 0.4, 0]),
         }}
       >
         <motion.div 
@@ -413,3 +419,4 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     </div>
   );
 };
+
