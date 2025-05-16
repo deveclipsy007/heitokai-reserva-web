@@ -58,6 +58,72 @@ const AboutUs = () => {
       }
     }
   };
+
+  // Card animation enhancements
+  const cardHoverVariants = {
+    initial: {
+      scale: 1,
+      y: 0,
+      boxShadow: "0px 5px 15px rgba(0,0,0,0.1)"
+    },
+    hover: {
+      scale: 1.05,
+      y: -10,
+      boxShadow: "0px 15px 25px rgba(0,0,0,0.2)",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10
+      }
+    },
+    tap: {
+      scale: 0.98,
+      boxShadow: "0px 2px 8px rgba(0,0,0,0.15)",
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 15
+      }
+    }
+  };
+
+  // Enhanced card variants with 3D effects
+  const enhancedCardVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+      rotateY: -15,
+      z: -100
+    },
+    visible: (index) => ({
+      opacity: 1,
+      scale: 1,
+      rotateY: 0,
+      z: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+        delay: index * 0.2 + 0.3
+      }
+    })
+  };
+
+  // Icon animation
+  const iconVariants = {
+    initial: { scale: 1, rotate: 0 },
+    animate: { 
+      scale: [1, 1.2, 1], 
+      rotate: [0, 10, -10, 0],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return <div className="py-20 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden" id="sobre-nos">
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
@@ -159,10 +225,37 @@ const AboutUs = () => {
           </motion.div>
         </motion.div>
 
-        {/* Numbers section with animated counting */}
+        {/* Numbers section with animated counting and enhanced animations */}
         <motion.div variants={containerVariants} initial="hidden" animate={controls} className="bg-gradient-to-br from-heitorai-green to-heitorai-dark rounded-lg p-10 text-white shadow-2xl relative overflow-hidden mb-20">
           {/* Improved overlay gradient with better opacity and depth */}
           <div className="absolute inset-0 bg-gradient-to-r from-heitorai-green/40 to-heitorai-dark/80 backdrop-blur-[2px] opacity-80" />
+          
+          {/* Enhanced particle effects for the numbers section */}
+          <div className="absolute inset-0 overflow-hidden">
+            {Array.from({length: 8}).map((_, i) => (
+              <motion.div
+                key={`particle-${i}`}
+                className="absolute rounded-full bg-white/10"
+                style={{
+                  width: Math.random() * 60 + 20,
+                  height: Math.random() * 60 + 20,
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  x: [0, Math.random() * 50 - 25],
+                  y: [0, Math.random() * 50 - 25],
+                  opacity: [0.1, 0.3, 0.1],
+                }}
+                transition={{
+                  duration: Math.random() * 8 + 5,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
           
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
             {[{
@@ -181,27 +274,103 @@ const AboutUs = () => {
             icon: Trophy,
             number: 12,
             text: "Prêmios de Excelência"
-          }].map((item, index) => <motion.div key={index} variants={cardVariants} className="flex flex-col items-center bg-heitorai-dark/40 backdrop-blur-sm py-6 px-4 rounded-lg border border-white/10 hover:border-heitorai-light-green/30 transition-all duration-300 shadow-lg">
-                <motion.div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 shadow-inner" whileHover={{
-              scale: 1.1,
-              boxShadow: "0 0 25px rgba(255,255,255,0.4)"
-            }}>
-                  <item.icon size={30} className="text-heitorai-light-green" />
+          }].map((item, index) => (
+              <motion.div 
+                key={index} 
+                custom={index}
+                variants={enhancedCardVariants}
+                whileHover="hover"
+                whileTap="tap"
+                initial="hidden"
+                animate="visible"
+                className="flex flex-col items-center bg-heitorai-dark/40 backdrop-blur-sm py-6 px-4 rounded-lg border border-white/10 hover:border-heitorai-light-green/30 transition-all duration-300 shadow-lg"
+                style={{
+                  transformStyle: "preserve-3d",
+                  perspective: "1000px"
+                }}
+              >
+                <motion.div 
+                  className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 shadow-inner relative overflow-hidden"
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0 0 25px rgba(255,255,255,0.4)"
+                  }}
+                >
+                  {/* Glowing circle behind icon */}
+                  <motion.div 
+                    className="absolute inset-0 rounded-full bg-heitorai-light-green/10"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.3, 0.6, 0.3]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div
+                    variants={iconVariants}
+                    initial="initial"
+                    animate="animate"
+                  >
+                    <item.icon size={30} className="text-heitorai-light-green" />
+                  </motion.div>
                 </motion.div>
-                <motion.h3 className="text-4xl font-bold mb-2 font-serif" initial={{
-              opacity: 0
-            }} whileInView={{
-              opacity: 1
-            }} viewport={{
-              once: false
-            }} transition={{
-              duration: 0.5,
-              delay: index * 0.2
-            }}>
-                  {item.number}+
+                
+                <motion.h3 
+                  className="text-4xl font-bold mb-2 font-serif"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { 
+                      delay: index * 0.2 + 0.5, 
+                      duration: 0.5 
+                    } 
+                  }}
+                >
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ 
+                      duration: 2,
+                      delay: index * 0.2 + 1
+                    }}
+                  >
+                    {item.number}+
+                  </motion.span>
                 </motion.h3>
-                <p className="text-white/90">{item.text}</p>
-              </motion.div>)}
+                
+                <motion.p 
+                  className="text-white/90"
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    opacity: 1,
+                    transition: { delay: index * 0.2 + 1.2 }
+                  }}
+                >
+                  {item.text}
+                </motion.p>
+                
+                {/* Additional 3D effect elements */}
+                <motion.div
+                  className="absolute inset-0 rounded-lg border border-white/10 z-[-1]"
+                  style={{ 
+                    transform: "translateZ(-10px)",
+                    transformStyle: "preserve-3d"
+                  }}
+                  animate={{
+                    boxShadow: ["0px 0px 0px rgba(255,255,255,0)", "0px 0px 15px rgba(197,226,165,0.2)", "0px 0px 0px rgba(255,255,255,0)"],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 
