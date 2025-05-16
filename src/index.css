@@ -64,11 +64,7 @@
 
 @layer components {
   .btn-primary {
-<<<<<<< HEAD
-    @apply bg-Heitoraí-green text-white py-3 px-6 rounded-sm hover:bg-Heitoraí-dark transition-all duration-300 inline-block font-medium;
-=======
     @apply bg-heitokai-green text-white py-3 px-6 rounded-sm hover:bg-heitokai-dark transition-all duration-300 inline-block font-medium;
->>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
   }
   
   .container-custom {
@@ -76,18 +72,10 @@
   }
   
   .section-title {
-<<<<<<< HEAD
-    @apply font-serif text-3xl md:text-4xl lg:text-5xl font-medium mb-4 text-Heitoraí-dark;
-  }
-  
-  .section-subtitle {
-    @apply font-serif text-xl md:text-2xl text-Heitoraí-green mb-8;
-=======
     @apply font-serif text-3xl md:text-4xl lg:text-5xl font-medium mb-4 text-heitokai-dark;
   }
   
   .section-subtitle {
     @apply font-serif text-xl md:text-2xl text-heitokai-green mb-8;
->>>>>>> 849cabcdb1d80e2298d1b11dd684fa620eaf8afa
   }
 }
