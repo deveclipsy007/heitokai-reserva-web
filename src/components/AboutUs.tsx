@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, Building, Users, Heart } from "lucide-react";
+
 const AboutUs = () => {
   const controls = useAnimation();
   const ref = useRef(null);
@@ -159,8 +160,9 @@ const AboutUs = () => {
         </motion.div>
 
         {/* Numbers section with animated counting */}
-        <motion.div variants={containerVariants} initial="hidden" animate={controls} className="bg-heitokai-dark rounded-lg p-10 text-white shadow-2xl relative overflow-hidden mb-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-heitokai-dark/80 to-heitokai-dark opacity-90" />
+        <motion.div variants={containerVariants} initial="hidden" animate={controls} className="bg-gradient-to-br from-heitorai-green to-heitorai-dark rounded-lg p-10 text-white shadow-2xl relative overflow-hidden mb-20">
+          {/* Improved overlay gradient with better opacity and depth */}
+          <div className="absolute inset-0 bg-gradient-to-r from-heitorai-green/40 to-heitorai-dark/80 backdrop-blur-[2px] opacity-80" />
           
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
             {[{
@@ -179,12 +181,12 @@ const AboutUs = () => {
             icon: Trophy,
             number: 12,
             text: "Prêmios de Excelência"
-          }].map((item, index) => <motion.div key={index} variants={cardVariants} className="flex flex-col items-center bg-[#075307]/65 py-[10px] px-[10px]">
-                <motion.div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4" whileHover={{
+          }].map((item, index) => <motion.div key={index} variants={cardVariants} className="flex flex-col items-center bg-heitorai-dark/40 backdrop-blur-sm py-6 px-4 rounded-lg border border-white/10 hover:border-heitorai-light-green/30 transition-all duration-300 shadow-lg">
+                <motion.div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 shadow-inner" whileHover={{
               scale: 1.1,
-              boxShadow: "0 0 20px rgba(255,255,255,0.3)"
+              boxShadow: "0 0 25px rgba(255,255,255,0.4)"
             }}>
-                  <item.icon size={30} className="text-heitokai-light-green" />
+                  <item.icon size={30} className="text-heitorai-light-green" />
                 </motion.div>
                 <motion.h3 className="text-4xl font-bold mb-2 font-serif" initial={{
               opacity: 0
@@ -198,7 +200,7 @@ const AboutUs = () => {
             }}>
                   {item.number}+
                 </motion.h3>
-                <p className="text-white/80">{item.text}</p>
+                <p className="text-white/90">{item.text}</p>
               </motion.div>)}
           </div>
         </motion.div>
@@ -229,4 +231,5 @@ const AboutUs = () => {
       </div>
     </div>;
 };
+
 export default AboutUs;
