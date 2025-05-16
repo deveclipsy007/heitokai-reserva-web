@@ -1,19 +1,14 @@
-
 const Footer = () => {
   return <footer className="bg-heitorai-dark text-white py-10">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="font-serif text-lg mb-4">Contato</h3>
-            <p className="text-sm mb-2">(00) 0000-0000 / (00) 00000-0000</p>
+            
             <p className="text-sm">contato@4bincorporadora.com.br</p>
           </div>
           
-          <div>
-            <h3 className="font-serif text-lg mb-4">Endereço</h3>
-            <p className="text-sm mb-2">Estrada das Araras, 000</p>
-            <p className="text-sm">CEP 00000-000</p>
-          </div>
+          
           
           <div>
             <h3 className="font-serif text-lg mb-4">Redes Sociais</h3>

@@ -496,7 +496,7 @@ const Map = () => {
                 </div>
                 
                 <div className="mt-6 p-4 bg-heitokai-beige/30 rounded-lg">
-                  <h4 className="text-heitokai-dark font-medium mb-3 flex items-center">
+                  <h4 className="text-heitokai-dark font-medium mb-3 flex items-center text-green-900">
                     <Sparkles className="w-5 h-5 mr-2 text-heitokai-green" />
                     Diferenciais do projeto
                   </h4>
