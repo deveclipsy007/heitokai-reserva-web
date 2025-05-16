@@ -155,7 +155,7 @@ const Map = () => {
               <motion.div whileHover={{
               scale: 1.05,
               rotate: 5
-            }} className="w-20 h-20 rounded-xl flex items-center justify-center bg-gradient-to-br from-heitokai-green to-heitokai-light-green text-white shadow-lg group-hover:shadow-heitokai-green/30 transition-all duration-300">
+            }} className="w-20 h-20 rounded-xl flex items-center justify-center bg-gradient-to-br from-heitokai-green to-heitokai-light-green text-white shadow-lg group-hover:shadow-heitokai-green/30 transition-all duration-300 bg-green-900">
                 <Compass className="h-10 w-10 group-hover:text-white transition-all duration-300" />
               </motion.div>
               <motion.div whileHover={{
@@ -175,7 +175,7 @@ const Map = () => {
               <motion.div whileHover={{
               scale: 1.05,
               rotate: -5
-            }} className="w-20 h-20 rounded-xl flex items-center justify-center bg-gradient-to-br from-heitokai-green to-heitokai-light-green text-white shadow-lg group-hover:shadow-heitokai-green/30 transition-all duration-300">
+            }} className="w-20 h-20 rounded-xl flex items-center justify-center bg-gradient-to-br from-heitokai-green to-heitokai-light-green text-white shadow-lg group-hover:shadow-heitokai-green/30 transition-all duration-300 bg-green-900">
                 <MapPin className="h-10 w-10 group-hover:text-white transition-all duration-300" />
               </motion.div>
               <motion.div whileHover={{
@@ -195,7 +195,7 @@ const Map = () => {
               <motion.div whileHover={{
               scale: 1.05,
               rotate: 5
-            }} className="w-20 h-20 rounded-xl flex items-center justify-center bg-gradient-to-br from-heitokai-green to-heitokai-light-green text-white shadow-lg group-hover:shadow-heitokai-green/30 transition-all duration-300">
+            }} className="w-20 h-20 rounded-xl flex items-center justify-center bg-gradient-to-br from-heitokai-green to-heitokai-light-green text-white shadow-lg group-hover:shadow-heitokai-green/30 transition-all duration-300 bg-green-900">
                 <Route className="h-10 w-10 group-hover:text-white transition-all duration-300" />
               </motion.div>
               <motion.div whileHover={{
@@ -215,7 +215,7 @@ const Map = () => {
               <motion.div whileHover={{
               scale: 1.05,
               rotate: -5
-            }} className="w-20 h-20 rounded-xl flex items-center justify-center bg-gradient-to-br from-heitokai-green to-heitokai-light-green text-white shadow-lg group-hover:shadow-heitokai-green/30 transition-all duration-300">
+            }} className="w-20 h-20 rounded-xl flex items-center justify-center bg-gradient-to-br from-heitokai-green to-heitokai-light-green text-white shadow-lg group-hover:shadow-heitokai-green/30 transition-all duration-300 bg-green-900">
                 <Navigation className="h-10 w-10 group-hover:text-white transition-all duration-300" />
               </motion.div>
               <motion.div whileHover={{
